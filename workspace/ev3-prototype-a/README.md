@@ -12,7 +12,6 @@ $ cd hakoniwa-ros-samples/workspace/ev3-prototype-a
 ## ROS-TCP-Endpointを起動する
 
 ```
-$ roscore &
 $ run-endpoint.bash
 ```
 
