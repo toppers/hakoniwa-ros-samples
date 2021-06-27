@@ -44,3 +44,7 @@ Windows エクスプローラで，「hakoniwa-ros-samples\workspace\ev3-prototy
 $ cd hakoniwa-ros-samples/workspace/ev3-prototype-a
 $ run.bash
 ```
+
+## デモ
+
+![ros1_demo3](https://user-images.githubusercontent.com/164193/123541210-46496b80-d77e-11eb-98cc-e7fa685deaa2.gif)
