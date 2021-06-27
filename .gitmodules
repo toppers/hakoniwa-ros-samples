@@ -1,0 +1,3 @@
+[submodule "workspace/ev3-prototype-a/src/ROS-TCP-Endpoint"]
+	path = workspace/ev3-prototype-a/src/ROS-TCP-Endpoint
+	url = https://github.com/Unity-Technologies/ROS-TCP-Endpoint

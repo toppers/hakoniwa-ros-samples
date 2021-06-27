@@ -3,8 +3,8 @@
 import rospy
 
 from ros_tcp_endpoint import TcpServer, RosPublisher, RosSubscriber, RosService, UnityService
-from robotics_demo.msg import Actuator
-from robotics_demo.msg import Sensor
+from hackev.msg import Actuator
+from hackev.msg import Sensor
 
 def main():
     ros_node_name = rospy.get_param("/TCP_NODE_NAME", 'TCPServer')
