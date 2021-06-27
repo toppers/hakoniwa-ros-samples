@@ -1,0 +1,12 @@
+{
+	"fields": [
+        {
+            "topic_message_name": "sensor",
+            "topic_type_name": "Sensor"
+        },
+        {
+            "topic_message_name": "actuator",
+            "topic_type_name": "Actuator"
+        }
+	]
+}
