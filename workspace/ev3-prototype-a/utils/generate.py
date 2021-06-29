@@ -22,7 +22,8 @@ class RosMessage:
     pass
 
 def to_conv(name):
-	return name.replace("int", "Int").replace("uInt", "UInt").replace("float", "Float")
+	tmp = name.replace("int", "Int").replace("uInt", "UInt").replace("float", "Float")
+	return re.sub(r'\[.*\]', "Array", tmp)
 
 container = RosMessageContainer()
 container.to_conv = to_conv

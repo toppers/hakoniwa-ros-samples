@@ -6,63 +6,63 @@
         },
         {
             "name": "sensor_color0",
-            "type": "uint32"
+            "type": "int32"
         },
         {
             "name": "sensor_color1",
-            "type": "uint32"
+            "type": "int32"
         },
         {
             "name": "sensor_color2",
-            "type": "uint32"
+            "type": "int32"
         },
         {
             "name": "sensor_reflect0",
-            "type": "uint32"
+            "type": "int32"
         },
         {
             "name": "sensor_reflect1",
-            "type": "uint32"
+            "type": "int32"
         },
         {
             "name": "sensor_reflect2",
-            "type": "uint32"
+            "type": "int32"
         },
         {
             "name": "sensor_rgb_r0",
-            "type": "uint32"
+            "type": "int32"
         },
         {
             "name": "sensor_rgb_r1",
-            "type": "uint32"
+            "type": "int32"
         },
         {
             "name": "sensor_rgb_r2",
-            "type": "uint32"
+            "type": "int32"
         },
         {
             "name": "sensor_rgb_g0",
-            "type": "uint32"
+            "type": "int32"
         },
         {
             "name": "sensor_rgb_g1",
-            "type": "uint32"
+            "type": "int32"
         },
         {
             "name": "sensor_rgb_g2",
-            "type": "uint32"
+            "type": "int32"
         },
         {
             "name": "sensor_rgb_b0",
-            "type": "uint32"
+            "type": "int32"
         },
         {
             "name": "sensor_rgb_b1",
-            "type": "uint32"
+            "type": "int32"
         },
         {
             "name": "sensor_rgb_b2",
-            "type": "uint32"
+            "type": "int32"
         },
         {
             "name": "sensor_gyroscope",
@@ -78,27 +78,27 @@
         },
         {
             "name": "sensor_ultrasonic",
-            "type": "uint32"
+            "type": "int32"
         },
         {
             "name": "touch_sensor0",
-            "type": "uint32"
+            "type": "int32"
         },
         {
             "name": "touch_sensor1",
-            "type": "uint32"
+            "type": "int32"
         },
         {
             "name": "motor_angle_a",
-            "type": "uint32"
+            "type": "int32"
         },
         {
             "name": "motor_angle_b",
-            "type": "uint32"
+            "type": "int32"
         },
         {
             "name": "motor_angle_c",
-            "type": "uint32"
+            "type": "int32"
         },
         {
             "name": "gps_lat",
@@ -107,6 +107,10 @@
         {
             "name": "gps_lon",
             "type": "float64"
+        },
+        {
+            "name": "test_array",
+            "type": "int32[10]"
         }
     ]
 }
