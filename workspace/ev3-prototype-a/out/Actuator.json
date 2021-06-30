@@ -1,48 +1,48 @@
 {
-    "fields": [
-        {
-            "name": "led",
-            "type": "int32"
-        },
-        {
-            "name": "motor_power_a",
-            "type": "int32"
-        },
-        {
-            "name": "motor_power_b",
-            "type": "int32"
-        },
-        {
-            "name": "motor_power_c",
-            "type": "int32"
-        },
-        {
-            "name": "motor_stop_a",
-            "type": "uint32"
-        },
-        {
-            "name": "motor_stop_b",
-            "type": "uint32"
-        },
-        {
-            "name": "motor_stop_c",
-            "type": "uint32"
-        },
-        {
-            "name": "motor_reset_angle_a",
-            "type": "int32"
-        },
-        {
-            "name": "motor_reset_angle_b",
-            "type": "int32"
-        },
-        {
-            "name": "motor_reset_angle_c",
-            "type": "int32"
-        },
-        {
-            "name": "gyro_reset",
-            "type": "int32"
-        }
-    ]
+  "fields": [
+    {
+      "type": "int32", 
+      "name": "led"
+    }, 
+    {
+      "type": "int32", 
+      "name": "motor_power_a"
+    }, 
+    {
+      "type": "int32", 
+      "name": "motor_power_b"
+    }, 
+    {
+      "type": "int32", 
+      "name": "motor_power_c"
+    }, 
+    {
+      "type": "uint32", 
+      "name": "motor_stop_a"
+    }, 
+    {
+      "type": "uint32", 
+      "name": "motor_stop_b"
+    }, 
+    {
+      "type": "uint32", 
+      "name": "motor_stop_c"
+    }, 
+    {
+      "type": "int32", 
+      "name": "motor_reset_angle_a"
+    }, 
+    {
+      "type": "int32", 
+      "name": "motor_reset_angle_b"
+    }, 
+    {
+      "type": "int32", 
+      "name": "motor_reset_angle_c"
+    }, 
+    {
+      "type": "int32", 
+      "name": "gyro_reset"
+    }
+  ]
 }

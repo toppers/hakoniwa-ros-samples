@@ -9,11 +9,16 @@ fi
 IN_DIR=${1}
 OUT_DIR=${2}
 
-for i in `ls ${IN_DIR}`
+for i in `ls ${IN_DIR}/*.msg`
 do
 	MSG_NAME=`echo $i | awk -F\. '{print $1}'`
 	echo $MSG_NAME
-	utils/romsg2json.bash ${IN_DIR}/${i} > ${OUT_DIR}/${MSG_NAME}.json
+	python utils/rosmsg2json.py ${i}
+done
+
+for i in `ls ${IN_DIR}/*.json`
+do
+	mv ${i} ${OUT_DIR}/
 done
 
 OUT_NAME=RosTopicIo
