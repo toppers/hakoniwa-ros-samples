@@ -29,7 +29,7 @@ namespace Hakoniwa.PluggableAsset.Communication.Pdu.ROS
 {%-			if (container.is_array(item["type"])): %}
             foreach (var e in src.Refs("{{item["name"]}}"))
             {
-                ConvertToMessage(e.GetPduReadOps(), dst.array[Array.IndexOf(src.Refs("{{item["name"]}}"), e)]);
+                ConvertToMessage(e.GetPduReadOps(), dst.{{item["name"]}}[Array.IndexOf(src.Refs("{{item["name"]}}"), e)]);
             }
 {%-			else: %}
             ConvertToMessage(src.Ref("{{item["name"]}}").GetPduReadOps(), dst.{{item["name"]}});
