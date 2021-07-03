@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using RosMessageTypes.Std;
 using RosMessageTypes.Hackev;
 using Unity.Robotics.ROSTCPConnector.MessageGeneration;
+using RosMessageTypes.Geometry;
 
 namespace Hakoniwa.PluggableAsset.Communication.Pdu.ROS
 {

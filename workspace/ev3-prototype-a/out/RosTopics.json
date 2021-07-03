@@ -1,8 +1,12 @@
 {
 	"fields": [
         {
-            "topic_message_name": "sensor",
-            "topic_type_name": "Sensor"
+            "topic_message_name": "scan",
+            "topic_type_name": "LaserScan"
+        },
+        {
+            "topic_message_name": "imu",
+            "topic_type_name": "Imu"
         },
         {
             "topic_message_name": "actuator",

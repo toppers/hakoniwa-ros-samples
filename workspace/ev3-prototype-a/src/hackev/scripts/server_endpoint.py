@@ -4,7 +4,8 @@ import rospy
 
 from ros_tcp_endpoint import TcpServer, RosPublisher, RosSubscriber, RosService, UnityService
 from hackev.msg import Actuator
-from hackev.msg import Sensor
+from hackev.msg import LaserScan
+from hackev.msg import Imu
 
 def main():
     ros_node_name = rospy.get_param("/TCP_NODE_NAME", 'TCPServer')
@@ -14,7 +15,8 @@ def main():
     rospy.init_node(ros_node_name, anonymous=True)
     
     tcp_server.start({
-        'sensor': RosPublisher('sensor', Sensor, queue_size=10),
+        'scan': RosPublisher('scan', LaserScan, queue_size=10),
+        'imu': RosPublisher('imu', Imu, queue_size=10),
         'actuator': RosSubscriber('actuator', Actuator, tcp_server),
     })
     
