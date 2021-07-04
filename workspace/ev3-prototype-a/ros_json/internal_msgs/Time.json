@@ -1,0 +1,12 @@
+{
+  "fields": [
+    {
+      "type": "uint32", 
+      "name": "secs"
+    }, 
+    {
+      "type": "uint32", 
+      "name": "nsecs"
+    }
+  ]
+}

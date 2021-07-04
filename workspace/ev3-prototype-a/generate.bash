@@ -22,11 +22,11 @@ do
 done
 
 OUT_NAME=RosTopicIo
-python utils/generate.py ${OUT_NAME} ${IN_DIR} ${OUT_DIR} > ${OUT_DIR}/${OUT_NAME}.cs
+#python utils/generate.py ${OUT_NAME} ${IN_DIR} ${OUT_DIR} > ${OUT_DIR}/${OUT_NAME}.cs
 
 OUT_NAME=RosTopicPduReaderConverter
-python utils/generate.py ${OUT_NAME} ${IN_DIR} ${OUT_DIR} > ${OUT_DIR}/${OUT_NAME}.cs
+#python utils/generate.py ${OUT_NAME} ${IN_DIR} ${OUT_DIR} > ${OUT_DIR}/${OUT_NAME}.cs
 
 OUT_NAME=RosTopicPduWriterConverter
-python utils/generate.py ${OUT_NAME} ${IN_DIR} ${OUT_DIR} > ${OUT_DIR}/${OUT_NAME}.cs
+#python utils/generate.py ${OUT_NAME} ${IN_DIR} ${OUT_DIR} > ${OUT_DIR}/${OUT_NAME}.cs
 
