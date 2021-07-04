@@ -33,7 +33,7 @@ namespace Hakoniwa.PluggableAsset.Communication.Pdu.ROS
 				ConvertToPdu(src.{{item["name"]}}[Array.IndexOf(dst.Refs("{{item["name"]}}"), e)], e.GetPduWriteOps());
             }
 {%-			else: %}
-			ConvertToPdu(src, dst.Ref("{{item["name"]}}").GetPduWriteOps());
+			ConvertToPdu(src.{{item["name"]}}, dst.Ref("{{item["name"]}}").GetPduWriteOps());
 {%-			endif %}
 {%-		endif %}
 

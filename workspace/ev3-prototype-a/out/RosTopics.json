@@ -9,8 +9,8 @@
             "topic_type_name": "Imu"
         },
         {
-            "topic_message_name": "actuator",
-            "topic_type_name": "Actuator"
+            "topic_message_name": "cmd_vel",
+            "topic_type_name": "Twist"
         }
 	]
 }

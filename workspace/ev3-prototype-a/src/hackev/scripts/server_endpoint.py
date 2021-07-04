@@ -3,9 +3,9 @@
 import rospy
 
 from ros_tcp_endpoint import TcpServer, RosPublisher, RosSubscriber, RosService, UnityService
-from hackev.msg import Actuator
 from hackev.msg import LaserScan
 from hackev.msg import Imu
+from geometry_msgs.msg import Twist
 
 def main():
     ros_node_name = rospy.get_param("/TCP_NODE_NAME", 'TCPServer')
@@ -17,7 +17,7 @@ def main():
     tcp_server.start({
         'scan': RosPublisher('scan', LaserScan, queue_size=10),
         'imu': RosPublisher('imu', Imu, queue_size=10),
-        'actuator': RosSubscriber('actuator', Actuator, tcp_server),
+        'cmd_vel': RosSubscriber('cmd_vel', Twist, tcp_server),
     })
     
     rospy.spin()

@@ -8,6 +8,7 @@ using UnityEngine;
 using System;
 using RosMessageTypes.Hackev;
 using Unity.Robotics.ROSTCPConnector.MessageGeneration;
+using RosMessageTypes.Geometry;
 
 namespace Hakoniwa.PluggableAsset.Communication.Method.ROS
 {
@@ -26,19 +27,24 @@ namespace Hakoniwa.PluggableAsset.Communication.Method.ROS
             }
 
 
-            ros.Subscribe<MSensor>("sensor", MSensorChange);
-            ros.Subscribe<MActuator>("actuator", MActuatorChange);
+            ros.Subscribe<MLaserScan>("scan", MLaserScanChange);
+            ros.Subscribe<MImu>("imu", MImuChange);
+            ros.Subscribe<MTwist>("cmd_vel", MTwistChange);
 
         }
 
 
-        private void MSensorChange(MSensor obj)
+        private void MLaserScanChange(MLaserScan obj)
         {
-            this.topic_data_table["sensor"] = obj;
+            this.topic_data_table["scan"] = obj;
         }
-        private void MActuatorChange(MActuator obj)
+        private void MImuChange(MImu obj)
         {
-            this.topic_data_table["actuator"] = obj;
+            this.topic_data_table["imu"] = obj;
+        }
+        private void MTwistChange(MTwist obj)
+        {
+            this.topic_data_table["cmd_vel"] = obj;
         }
 
         public void Publish(IPduCommTypedData data)

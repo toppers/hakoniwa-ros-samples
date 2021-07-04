@@ -5,100 +5,24 @@
       "name": "button"
     }, 
     {
-      "type": "int32", 
-      "name": "sensor_color0"
+      "type": "SensorColor[]", 
+      "name": "color"
     }, 
     {
-      "type": "int32", 
-      "name": "sensor_color1"
-    }, 
-    {
-      "type": "int32", 
-      "name": "sensor_color2"
-    }, 
-    {
-      "type": "int32", 
-      "name": "sensor_reflect0"
-    }, 
-    {
-      "type": "int32", 
-      "name": "sensor_reflect1"
-    }, 
-    {
-      "type": "int32", 
-      "name": "sensor_reflect2"
-    }, 
-    {
-      "type": "int32", 
-      "name": "sensor_rgb_r0"
-    }, 
-    {
-      "type": "int32", 
-      "name": "sensor_rgb_r1"
-    }, 
-    {
-      "type": "int32", 
-      "name": "sensor_rgb_r2"
-    }, 
-    {
-      "type": "int32", 
-      "name": "sensor_rgb_g0"
-    }, 
-    {
-      "type": "int32", 
-      "name": "sensor_rgb_g1"
-    }, 
-    {
-      "type": "int32", 
-      "name": "sensor_rgb_g2"
-    }, 
-    {
-      "type": "int32", 
-      "name": "sensor_rgb_b0"
-    }, 
-    {
-      "type": "int32", 
-      "name": "sensor_rgb_b1"
-    }, 
-    {
-      "type": "int32", 
-      "name": "sensor_rgb_b2"
-    }, 
-    {
-      "type": "int32", 
-      "name": "sensor_gyroscope"
-    }, 
-    {
-      "type": "int32", 
-      "name": "gyro_degree"
-    }, 
-    {
-      "type": "int32", 
-      "name": "gyro_degree_rate"
+      "type": "SensorGyro", 
+      "name": "gyro"
     }, 
     {
       "type": "int32", 
       "name": "sensor_ultrasonic"
     }, 
     {
-      "type": "int32", 
-      "name": "touch_sensor0"
+      "type": "int32[]", 
+      "name": "touch_sensor"
     }, 
     {
-      "type": "int32", 
-      "name": "touch_sensor1"
-    }, 
-    {
-      "type": "int32", 
-      "name": "motor_angle_a"
-    }, 
-    {
-      "type": "int32", 
-      "name": "motor_angle_b"
-    }, 
-    {
-      "type": "int32", 
-      "name": "motor_angle_c"
+      "type": "int32[]", 
+      "name": "motor_angle"
     }, 
     {
       "type": "float64", 
@@ -107,10 +31,6 @@
     {
       "type": "float64", 
       "name": "gps_lon"
-    }, 
-    {
-      "type": "int32[10]", 
-      "name": "test_array"
     }
   ]
 }
