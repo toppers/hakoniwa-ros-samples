@@ -1,0 +1,16 @@
+{
+  "fields": [
+    {
+      "type": "uint32", 
+      "name": "seq"
+    }, 
+    {
+      "type": "time", 
+      "name": "stamp"
+    }, 
+    {
+      "type": "string", 
+      "name": "frame_id"
+    }
+  ]
+}

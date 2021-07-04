@@ -1,0 +1,16 @@
+{
+  "fields": [
+    {
+      "type": "Header", 
+      "name": "header"
+    }, 
+    {
+      "type": "float64", 
+      "name": "temperature"
+    }, 
+    {
+      "type": "float64", 
+      "name": "variance"
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "fields": [
+    {
+      "type": "Header", 
+      "name": "header"
+    }, 
+    {
+      "type": "Polygon", 
+      "name": "polygon"
+    }
+  ]
+}

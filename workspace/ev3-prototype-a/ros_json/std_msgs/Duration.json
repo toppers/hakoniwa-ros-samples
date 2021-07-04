@@ -1,0 +1,8 @@
+{
+  "fields": [
+    {
+      "type": "duration", 
+      "name": "data"
+    }
+  ]
+}

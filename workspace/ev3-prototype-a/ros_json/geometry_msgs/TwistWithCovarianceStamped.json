@@ -1,0 +1,12 @@
+{
+  "fields": [
+    {
+      "type": "Header", 
+      "name": "header"
+    }, 
+    {
+      "type": "TwistWithCovariance", 
+      "name": "twist"
+    }
+  ]
+}

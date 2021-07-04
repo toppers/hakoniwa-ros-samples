@@ -1,0 +1,16 @@
+{
+  "fields": [
+    {
+      "type": "Header", 
+      "name": "header"
+    }, 
+    {
+      "type": "float64", 
+      "name": "relative_humidity"
+    }, 
+    {
+      "type": "float64", 
+      "name": "variance"
+    }
+  ]
+}
