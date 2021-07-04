@@ -81,25 +81,22 @@ container.is_array = is_array
 container.is_primitive = is_primitive
 container.is_primitive_array = is_primitive_array
 
-file = open(out_dir + '/RosTopics.json')
+file = open('./settings/RosTopics.json')
 container.ros_topics = json.load(file)
 
 container.msgs = []
 
-files = glob.glob(in_dir + "/*.msg")
+files = glob.glob(in_dir + "/*.json")
 for file in files:
-	ros_msg = RosMessage()
-	tmp = re.split('[./]', file)
-	msg_name = tmp[len(tmp) - 2]
-	ros_msg.name = msg_name
-	container.msgs.append(ros_msg)
+    ros_msg = RosMessage()
+    tmp = re.split('[./]', file)
+    msg_name = tmp[len(tmp) - 2]
+    ros_msg.name = msg_name
+    container.msgs.append(ros_msg)
+    tmp_file = open(in_dir + '/' + msg_name +'.json')
+    ros_msg.json_data = json.load(tmp_file)
 
-
-for e in container.msgs:
-    file = open(out_dir + '/' + e.name+'.json')
-    e.json_data = json.load(file)
-
-tpl = env.get_template('utils/' + tpl_name)
+tpl = env.get_template(in_dir + '/' + tpl_name)
 out = tpl.render({'container':container})
 
 print out.encode('utf-8')
