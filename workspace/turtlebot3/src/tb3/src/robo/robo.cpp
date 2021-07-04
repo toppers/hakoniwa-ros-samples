@@ -6,8 +6,8 @@
 
 static void scanCallback(const sensor_msgs::LaserScan::ConstPtr& msg)
 {
-   	//TODO 
-    return;
+	ROS_INFO("msg IN LaserScan");
+	return;
 }
 static void imuCallback(const sensor_msgs::Imu::ConstPtr& msg)
 {
