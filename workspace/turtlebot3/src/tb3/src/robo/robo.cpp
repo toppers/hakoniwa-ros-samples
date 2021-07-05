@@ -5,10 +5,7 @@
 #include <stdio.h>
 
 typedef struct {
-	double foward;
-	double left;
-	double right;
-	double back;
+	double ranges[360];
 } ScanDataType;
 
 static ScanDataType scan_data;
@@ -21,10 +18,11 @@ static void scanCallback(const sensor_msgs::LaserScan::ConstPtr& msg)
 		printf("msg IN LaserScan: [%d] = %f\n", i, msg->ranges[i]);
 	}
 #endif
-	scan_data.foward = msg->ranges[0];
-	scan_data.left = msg->ranges[90];
-	scan_data.back = msg->ranges[180];
-	scan_data.right = msg->ranges[270];
+	
+	int i;
+	for (i = 0; i < 360; i++) {
+		scan_data.ranges[i] = msg->ranges[i];
+	}
 	return;
 }
 static void imuCallback(const sensor_msgs::Imu::ConstPtr& msg)
@@ -36,12 +34,42 @@ static void imuCallback(const sensor_msgs::Imu::ConstPtr& msg)
 static ros::Publisher *publisher;
 static geometry_msgs::Twist cmd_vel;
 
+static float get_foward_distance(void)
+{
+	int i;
+	float min = 100.0f;
+	for (i = 0; i < 15; i++) {
+		if (scan_data.ranges[i] < min) {
+			min = scan_data.ranges[i];
+		}
+	}
+	for (i = (360 - 15); i < 360 ; i++) {
+		if (scan_data.ranges[i] < min) {
+			min = scan_data.ranges[i];
+		}
+	}
+	printf("foward: %lf\n", min);
+	return min;
+}
+static float get_right_distance(void)
+{
+	int i;
+	float min = 100.0f;
+	for (i = (90 - 30); i < (90 + 30); i++) {
+		if (scan_data.ranges[i] < min) {
+			min = scan_data.ranges[i];
+		}
+	}
+	printf("right: %lf\n", min);
+	return min;
+}
+
+
 static bool do_foward(void)
 {
 	bool is_stop = false;
 	cmd_vel.linear.x = 0;
-	cmd_vel.angular.z = 0;
-	if (scan_data.foward <= 0.12f) {
+	if (get_foward_distance() < 0.1f) {
 		cmd_vel.linear.x = 0;
 		is_stop = true;
 	}
@@ -52,27 +80,33 @@ static bool do_foward(void)
 	return is_stop;
 }
 
+
+
 static bool turn_left(void)
 {
 	bool is_stop = false;
-	cmd_vel.linear.x = 0;
 	cmd_vel.angular.z = 0;
-	if (scan_data.right <= 0.1f) {
-		cmd_vel.angular.z = 0;
+	if (get_right_distance() < 0.05f) {
+		cmd_vel.angular.z = 5;
 		is_stop = true;
 	}
 	else {
-		cmd_vel.angular.z = -3;
+		cmd_vel.angular.z = 0;
 	}
-	publisher->publish(cmd_vel);
 	
 	return is_stop;
 }
 
 static void do_control(void)
 {
-	if (do_foward()) {
-		turn_left();
+	bool is_foward = false;
+	bool is_left = false;
+	
+	is_foward = do_foward();
+	is_left = turn_left();
+	
+	if (cmd_vel.linear.x == 0 && cmd_vel.angular.z == 0) {
+		cmd_vel.angular.z = 1;
 	}
 	publisher->publish(cmd_vel);
 	return;
