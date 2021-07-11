@@ -6,11 +6,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using RosMessageTypes.Std;
-using RosMessageTypes.Hackev;
+{% if container.has_msg == "true" %}
+using RosMessageTypes.{{container.pkg_name.upper()}};
+{% endif %}
 using Unity.Robotics.ROSTCPConnector.MessageGeneration;
 using RosMessageTypes.Geometry;
+using RosMessageTypes.Sensor;
+using Hakoniwa.PluggableAsset.Communication.Pdu.ROS.{{container.pkg_name.upper()}};
 
-namespace Hakoniwa.PluggableAsset.Communication.Pdu.ROS
+namespace Hakoniwa.PluggableAsset.Communication.Pdu.ROS.{{container.pkg_name.upper()}}
 {
     class RosTopicPduWriterConverter : IPduWriterConverter
     {

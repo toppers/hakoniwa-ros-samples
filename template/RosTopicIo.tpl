@@ -6,11 +6,15 @@ using System.Collections.Generic;
 using Unity.Robotics.ROSTCPConnector;
 using UnityEngine;
 using System;
-using RosMessageTypes.Hackev;
+{% if container.has_msg == "true" %}
+using RosMessageTypes.{{container.pkg_name.upper()}};
+{% endif %}
 using Unity.Robotics.ROSTCPConnector.MessageGeneration;
 using RosMessageTypes.Geometry;
+using RosMessageTypes.Sensor;
+using Hakoniwa.PluggableAsset.Communication.Pdu.ROS.{{container.pkg_name.upper()}};
 
-namespace Hakoniwa.PluggableAsset.Communication.Method.ROS
+namespace Hakoniwa.PluggableAsset.Communication.Method.ROS.{{container.pkg_name.upper()}}
 {
     public class RosTopicIo : IRosTopicIo
     {
