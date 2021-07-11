@@ -6,9 +6,7 @@ using System.Collections.Generic;
 using Unity.Robotics.ROSTCPConnector;
 using UnityEngine;
 using System;
-{% if container.has_msg == "true" %}
-using RosMessageTypes.{{container.pkg_name.capitalize()}};
-{% endif %}
+using RosMessageTypes.Ev3;
 using Unity.Robotics.ROSTCPConnector.MessageGeneration;
 using RosMessageTypes.Geometry;
 using RosMessageTypes.Sensor;
