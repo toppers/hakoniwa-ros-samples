@@ -42,3 +42,8 @@ Windows エクスプローラで，「hakoniwa-ros-samples\workspace\turtlebot3\
 ```
 $ bash run.bash
 ```
+
+実行すると，このような感じで動きます．
+
+
+![ros1_demo7](https://user-images.githubusercontent.com/164193/124454332-563afe00-ddc3-11eb-92c3-52e7d0dd601f.gif)
