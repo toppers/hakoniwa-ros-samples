@@ -1,22 +1,22 @@
 cmake_minimum_required(VERSION 2.8.3)
-project(tb3)
+project(ev3)
 
 find_package(catkin REQUIRED COMPONENTS
   rospy
   std_msgs
   geometry_msgs
-  sensor_msgs
   ros_tcp_endpoint
   message_generation
 )
 
+add_message_files(DIRECTORY msg)
 
 generate_messages(
   DEPENDENCIES
-  std_msgs
   geometry_msgs
-  sensor_msgs
+  std_msgs
 )
+
 
 catkin_package(CATKIN_DEPENDS
     ros_tcp_endpoint
@@ -34,5 +34,5 @@ catkin_package()
 include_directories(
   include 
   ${catkin_INCLUDE_DIRS})
-add_executable(robo src/robo/robo.cpp)
-target_link_libraries(robo ${catkin_LIBRARIES})
+add_executable(ev3ctrl src/ev3ctrl/ev3ctrl.cpp)
+target_link_libraries(ev3ctrl ${catkin_LIBRARIES})

@@ -114,7 +114,7 @@ static void do_control(void)
 
 int main(int argc, char** argv)
 {
-    ros::init(argc, argv, "robo");
+    ros::init(argc, argv, "tb3ctrl");
     ros::NodeHandle n;
 
     ros::Publisher actuator_pub = n.advertise<geometry_msgs::Twist>("cmd_vel", 1);
