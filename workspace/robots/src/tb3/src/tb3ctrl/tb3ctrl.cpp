@@ -86,8 +86,22 @@ static bool turn_left(void)
 {
 	bool is_stop = false;
 	cmd_vel.angular.z = 0;
-	if (get_right_distance() < 0.05f) {
+	if (get_right_distance() < 0.02f) {
 		cmd_vel.angular.z = 5;
+		is_stop = true;
+	}
+	else {
+		cmd_vel.angular.z = 0;
+	}
+	
+	return is_stop;
+}
+static bool turn_right(void)
+{
+	bool is_stop = false;
+	cmd_vel.angular.z = 0;
+	if (get_right_distance() < 0.02f) {
+		cmd_vel.angular.z = -5;
 		is_stop = true;
 	}
 	else {
@@ -103,7 +117,7 @@ static void do_control(void)
 	bool is_left = false;
 	
 	is_foward = do_foward();
-	is_left = turn_left();
+	is_left = turn_right();
 	
 	if (cmd_vel.linear.x == 0 && cmd_vel.angular.z == 0) {
 		cmd_vel.angular.z = 1;

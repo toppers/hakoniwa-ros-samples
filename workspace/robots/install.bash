@@ -7,6 +7,14 @@ then
 	exit 1
 fi
 
+if [ -d ${1} ]
+then
+	:
+else
+	echo "ERROR: Can not found folder: ${1}"
+	exit 1
+fi
+
 SETTING_FOLDER=${1}
 PKG_NAME=`echo ${SETTING_FOLDER} | sed -e 's/\// /g' | awk '{print $NF}'`
 

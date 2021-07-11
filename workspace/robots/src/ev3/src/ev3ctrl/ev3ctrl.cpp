@@ -396,7 +396,12 @@ int main(int argc, char **argv)
         {
             do_arm_move(false);
             do_practice_2();
-        }
+            check_ultrasonic_sensor();
+            check_color_sensor();
+            if (ultrasonic_value < 4) {
+                do_stop();
+            }
+    }
 
         ros_actuator_data.leds[0] = actuator_data.led;
         ros_actuator_data.motors[0].power = actuator_data.motor_power[0];
