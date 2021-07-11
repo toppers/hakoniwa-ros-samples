@@ -20,10 +20,13 @@ rm -rf output
 mkdir input
 mkdir output
 
-for i in `cat ${SETTING_FOLDER}/ros_msgs.txt`
-do
-	cp ${ROS_JSON_DIR}/${i} input/
-done
+if [ -f ${SETTING_FOLDER}/ros_msgs.txt ]
+then
+	for i in `cat ${SETTING_FOLDER}/ros_msgs.txt`
+	do
+		cp ${ROS_JSON_DIR}/${i} input/
+	done
+fi
 
 HAS_MSG="true"
 if [ -f ${SETTING_FOLDER}/my_msgs.txt ]
