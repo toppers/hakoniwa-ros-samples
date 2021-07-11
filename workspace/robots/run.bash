@@ -2,4 +2,4 @@
 
 source devel/setup.bash
 
-rosrun tb3 robo
+rosrun ev3 ev3ctrl
