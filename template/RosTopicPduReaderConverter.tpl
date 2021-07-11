@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using RosMessageTypes.Std;
 {% if container.has_msg == "true" %}
-using RosMessageTypes.{{container.pkg_name.upper()}};
+using RosMessageTypes.{{container.pkg_name.capitalize()}};
 {% endif %}
 using Unity.Robotics.ROSTCPConnector.MessageGeneration;
 using RosMessageTypes.Geometry;
