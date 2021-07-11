@@ -59,5 +59,5 @@ cp ${UNITY_SRC_FILE2} ${UNITY_DST_DIR2}
 cp ${UNITY_SRC_FILE3} ${UNITY_DST_DIR3}
 cp ${UNITY_SRC_FILE4} ${UNITY_DST_DIR4}
 
-rm -rf input
-rm -rf output
+#rm -rf input
+#rm -rf output

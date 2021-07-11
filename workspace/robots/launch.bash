@@ -3,4 +3,10 @@
 
 source devel/setup.bash
 
-roslaunch ev3 robo.launch
+if [ $# -ne 1 ]
+then
+	echo "Usage: $0 <pkgname>"
+	exit 1
+fi
+
+roslaunch ${1} robo.launch

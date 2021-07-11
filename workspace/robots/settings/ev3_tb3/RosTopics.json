@@ -1,0 +1,24 @@
+{
+	"fields": [
+        {
+            "topic_message_name": "ev3_sensor",
+            "topic_type_name": "Ev3PduSensor"
+        },
+        {
+            "topic_message_name": "ev3_actuator",
+            "topic_type_name": "Ev3PduActuator"
+        },
+        {
+            "topic_message_name": "scan",
+            "topic_type_name": "LaserScan"
+        },
+        {
+            "topic_message_name": "imu",
+            "topic_type_name": "Imu"
+        },
+        {
+            "topic_message_name": "cmd_vel",
+            "topic_type_name": "Twist"
+        }
+	]
+}
