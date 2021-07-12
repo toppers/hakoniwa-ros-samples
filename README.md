@@ -4,5 +4,5 @@
 
 現時点では，以下のサンプルを公開中．
 
-* https://github.com/toppers/hakoniwa-ros-samples/tree/main/workspace/turtlebot3
-  * TurtleBot3向けシミュレータをROSで制御するためのサンプル 
+* https://github.com/toppers/hakoniwa-ros-samples/tree/main/workspace/robots
+  * HackEVとTurtleBot3を対象として，箱庭上でROS制御するためのサンプル 
