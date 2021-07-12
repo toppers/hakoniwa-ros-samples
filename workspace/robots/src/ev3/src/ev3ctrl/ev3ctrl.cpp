@@ -124,10 +124,21 @@ static void do_foward(int power)
     ERR_CHECK(err);
     return;
 }
+
+typedef enum {
+    Practice2_Phase_First = 0,
+    Practice2_Phase_Second,
+    Practice2_Phase_Third,
+    Practice2_Phase_Fourth,
+    Practice2_Phase_Fifth,
+    Practice2_Phase_Sixth,
+} Practice2_PhaseType;
+static Practice2_PhaseType Practice2_Phase;
 static void check_color_sensor(void)
 {
     color = ev3_color_sensor_get_color(color_sensor);
     uint8_t value = ev3_color_sensor_get_reflect(color_sensor);
+	printf("mode=%d :", Practice2_Phase + 1);
     switch (color) {
         case COLOR_NONE:
             break;
@@ -186,6 +197,8 @@ static void do_stop(void)
     err = ev3_motor_stop(right_motor, true);
     ERR_CHECK(err);
     do_foward(0);
+	printf("do_stop!!\n");
+	return;
 }
 /*
  * 1.4 アームを動かす
@@ -230,15 +243,6 @@ static void do_practice_1(void)
     return;
 }
 
-typedef enum {
-    Practice2_Phase_First = 0,
-    Practice2_Phase_Second,
-    Practice2_Phase_Third,
-    Practice2_Phase_Fourth,
-    Practice2_Phase_Fifth,
-    Practice2_Phase_Sixth,
-} Practice2_PhaseType;
-static Practice2_PhaseType Practice2_Phase;
 
 static void do_practice_2_first(void)
 {
@@ -264,7 +268,7 @@ static void do_practice_2_second(void)
 {
     check_ultrasonic_sensor();
     check_color_sensor();
-    if (ultrasonic_value > 5) {
+    if (ultrasonic_value > 10) {
         do_foward(5);
         return;
     }
@@ -297,6 +301,7 @@ static void do_practice_2_Fourth(void)
         do_foward(5);
         break;
     case COLOR_WHITE:
+    case COLOR_RED:
         do_turn(-5);
         break;
     case COLOR_BLUE:
@@ -312,15 +317,37 @@ static void do_practice_2_Fourth(void)
 static void do_practice_2_Fifh(void)
 {
     check_ultrasonic_sensor();
-    if (ultrasonic_value < 5) {
+    if (ultrasonic_value < 10) {
         do_stop();
         printf("GOAL!!\n");
         Practice2_Phase = Practice2_Phase_Sixth;
     }
     else {
-        do_foward(5);
+	    switch (color) {
+	    case COLOR_BLUE:
+	    case COLOR_BLACK:
+	        do_foward(5);
+	        break;
+	    case COLOR_WHITE:
+	        do_turn(-5);
+	        break;
+	    default:
+	        do_turn(5);
+	        break;
+	    }
     }
     return;
+}
+static void do_practice_2_Sixth(void)
+{
+    check_ultrasonic_sensor();
+	printf("distance=%d\n", ultrasonic_value);
+    if (ultrasonic_value < 10) {
+        do_stop();
+    }
+    else {
+        do_foward(5);
+    }
 }
 #define BLINK_CYCLE 20
 #define BLINK_CYCLE_HALF ( BLINK_CYCLE / 2 )
@@ -370,8 +397,11 @@ static void do_practice_2(void)
         blink_led(LED_GREEN);
         do_practice_2_Fifh();
         break;
-    default:
+    case Practice2_Phase_Sixth:
         ev3_led_set_color(LED_OFF);
+    	do_practice_2_Sixth();
+    	break;
+    default:
         do_stop();
         break;
     }
@@ -395,12 +425,14 @@ int main(int argc, char **argv)
         loop_rate.sleep();
         {
             do_arm_move(false);
-            do_practice_2();
             check_ultrasonic_sensor();
             check_color_sensor();
-            if (ultrasonic_value < 4) {
+            if (ultrasonic_value < 5) {
                 do_stop();
             }
+        	else {
+	            do_practice_2();
+        	}
     }
 
         ros_actuator_data.leds[0] = actuator_data.led;
