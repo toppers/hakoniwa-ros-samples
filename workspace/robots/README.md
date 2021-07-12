@@ -40,10 +40,14 @@ Windows エクスプローラで，「hakoniwa-ros-samples\workspace\turtlebot3\
 別端末で，以下のコマンドを実行する
 
 ```
+$ bash run.bash ev3
+```
+
+```
 $ bash run.bash tb3
 ```
 
 実行すると，このような感じで動きます．
 
 
-![ros1_demo7](https://user-images.githubusercontent.com/164193/124454332-563afe00-ddc3-11eb-92c3-52e7d0dd601f.gif)
+![debug](https://user-images.githubusercontent.com/164193/125229001-cdffb000-e310-11eb-8a01-6221ed7b2620.gif)
