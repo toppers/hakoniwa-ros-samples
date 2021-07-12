@@ -10,13 +10,13 @@
 
 ```
 $ git clone https://github.com/toppers/hakoniwa-ros-samples.git
-$ cd hakoniwa-ros-samples/workspace/turtlebot3
+$ cd hakoniwa-ros-samples/workspace/robots
 ```
 
 ## ROS-TCP-Endpointを起動する
 
 ```
-bash launch.bash
+bash launch.bash ev3_tb3
 ```
 
 ## Unity バイナリをダウンロードする
@@ -27,7 +27,7 @@ $ bash unity/download.bash
 
 ## ROSサンプルプログラムをビルドする
 ```
-$ cd hakoniwa-ros-samples/workspace/turtlebot3
+$ cd hakoniwa-ros-samples/workspace/robots
 $ bash clean_build.bash
 ```
 
@@ -40,7 +40,7 @@ Windows エクスプローラで，「hakoniwa-ros-samples\workspace\turtlebot3\
 別端末で，以下のコマンドを実行する
 
 ```
-$ bash run.bash
+$ bash run.bash tb3
 ```
 
 実行すると，このような感じで動きます．
