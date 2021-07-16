@@ -14,6 +14,7 @@ using Hakoniwa.PluggableAsset.Communication.Pdu.ROS.{{container.pkg_name.upper()
 using System.IO;
 using Newtonsoft.Json;
 using Hakoniwa.Core.Utils.Logger;
+using RosMessageTypes.BuiltinInterfaces;
 
 namespace Hakoniwa.PluggableAsset.Communication.Method.ROS.{{container.pkg_name.upper()}}
 {
@@ -68,16 +69,22 @@ namespace Hakoniwa.PluggableAsset.Communication.Method.ROS.{{container.pkg_name.
             }
 
 {% for msg in container.ros_topics["fields"]: %}
-            ros.Subscribe<M{{msg.topic_type_name}}>("{{msg.topic_message_name}}", M{{msg.topic_type_name}}Change);
+{%-		if (msg.sub == false): %}
+			ros.RegisterPublisher<{{msg.topic_type_name}}Msg>("{{msg.topic_message_name}}");
+{%-		else: %}
+            ros.Subscribe<{{msg.topic_type_name}}Msg>("{{msg.topic_message_name}}", {{msg.topic_type_name}}MsgChange);
+{%-		endif %}
 {%- endfor %}
 
         }
 
 {% for msg in container.ros_topics["fields"]: %}
-        private void M{{msg.topic_type_name}}Change(M{{msg.topic_type_name}} obj)
+{%-		if (msg.sub): %}
+        private void {{msg.topic_type_name}}MsgChange({{msg.topic_type_name}}Msg obj)
         {
             this.topic_data_table["{{msg.topic_message_name}}"] = obj;
         }
+{%-		endif %}
 {%- endfor %}
 
         public void Publish(IPduCommTypedData data)

@@ -11,6 +11,7 @@ using Unity.Robotics.ROSTCPConnector.MessageGeneration;
 using RosMessageTypes.Geometry;
 using RosMessageTypes.Sensor;
 using Hakoniwa.PluggableAsset.Communication.Pdu.ROS.{{container.pkg_name.upper()}};
+using RosMessageTypes.BuiltinInterfaces;
 
 namespace Hakoniwa.PluggableAsset.Communication.Pdu.ROS.{{container.pkg_name.upper()}}
 {
@@ -23,7 +24,7 @@ namespace Hakoniwa.PluggableAsset.Communication.Pdu.ROS.{{container.pkg_name.upp
         }
         
 {% for msg in container.msgs: %}
-        static private void ConvertToMessage(IPduReadOperation src, M{{msg.name}} dst)
+        static private void ConvertToMessage(IPduReadOperation src, {{msg.name}}Msg dst)
         {
 {%- 	for item in msg.json_data["fields"]: -%}
 {%-		if (container.is_primitive(item["type"]) or container.is_primitive_array(item["type"])): %}
@@ -34,7 +35,7 @@ namespace Hakoniwa.PluggableAsset.Communication.Pdu.ROS.{{container.pkg_name.upp
             {
                 int index = Array.IndexOf(src.Refs("{{item["name"]}}"), e);
                 if (dst.{{item["name"]}}[index] == null) {
-                    dst.{{item["name"]}}[index] = new M{{container.get_array_type(item["type"])}}();
+                    dst.{{item["name"]}}[index] = new {{container.get_array_type(item["type"])}}Msg();
                 }
                 ConvertToMessage(e.GetPduReadOps(), dst.{{item["name"]}}[index]);
             }
@@ -52,7 +53,7 @@ namespace Hakoniwa.PluggableAsset.Communication.Pdu.ROS.{{container.pkg_name.upp
 {% for topic in container.ros_topics["fields"]: %}
             if (type.Equals("{{topic.topic_type_name}}"))
             {
-            	M{{topic.topic_type_name}} ros_topic = new M{{topic.topic_type_name}}();
+            	{{topic.topic_type_name}}Msg ros_topic = new {{topic.topic_type_name}}Msg();
                 ConvertToMessage(src, ros_topic);
                 return ros_topic;
             }

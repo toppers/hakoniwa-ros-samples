@@ -142,7 +142,7 @@ typedef enum {
 } RoboModeType;
 int main(int argc, char** argv)
 {
-	RoboModeType mode = RoboMode_INIT;
+	RoboModeType mode = RoboMode_RUN;
     ros::init(argc, argv, "tb3ctrl");
     ros::NodeHandle n;
 

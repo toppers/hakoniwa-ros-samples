@@ -19,7 +19,7 @@ SETTING_FOLDER=${1}
 PKG_NAME=`echo ${SETTING_FOLDER} | sed -e 's/\// /g' | awk '{print $NF}'`
 
 ROS_JSON_DIR=../../ros_json/
-UNITY_PRJ_DIR=../unity/ros-sample
+UNITY_PRJ_DIR=../unity/tb3
 UNITY_DST_DIR=${UNITY_PRJ_DIR}/Assets/Scripts/Hakoniwa/PluggableAsset/Communication
 
 rm -rf input
