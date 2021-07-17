@@ -3,7 +3,7 @@
 rm -rf build
 rm -rf devel
 
-DIR_PATH=$(cd ../../third-party/ROS-TCP-Endpoint && pwd)
+DIR_PATH=$(cd ../../../third-party/ROS-TCP-Endpoint && pwd)
 
 if [ -f src/ROS-TCP-Endpoint ]
 then
