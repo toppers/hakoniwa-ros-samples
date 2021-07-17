@@ -422,6 +422,10 @@ int main(int argc, char **argv)
 	            do_practice_2();
         	}
   		}
+		ros_actuator_data.leds[0] = actuator_data.led;
+        ros_actuator_data.motors[0].power = actuator_data.motor_power[0];
+        ros_actuator_data.motors[1].power = actuator_data.motor_power[1];
+        ros_actuator_data.motors[2].power = actuator_data.motor_power[2];
 	    publisher->publish(ros_actuator_data);
     	rclcpp::spin_some(node);
     	rate.sleep();
