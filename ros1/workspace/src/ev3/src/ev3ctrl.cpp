@@ -277,7 +277,6 @@ static void do_practice_2_Fourth(void) {
       do_foward(5);
       break;
     case COLOR_WHITE:
-    case COLOR_RED:
       do_turn(-5);
       break;
     case COLOR_BLUE:

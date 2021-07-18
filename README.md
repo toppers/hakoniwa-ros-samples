@@ -40,14 +40,6 @@ $ bash clean.bash
 $ bash build.bash
 ```
 
-## ROS-TCP-Endpointを起動する
-
-作業フォルダ上で以下のコマンドを実行する
-
-```
-$ bash launch.bash
-```
-
 ## Unity バイナリをダウンロードする
 
 以下のフォルダに移動し，Unity バイナリをダウンロードする
@@ -72,11 +64,20 @@ $ bash unity/download.bash
 
 ### ROS1 の場合
 
-Windows エクスプローラで，「hakoniwa-ros-samples\ros1\unity\WindowsBinary」内の「ros-sample.exe」をダブルクリックする．
+Windows エクスプローラで，「hakoniwa-ros-samples\ros1\unity\Ros1WindowsBinary」内の「tb3_ros1.exe」をダブルクリックする．
 
 ### ROS2 の場合
 
-Windows エクスプローラで，「hakoniwa-ros-samples\ros2\unity\WindowsBinary」内の「ros-sample.exe」をダブルクリックする．
+Windows エクスプローラで，「hakoniwa-ros-samples\ros2\unity\Ros2WindowsBinary」内の「tb3_ros2.exe」をダブルクリックする．
+
+
+## ROS-TCP-Endpointを起動する
+
+作業フォルダ上で以下のコマンドを実行する
+
+```
+$ bash launch.bash
+```
 
 ## ROSプログラムを実行する
 作業フォルダ上で，以下のコマンドを実行する
