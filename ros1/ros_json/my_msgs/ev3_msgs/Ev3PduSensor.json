@@ -2,7 +2,7 @@
   "fields": [
     {
       "type": "Ev3PduSensorHeader", 
-      "name": "header"
+      "name": "head"
     }, 
     {
       "type": "uint8[1]", 

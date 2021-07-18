@@ -2,7 +2,7 @@
   "fields": [
     {
       "type": "Ev3PduActuatorHeader", 
-      "name": "header"
+      "name": "head"
     }, 
     {
       "type": "uint8[1]", 
