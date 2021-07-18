@@ -1,0 +1,14 @@
+{
+	"fields": [
+        {
+            "topic_message_name": "ev3_sensor",
+            "topic_type_name": "Ev3PduSensor",
+            "sub": false
+        },
+        {
+            "topic_message_name": "ev3_actuator",
+            "topic_type_name": "Ev3PduActuator",
+            "sub": true
+        }
+	]
+}
