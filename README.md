@@ -82,6 +82,11 @@ $ bash launch.bash
 ## ROSプログラムを実行する
 作業フォルダ上で，以下のコマンドを実行する
 
+```
 $ bash run.bash ev3
+```
+
+```
 $ bash run.bash tb3
+```
 
