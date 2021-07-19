@@ -18,6 +18,7 @@
             "pdu_writer_names": [
                 "TB3RoboModel_Tb3LaserSensorPdu",
                 "TB3RoboModel_Tb3ImuSensorPdu",
+                "TB3RoboModel_Tb3OdometryPdu",
             ],
             "pdu_reader_names": [
                 "TB3RoboModel_Tb3CmdVelPdu",
@@ -46,6 +47,13 @@
             "conv_class_name" : "Hakoniwa.PluggableAsset.Communication.Pdu.ROS.EV3_TB3.RosTopicPduWriterConverter",
             "topic_message_name": "imu",
             "pdu_config_name": "Imu",
+        },
+        {
+            "name": "TB3RoboModel_Tb3OdometryPdu",
+            "class_name": "Hakoniwa.PluggableAsset.Communication.Pdu.ROS.RosTopicPduWriter",
+            "conv_class_name" : "Hakoniwa.PluggableAsset.Communication.Pdu.ROS.EV3_TB3.RosTopicPduWriterConverter",
+            "topic_message_name": "odom",
+            "pdu_config_name": "Odometry",
         }
     ],
     "pdu_readers": [
@@ -124,7 +132,39 @@
         {
             "pdu_type_name": "builtin_interfaces/Time",
 			"pdu_data_field_path" : "../../../ros2/ros_json/builtin_interfaces/Time.json"
-        }
+        },
+        {
+            "pdu_type_name": "geometry_msgs/Transform",
+			"pdu_data_field_path" : "../../../ros2/ros_json/geometry_msgs/Transform.json"
+        },
+        {
+            "pdu_type_name": "Quaternion",
+			"pdu_data_field_path" : "../../../ros2/ros_json/geometry_msgs/Quaternion.json"
+        },
+        {
+            "pdu_type_name": "Pose",
+			"pdu_data_field_path" : "../../../ros2/ros_json/geometry_msgs/Pose.json"
+        },
+        {
+            "pdu_type_name": "Point",
+			"pdu_data_field_path" : "../../../ros2/ros_json/geometry_msgs/Point.json"
+        },
+        {
+            "pdu_type_name": "geometry_msgs/Quaternion",
+			"pdu_data_field_path" : "../../../ros2/ros_json/geometry_msgs/Quaternion.json"
+        },
+        {
+            "pdu_type_name": "geometry_msgs/PoseWithCovariance",
+			"pdu_data_field_path" : "../../../ros2/ros_json/geometry_msgs/PoseWithCovariance.json"
+        },
+        {
+            "pdu_type_name": "geometry_msgs/TwistWithCovariance",
+			"pdu_data_field_path" : "../../../ros2/ros_json/geometry_msgs/TwistWithCovariance.json"
+        },
+        {
+            "pdu_type_name": "Odometry",
+			"pdu_data_field_path" : "../../../ros2/ros_json/nav_msgs/Odometry.json"
+        },
     ],
     "ros_topics_path" : "../../../settings/ev3_tb3/RosTopics.json",
     "udp_methods": null,
@@ -162,6 +202,11 @@
             "name": "writer_connector3",
             "pdu_name": "TB3RoboModel_Tb3ImuSensorPdu",
             "method_name": "ros_topic_io"
+        },
+        {
+            "name": "writer_connector4",
+            "pdu_name": "TB3RoboModel_Tb3OdometryPdu",
+            "method_name": "ros_topic_io"
         }
     ],
     "pdu_channel_connectors": [
@@ -179,6 +224,11 @@
             "outside_asset_name": null,
             "reader_connector_name": null,
             "writer_connector_name": "writer_connector3"
+        },
+        {
+            "outside_asset_name": null,
+            "reader_connector_name": null,
+            "writer_connector_name": "writer_connector4"
         },
         {
             "outside_asset_name": null,

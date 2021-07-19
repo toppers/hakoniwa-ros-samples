@@ -1,6 +1,6 @@
 {
 	"connection_startup": true,
-	"ip_address": "172.20.211.2",
+	"ip_address": "172.20.229.246",
 	"portno": 10000,
 	"show_hud": false,
 	"keep_alive_time": 10,
