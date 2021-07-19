@@ -1,0 +1,30 @@
+[
+        {
+            "name": "RoboModel_Ev3SensorPdu",
+            "class_name": "Hakoniwa.PluggableAsset.Communication.Pdu.ROS.RosTopicPduWriter",
+            "conv_class_name" : "Hakoniwa.PluggableAsset.Communication.Pdu.ROS.EV3_TB3.RosTopicPduWriterConverter",
+            "topic_message_name": "ev3_sensor",
+            "pdu_config_name": "Ev3PduSensor",
+        },
+        {
+            "name": "TB3RoboModel_Tb3LaserSensorPdu",
+            "class_name": "Hakoniwa.PluggableAsset.Communication.Pdu.ROS.RosTopicPduWriter",
+            "conv_class_name" : "Hakoniwa.PluggableAsset.Communication.Pdu.ROS.EV3_TB3.RosTopicPduWriterConverter",
+            "topic_message_name": "scan",
+            "pdu_config_name": "LaserScan",
+        },
+        {
+            "name": "TB3RoboModel_Tb3ImuSensorPdu",
+            "class_name": "Hakoniwa.PluggableAsset.Communication.Pdu.ROS.RosTopicPduWriter",
+            "conv_class_name" : "Hakoniwa.PluggableAsset.Communication.Pdu.ROS.EV3_TB3.RosTopicPduWriterConverter",
+            "topic_message_name": "imu",
+            "pdu_config_name": "Imu",
+        },
+        {
+            "name": "TB3RoboModel_Tb3OdometryPdu",
+            "class_name": "Hakoniwa.PluggableAsset.Communication.Pdu.ROS.RosTopicPduWriter",
+            "conv_class_name" : "Hakoniwa.PluggableAsset.Communication.Pdu.ROS.EV3_TB3.RosTopicPduWriterConverter",
+            "topic_message_name": "odom",
+            "pdu_config_name": "Odometry",
+        }
+]
