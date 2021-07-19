@@ -75,6 +75,7 @@ def get_type(name):
 	else:
 		return name
 
+
 container = RosMessageContainer()
 container.to_conv = to_conv
 container.get_type = get_type
@@ -84,6 +85,12 @@ container.is_primitive = is_primitive
 container.is_primitive_array = is_primitive_array
 container.has_msg = has_msg
 container.pkg_name = pkg_name
+container.msg_pkgs = []
+
+for line in open(in_dir + "/msg_pkg.txt", 'r'):
+	line = line.capitalize()
+	tmp = re.sub('_(.)',lambda x:x.group(1).capitalize(),line)
+	container.msg_pkgs.append(tmp.strip())
 
 file = open('./settings/' + pkg_name + '/RosTopics.json')
 container.ros_topics = json.load(file)

@@ -5,3 +5,10 @@ geometry_msgs/Quaternion.json
 geometry_msgs/Vector3.json
 std_msgs/Header.json
 builtin_interfaces/Time.json
+geometry_msgs/Transform.json
+geometry_msgs/Quaternion.json
+geometry_msgs/Pose.json
+geometry_msgs/Point.json
+geometry_msgs/PoseWithCovariance.json
+geometry_msgs/TwistWithCovariance.json
+nav_msgs/Odometry.json

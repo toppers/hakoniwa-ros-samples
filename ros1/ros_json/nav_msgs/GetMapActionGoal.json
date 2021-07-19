@@ -1,0 +1,16 @@
+{
+  "fields": [
+    {
+      "type": "Header", 
+      "name": "header"
+    }, 
+    {
+      "type": "actionlib_msgs/GoalID", 
+      "name": "goal_id"
+    }, 
+    {
+      "type": "GetMapGoal", 
+      "name": "goal"
+    }
+  ]
+}

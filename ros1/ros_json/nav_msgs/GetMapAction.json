@@ -1,0 +1,16 @@
+{
+  "fields": [
+    {
+      "type": "GetMapActionGoal", 
+      "name": "action_goal"
+    }, 
+    {
+      "type": "GetMapActionResult", 
+      "name": "action_result"
+    }, 
+    {
+      "type": "GetMapActionFeedback", 
+      "name": "action_feedback"
+    }
+  ]
+}

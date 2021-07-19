@@ -21,6 +21,11 @@
             "sub": false
         },
         {
+            "topic_message_name": "odom",
+            "topic_type_name": "Odometry",
+            "sub": false
+        },
+        {
             "topic_message_name": "cmd_vel",
             "topic_type_name": "Twist",
             "sub": true

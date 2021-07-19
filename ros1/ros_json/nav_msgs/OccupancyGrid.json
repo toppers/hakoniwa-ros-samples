@@ -1,0 +1,16 @@
+{
+  "fields": [
+    {
+      "type": "Header", 
+      "name": "header"
+    }, 
+    {
+      "type": "MapMetaData", 
+      "name": "info"
+    }, 
+    {
+      "type": "int8[]", 
+      "name": "data"
+    }
+  ]
+}

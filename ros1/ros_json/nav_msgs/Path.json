@@ -1,0 +1,12 @@
+{
+  "fields": [
+    {
+      "type": "Header", 
+      "name": "header"
+    }, 
+    {
+      "type": "geometry_msgs/PoseStamped[]", 
+      "name": "poses"
+    }
+  ]
+}

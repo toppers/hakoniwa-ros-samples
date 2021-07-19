@@ -51,6 +51,7 @@ then
 	do
 		cp ${ROS_JSON_DIR}/${i} input/
 	done
+	cat ${SETTING_FOLDER}/ros_msgs.txt  | awk -F/ '{print $1}' | sort | uniq | awk -F_msgs '{print $1}' > input/msg_pkg.txt
 fi
 
 HAS_MSG="true"
@@ -60,6 +61,7 @@ then
 	do
 		cp ${ROS_JSON_DIR}/${i} input/
 	done
+	cat ${SETTING_FOLDER}/my_msgs.txt  | awk -F/ '{print $2}' | sort | uniq | awk -F_msgs '{print $1}' >> input/msg_pkg.txt
 else
 	HAS_MSG="false"
 fi

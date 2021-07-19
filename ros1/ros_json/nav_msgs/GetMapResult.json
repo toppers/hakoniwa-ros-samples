@@ -1,0 +1,8 @@
+{
+  "fields": [
+    {
+      "type": "nav_msgs/OccupancyGrid", 
+      "name": "map"
+    }
+  ]
+}
