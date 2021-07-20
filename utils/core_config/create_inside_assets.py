@@ -4,6 +4,7 @@ import json
 import sys
 import glob
 import re
+from collections import OrderedDict
 
 import hakoniwa_utils
 
@@ -23,15 +24,15 @@ robo_list = hakoniwa_utils.get_robolist(ros_topics)
 container = list()
 for robo in robo_list:
 	e_list = hakoniwa_utils.get_entry(ros_topics, 'robot_name', robo)
-	entry = dict()
+	entry = OrderedDict()
 	entry['name'] = robo
 	entry['pdu_writer_names'] = list()
 	entry['pdu_reader_names'] = list()
 	for e_list_entry in e_list:
 		if e_list_entry['sub']:
-			entry['pdu_reader_names'].append(robo + '_' + e_list_entry['topic_message_name'] + 'Pdu')
+			entry['pdu_reader_names'].append(hakoniwa_utils.get_pdu_name(e_list_entry))
 		else:
-			entry['pdu_writer_names'].append(robo + '_' + e_list_entry['topic_message_name'] + 'Pdu')
+			entry['pdu_writer_names'].append(hakoniwa_utils.get_pdu_name(e_list_entry))
 	container.append(entry)
 
 with open(out_dir + '/' + out_filename, mode='wt') as out_file:

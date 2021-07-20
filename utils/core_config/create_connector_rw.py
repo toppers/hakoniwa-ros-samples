@@ -4,6 +4,7 @@ import json
 import sys
 import glob
 import re
+from collections import OrderedDict
 
 import hakoniwa_utils
 
@@ -49,7 +50,7 @@ for e in ros_topics['fields']:
 			head_name = 'writer'
 
 	if is_add:
-		entry = dict()
+		entry = OrderedDict()
 		if rw_type != 'p':
 			entry['name'] = head_name + '_connector' + str(index)
 			entry['pdu_name'] = hakoniwa_utils.get_pdu_name(e)

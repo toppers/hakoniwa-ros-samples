@@ -4,6 +4,7 @@ import json
 import sys
 import glob
 import re
+from collections import OrderedDict
 
 import hakoniwa_utils
 
@@ -34,7 +35,7 @@ for e in ros_topics['fields']:
 		is_add = (e['sub'] == False)
 
 	if is_add:
-		entry = dict()
+		entry = OrderedDict()
 		entry['name'] = hakoniwa_utils.get_pdu_name(e)
 		entry['class_name'] = hakoniwa_utils.get_pdu_class_name(rw_type)
 		entry['conv_class_name'] = hakoniwa_utils.get_pdu_conv_class_name(rw_type, pkg_name)
