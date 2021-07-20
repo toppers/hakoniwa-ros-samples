@@ -29,9 +29,9 @@ for robo in robo_list:
 	entry['pdu_reader_names'] = list()
 	for e_list_entry in e_list:
 		if e_list_entry['sub']:
-			entry['pdu_reader_names'].append(robo + '_' + e_list_entry['topic_type_name'] + 'Pdu')
+			entry['pdu_reader_names'].append(robo + '_' + e_list_entry['topic_message_name'] + 'Pdu')
 		else:
-			entry['pdu_writer_names'].append(robo + '_' + e_list_entry['topic_type_name'] + 'Pdu')
+			entry['pdu_writer_names'].append(robo + '_' + e_list_entry['topic_message_name'] + 'Pdu')
 	container.append(entry)
 
 with open(out_dir + '/' + out_filename, mode='wt') as out_file:

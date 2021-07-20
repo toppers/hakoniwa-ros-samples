@@ -20,10 +20,10 @@ def get_entry(ros_topics, type, name):
 	return tmp_list
 
 def get_pdu_name(e):
-	return e['robot_name'] + '_' + e['topic_type_name'] + 'Pdu'
+	return e['robot_name'] + '_' + e['topic_message_name'] + 'Pdu'
 
 def get_pdu_type_name(e):
-	return e['topic_type_name'] + 'Pdu'
+	return e['topic_type_name']
 
 def get_pdu_topic_name(e):
 	return e['topic_message_name']
