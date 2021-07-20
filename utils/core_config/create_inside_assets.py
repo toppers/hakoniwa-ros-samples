@@ -5,6 +5,8 @@ import sys
 import glob
 import re
 
+import hakoniwa_utils
+
 if len(sys.argv) != 3:
 	print "Usage: " + sys.argv[0] + " <ros_tpics> <out_dir>"
 	sys.exit()
@@ -16,24 +18,11 @@ out_filename='inside_assets.json'
 file = open(in_file)
 ros_topics = json.load(file)
 
-def get_robolist():
-	tmp_list = list()
-	for e in ros_topics['fields']:
-		tmp_list.append(e['robot_name'])
-	return list(set(tmp_list))
-
-def get_entry(type, name):
-	tmp_list = list()
-	for e in ros_topics['fields']:
-		if e[type] == name:
-			tmp_list.append( e )
-	return tmp_list
-
-robo_list = get_robolist()
+robo_list = hakoniwa_utils.get_robolist(ros_topics)
 
 container = list()
 for robo in robo_list:
-	e_list = get_entry('robot_name', robo)
+	e_list = hakoniwa_utils.get_entry(ros_topics, 'robot_name', robo)
 	entry = dict()
 	entry['name'] = robo
 	entry['pdu_writer_names'] = list()
