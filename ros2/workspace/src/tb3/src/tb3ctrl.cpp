@@ -128,7 +128,7 @@ int main(int argc, char **argv) {
   auto subscriber = node->create_subscription<sensor_msgs::msg::LaserScan>(
       "scan", 1, scanCallback);
 
-  rclcpp::WallRate rate(100ms);
+  rclcpp::WallRate rate(10ms);
 
   while (rclcpp::ok()) {
     if (mode == RoboMode_INIT) {

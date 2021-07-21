@@ -4,18 +4,19 @@ import json
 import sys
 import glob
 import re
-from jinja2 import Environment, FileSystemLoader
+import string
+from jinja2 import Template, Environment, FileSystemLoader
+
 env = Environment(loader=FileSystemLoader('./', encoding='utf8'))
 
-if len(sys.argv) != 6:
-	print "ERROR: generate.py <name> <in_dir> <out_dir> <package_name> <has_msg(true or false)>"
+if len(sys.argv) != 5:
+	print "ERROR: generate.py <name> <in_dir> <out_dir> <package_name>"
 	sys.exit()
 
 tpl_name=sys.argv[1] + ".tpl"
 in_dir=sys.argv[2]
 out_dir=sys.argv[3]
 pkg_name=sys.argv[4]
-has_msg=sys.argv[5]
 
 class RosMessageContainer:
     pass
@@ -75,6 +76,9 @@ def get_type(name):
 	else:
 		return name
 
+def get_msg_type(name):
+	return name.split('/')[1]
+
 
 container = RosMessageContainer()
 container.to_conv = to_conv
@@ -83,8 +87,8 @@ container.get_array_type = get_array_type
 container.is_array = is_array
 container.is_primitive = is_primitive
 container.is_primitive_array = is_primitive_array
-container.has_msg = has_msg
 container.pkg_name = pkg_name
+container.get_msg_type = get_msg_type
 container.msg_pkgs = []
 
 for line in open(in_dir + "/msg_pkg.txt", 'r'):

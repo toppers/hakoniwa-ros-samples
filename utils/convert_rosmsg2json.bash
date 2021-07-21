@@ -30,6 +30,7 @@ function get_filepath()
 function create_ros_json_file()
 {
     local_pkg_msg=${1}
+    echo "#### Creating ${local_pkg_msg} ####"
     filepath=${2}
     pkg_name=`echo ${1} | awk -F/ '{print $1}'`
     msg_name=`echo ${1} | awk -F/ '{print $2}'`
@@ -39,7 +40,7 @@ function create_ros_json_file()
     else
         mkdir -p ${DST_DIR}/${pkg_name}
     fi
-    python rosmsg2json.py ${filepath} ${DST_DIR}/${pkg_name}
+    python utils/rosmsg2json.py ${filepath} ${DST_DIR}/${pkg_name}
 }
 
 for pkg_msg in `cat ${ROS_MSG_LIST_FILE}`

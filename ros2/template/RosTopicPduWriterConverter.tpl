@@ -49,9 +49,9 @@ namespace Hakoniwa.PluggableAsset.Communication.Pdu.ROS.{{container.pkg_name.upp
         static public Message ConvertToMessage(IPduReadOperation src, string type)
         {
 {% for topic in container.ros_topics["fields"]: %}
-            if (type.Equals("{{topic.topic_type_name}}"))
+            if (type.Equals("{{(topic.topic_type_name)}}"))
             {
-            	{{topic.topic_type_name}}Msg ros_topic = new {{topic.topic_type_name}}Msg();
+            	{{container.get_msg_type(topic.topic_type_name)}}Msg ros_topic = new {{container.get_msg_type(topic.topic_type_name)}}Msg();
                 ConvertToMessage(src, ros_topic);
                 return ros_topic;
             }

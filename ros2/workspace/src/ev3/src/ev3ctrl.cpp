@@ -373,7 +373,7 @@ int main(int argc, char **argv) {
   auto subscriber = node->create_subscription<ev3_msgs::msg::Ev3PduSensor>(
       "ev3_sensor", 10, topic_callback);
 
-  rclcpp::WallRate rate(100ms);
+  rclcpp::WallRate rate(10ms);
 
   auto ros_actuator_data = ev3_msgs::msg::Ev3PduActuator();
   while (rclcpp::ok()) {

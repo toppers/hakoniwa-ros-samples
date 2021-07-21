@@ -1,0 +1,2 @@
+/opt/ros/foxy/share
+/mnt/c/project/oss/hakoniwa-ros-samples/ros2/workspace/install/ev3_msgs/share

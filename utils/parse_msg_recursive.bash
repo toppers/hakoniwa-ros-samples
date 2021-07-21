@@ -16,7 +16,7 @@ function parse_one()
     rm -f entry_msg_types.txt
     for path in `cat ${SEARCH_PATH_FILE}`
     do
-        bash parse_msg.bash ${path} ${local_pkg_msg} > tmp.txt
+        bash utils/parse_msg.bash ${path} ${local_pkg_msg} > tmp.txt
         if [ $? -eq 0 ]
         then
             mv tmp.txt entry_msg_types.txt

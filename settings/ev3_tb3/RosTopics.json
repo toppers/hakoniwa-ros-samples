@@ -2,32 +2,38 @@
 	"fields": [
         {
             "topic_message_name": "ev3_sensor",
-            "topic_type_name": "Ev3PduSensor",
+            "topic_type_name": "ev3_msgs/Ev3PduSensor",
+            "robot_name": "RoboModel",
             "sub": false
         },
         {
             "topic_message_name": "ev3_actuator",
-            "topic_type_name": "Ev3PduActuator",
+            "topic_type_name": "ev3_msgs/Ev3PduActuator",
+            "robot_name": "RoboModel",
             "sub": true
         },
         {
             "topic_message_name": "scan",
-            "topic_type_name": "LaserScan",
+            "topic_type_name": "sensor_msgs/LaserScan",
+            "robot_name": "TB3RoboModel",
             "sub": false
         },
         {
             "topic_message_name": "imu",
-            "topic_type_name": "Imu",
+            "topic_type_name": "sensor_msgs/Imu",
+            "robot_name": "TB3RoboModel",
             "sub": false
         },
         {
             "topic_message_name": "odom",
-            "topic_type_name": "Odometry",
+            "topic_type_name": "nav_msgs/Odometry",
+            "robot_name": "TB3RoboModel",
             "sub": false
         },
         {
             "topic_message_name": "cmd_vel",
-            "topic_type_name": "Twist",
+            "topic_type_name": "geometry_msgs/Twist",
+            "robot_name": "TB3RoboModel",
             "sub": true
         }
 	]
