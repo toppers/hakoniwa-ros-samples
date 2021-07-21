@@ -37,6 +37,7 @@ function search_recursive()
     local_pkg_msg=${1}
     while [ 1 ]
     do
+        echo ${local_pkg_msg} >> msg_types.txt
         parse_one ${local_pkg_msg}
         NUM=`wc -l entry_msg_types.txt | awk '{print $1}'`
         cat entry_msg_types.txt >> msg_types.txt
