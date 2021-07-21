@@ -47,15 +47,15 @@ function search_recursive()
 
         for e in `cat entry_msg_types.txt`
         do
-            search_recursive ${e}.msg
+            search_recursive ${e}
         done
     done
 }
 
 search_recursive ${PKG_MSG}
 
-cat msg_types.txt | sort | uniq > _msg_types.txt
-mv _msg_types.txt msg_types.txt
+cat msg_types.txt | sort | uniq 
+rm -f msg_types.txt
 rm -f entry_msg_types.txt
 
 exit 0

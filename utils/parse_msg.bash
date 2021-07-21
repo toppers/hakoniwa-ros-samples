@@ -11,14 +11,14 @@ PKG_MSG=${2}
 PKG_NAME=`echo ${PKG_MSG} | awk -F/ '{print $1}'`
 MSG_NAME=`echo ${PKG_MSG} | awk -F/ '{print $2}'`
 
-if [ -f ${ROS_INSTALL_DIR}/${PKG_NAME}/msg/${MSG_NAME} ]
+if [ -f ${ROS_INSTALL_DIR}/${PKG_NAME}/msg/${MSG_NAME}.msg ]
 then
     :
 else
     exit 1
 fi
 
-cat ${ROS_INSTALL_DIR}/${PKG_NAME}/msg/${MSG_NAME} | grep -v "^#" | grep -v "^$" | awk '{print $1}' | sort |uniq > tmp
+cat ${ROS_INSTALL_DIR}/${PKG_NAME}/msg/${MSG_NAME}.msg | grep -v "^#" | grep -v "^$" | awk '{print $1}' | sort |uniq > tmp
 
 for i in `cat tmp`
 do
@@ -27,9 +27,10 @@ do
     then
         echo $i
     else
-        if [ -f ${ROS_INSTALL_DIR}/${PKG_NAME}/msg/${i}.msg ]
+        type=`echo ${i} | awk -F[ '{print $1}'`
+        if [ -f ${ROS_INSTALL_DIR}/${PKG_NAME}/msg/${type}.msg ]
         then
-            echo ${PKG_NAME}/$i
+            echo ${PKG_NAME}/${type}
         fi
     fi
 done
