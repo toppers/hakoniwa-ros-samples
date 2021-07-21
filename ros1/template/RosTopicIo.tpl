@@ -6,15 +6,14 @@ using System.Collections.Generic;
 using Unity.Robotics.ROSTCPConnector;
 using UnityEngine;
 using System;
-using RosMessageTypes.Ev3;
 using Unity.Robotics.ROSTCPConnector.MessageGeneration;
-using RosMessageTypes.Geometry;
-using RosMessageTypes.Sensor;
 using Hakoniwa.PluggableAsset.Communication.Pdu.ROS.{{container.pkg_name.upper()}};
 using System.IO;
 using Newtonsoft.Json;
 using Hakoniwa.Core.Utils.Logger;
-using RosMessageTypes.BuiltinInterfaces;
+{% for pkg in container.msg_pkgs: %}
+using RosMessageTypes.{{pkg}};
+{%- endfor %}
 
 namespace Hakoniwa.PluggableAsset.Communication.Method.ROS.{{container.pkg_name.upper()}}
 {
@@ -70,9 +69,9 @@ namespace Hakoniwa.PluggableAsset.Communication.Method.ROS.{{container.pkg_name.
 
 {% for msg in container.ros_topics["fields"]: %}
 {%-		if (msg.sub == false): %}
-			ros.RegisterPublisher<{{msg.topic_type_name}}Msg>("{{msg.topic_message_name}}");
+			ros.RegisterPublisher<{{container.get_msg_type(msg.topic_type_name)}}Msg>("{{msg.topic_message_name}}");
 {%-		else: %}
-            ros.Subscribe<{{msg.topic_type_name}}Msg>("{{msg.topic_message_name}}", {{msg.topic_type_name}}MsgChange);
+            ros.Subscribe<{{container.get_msg_type(msg.topic_type_name)}}Msg>("{{msg.topic_message_name}}", {{container.get_msg_type(msg.topic_type_name)}}MsgChange);
 {%-		endif %}
 {%- endfor %}
 
@@ -80,7 +79,7 @@ namespace Hakoniwa.PluggableAsset.Communication.Method.ROS.{{container.pkg_name.
 
 {% for msg in container.ros_topics["fields"]: %}
 {%-		if (msg.sub): %}
-        private void {{msg.topic_type_name}}MsgChange({{msg.topic_type_name}}Msg obj)
+        private void {{container.get_msg_type(msg.topic_type_name)}}MsgChange({{container.get_msg_type(msg.topic_type_name)}}Msg obj)
         {
             this.topic_data_table["{{msg.topic_message_name}}"] = obj;
         }

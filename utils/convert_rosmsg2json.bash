@@ -10,6 +10,8 @@ SEARCH_PATH_FILE=${1}
 ROS_MSG_LIST_FILE=${2}
 DST_DIR=${3}
 
+ROS_VERSION=`echo ${DST_DIR} | awk -F/ '{print $1}'`
+
 RET_VALUE="NONE"
 function get_filepath()
 {
@@ -43,15 +45,34 @@ function create_ros_json_file()
     python utils/rosmsg2json.py ${filepath} ${DST_DIR}/${pkg_name}
 }
 
+NEED_CREATE="TRUE"
+function check_version()
+{
+    pkg_name=`echo ${1} | awk -F/ '{print $1}'`
+    msg_name=`echo ${1} | awk -F/ '{print $2}'`
+	NEED_CREATE="TRUE"
+	if [ "${ROS_VERSION}" = "ros1" ]
+	then
+		if [ ${pkg_name} = "builtin_interfaces" ]
+		then
+			NEED_CREATE="FALSE"
+		fi
+	fi
+}
+
 for pkg_msg in `cat ${ROS_MSG_LIST_FILE}`
 do
-    get_filepath ${pkg_msg}
-    if [ ${RET_VALUE} != "NONE" ]
-    then
-        create_ros_json_file ${pkg_msg} ${RET_VALUE}
-    else
-        echo "ERROR: can not found pkg_msg=${pkg_msg}"
-        exit 1
-    fi
+	check_version ${pkg_msg}
+	if [ "${NEED_CREATE}" = "TRUE" ]
+	then
+	    get_filepath ${pkg_msg}
+	    if [ ${RET_VALUE} != "NONE" ]
+	    then
+	        create_ros_json_file ${pkg_msg} ${RET_VALUE}
+	    else
+	        echo "ERROR: can not found pkg_msg=${pkg_msg}"
+	        exit 1
+	    fi
+	fi
 done
 

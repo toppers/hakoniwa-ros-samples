@@ -5,13 +5,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using RosMessageTypes.Std;
-using RosMessageTypes.Ev3;
 using Unity.Robotics.ROSTCPConnector.MessageGeneration;
-using RosMessageTypes.Geometry;
-using RosMessageTypes.Sensor;
 using Hakoniwa.PluggableAsset.Communication.Pdu.ROS.{{container.pkg_name.upper()}};
-using RosMessageTypes.BuiltinInterfaces;
+{% for pkg in container.msg_pkgs: %}
+using RosMessageTypes.{{pkg}};
+{%- endfor %}
 
 namespace Hakoniwa.PluggableAsset.Communication.Pdu.ROS.{{container.pkg_name.upper()}}
 {
@@ -54,9 +52,9 @@ namespace Hakoniwa.PluggableAsset.Communication.Pdu.ROS.{{container.pkg_name.upp
 
             RosTopicPduReader ros_pdu_reader = dst as RosTopicPduReader;
 {% for topic in container.ros_topics["fields"]: %}
-            if (ros_pdu_reader.GetTypeName().Equals("{{topic.topic_type_name}}"))
+            if (ros_pdu_reader.GetTypeName().Equals("{{(topic.topic_type_name)}}"))
             {
-                var ros_topic_data = ros_topic.GetTopicData() as {{topic.topic_type_name}}Msg;
+                var ros_topic_data = ros_topic.GetTopicData() as {{container.get_msg_type(topic.topic_type_name)}}Msg;
                 ConvertToPdu(ros_topic_data, dst.GetWriteOps());
                 return;
             }

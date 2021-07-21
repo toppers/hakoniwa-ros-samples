@@ -49,10 +49,14 @@ mkdir output
 
 echo "###Phase1: Parsing ros_msgs from ${SETTING_FOLDER}/RosTopics.json"
 bash utils/create_all_ros_msgs.bash ${SETTING_FOLDER}/${ROS_VERSION}_search_file_path.txt ${SETTING_FOLDER}/RosTopics.json | tee ${SETTING_FOLDER}/ros_msgs.txt
+if [ ${ROS_VERSION} = "ros1" ]
+then
+	echo "builtin_interfaces/Time" | tee ${SETTING_FOLDER}/ros_msgs.txt
+fi
 echo "###Phase1: Succless"
 
 echo "###Phase2: Creating ros_json from ${SETTING_FOLDER}/ros_msgs.txt"
-bash utils/convert_rosmsg2json.bash settings/ev3_tb3/ros2_search_file_path.txt settings/ev3_tb3/ros_msgs.txt ${ROS_JSON_DIR}
+bash utils/convert_rosmsg2json.bash ${SETTING_FOLDER}/${ROS_VERSION}_search_file_path.txt ${SETTING_FOLDER}/ros_msgs.txt ${ROS_JSON_DIR}
 echo "###Phase2: Succless"
 
 echo "###Phase3: Creating core_config"

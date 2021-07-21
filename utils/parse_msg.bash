@@ -18,7 +18,7 @@ else
     exit 1
 fi
 
-cat ${ROS_INSTALL_DIR}/${PKG_NAME}/msg/${MSG_NAME}.msg | grep -v "^#" | grep -v "^$" | awk '{print $1}' | sort |uniq > .tmp
+cat ${ROS_INSTALL_DIR}/${PKG_NAME}/msg/${MSG_NAME}.msg | grep -v "^#" | egrep -v  "^[\ \t]+\#" | grep -v "^$" | awk '{print $1}' | sort |uniq > .tmp
 
 for i in `cat .tmp`
 do
@@ -31,6 +31,15 @@ do
         if [ -f ${ROS_INSTALL_DIR}/${PKG_NAME}/msg/${type}.msg ]
         then
             echo ${PKG_NAME}/${type}
+        else
+        	STR=`find ${ROS_INSTALL_DIR} -name ${type}.msg`
+        	if [ -z ${STR} ]
+        	then
+        		:
+        	else
+				TMP_PKG_NAME=`echo $STR | awk -F/ '{print $(NF-2)}'`
+	            echo ${TMP_PKG_NAME}/${type}
+        	fi
         fi
     fi
 done

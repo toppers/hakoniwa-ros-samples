@@ -7,7 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Unity.Robotics.ROSTCPConnector.MessageGeneration;
-using RosMessageTypes.BuiltinInterfaces;
+{% for pkg in container.msg_pkgs: %}
+using RosMessageTypes.{{pkg}};
+{%- endfor %}
 
 namespace Hakoniwa.PluggableAsset.Communication.Pdu.ROS.{{container.pkg_name.upper()}}
 {
