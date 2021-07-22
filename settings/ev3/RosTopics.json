@@ -2,12 +2,14 @@
 	"fields": [
         {
             "topic_message_name": "ev3_sensor",
-            "topic_type_name": "Ev3PduSensor",
+            "topic_type_name": "ev3_msgs/Ev3PduSensor",
+            "robot_name": "RoboModel",
             "sub": false
         },
         {
             "topic_message_name": "ev3_actuator",
-            "topic_type_name": "Ev3PduActuator",
+            "topic_type_name": "ev3_msgs/Ev3PduActuator",
+            "robot_name": "RoboModel",
             "sub": true
         }
 	]

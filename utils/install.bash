@@ -1,7 +1,6 @@
 #!/bin/bash
 
 export CORE_IPADDR=127.0.0.1
-export ROS_IPADDR=`ifconfig eth0 | grep netmask | awk '{print $2}'`
 
 if [ $# -ne 3 -a $# -ne 4 ]
 then
@@ -19,6 +18,13 @@ ROS_VERSION=${1}
 UNITY_PRJ_DIR=${2}
 SETTING_FOLDER=${3}
 ROS_JSON_DIR=${ROS_VERSION}/ros_json
+
+if [ "${ROS_VERSION}" = "ros1" ]
+then
+	export ROS_IPADDR=127.0.0.1
+else
+	export ROS_IPADDR=`ifconfig eth0 | grep netmask | awk '{print $2}'`
+fi 
 
 if [ -d ${ROS_JSON_DIR} ]
 then
@@ -59,7 +65,7 @@ then
 	bash utils/create_all_ros_msgs.bash ${SETTING_FOLDER}/${ROS_VERSION}_search_file_path.txt ${SETTING_FOLDER}/RosTopics.json | tee ${SETTING_FOLDER}/ros_msgs.txt
 	if [ ${ROS_VERSION} = "ros1" ]
 	then
-		echo "builtin_interfaces/Time" | tee ${SETTING_FOLDER}/ros_msgs.txt
+		echo "builtin_interfaces/Time" | tee -a ${SETTING_FOLDER}/ros_msgs.txt
 	fi
 	echo "###Phase1: Succless"
 fi

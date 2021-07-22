@@ -2,17 +2,20 @@
 	"fields": [
         {
             "topic_message_name": "scan",
-            "topic_type_name": "LaserScan",
+            "topic_type_name": "sensor_msgs/LaserScan",
+            "robot_name": "TB3RoboModel",
             "sub": false
         },
         {
             "topic_message_name": "imu",
-            "topic_type_name": "Imu",
+            "topic_type_name": "sensor_msgs/Imu",
+            "robot_name": "TB3RoboModel",
             "sub": false
         },
         {
             "topic_message_name": "cmd_vel",
-            "topic_type_name": "Twist",
+            "topic_type_name": "geometry_msgs/Twist",
+            "robot_name": "TB3RoboModel",
             "sub": true
         }
 	]

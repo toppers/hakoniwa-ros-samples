@@ -137,7 +137,7 @@ int main(int argc, char** argv) {
   ros::Subscriber imu_sub = n.subscribe("imu", 1, imuCallback);
 
   publisher = &actuator_pub;
-  ros::Rate loop_rate(10);
+  ros::Rate loop_rate(100);
   while (ros::ok()) {
     ros::spinOnce();
 

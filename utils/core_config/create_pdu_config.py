@@ -27,6 +27,11 @@ for pkg_msg in open(in_file, 'r'):
     container.append(entry)
     
 
+entry = OrderedDict()
+entry['pdu_type_name'] = 'time'
+entry['pdu_data_field_path'] = in_dir + '/builtin_interfaces/Time.json'
+container.append(entry)
+
 with open(out_dir + '/' + out_filename, mode='wt') as out_file:
   json.dump(container, out_file, ensure_ascii=False, indent=2)
 
