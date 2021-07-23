@@ -29,11 +29,15 @@ namespace Hakoniwa.PluggableAsset.Communication.Pdu.ROS.{{container.pkg_name.upp
 			dst.{{item["name"]}} = src.GetData{{container.to_conv(item["type"])}}("{{item["name"]}}");
 {%-		else: %}
 {%-			if (container.is_array(item["type"])): %}
+            if (dst.{{item["name"]}}.Length < src.Refs("{{item["name"]}}").Length)
+            {
+                dst.{{item["name"]}} = new {{container.get_msg_type(container.get_array_type(item["type"]))}}Msg[src.Refs("{{item["name"]}}").Length];
+            }
             foreach (var e in src.Refs("{{item["name"]}}"))
             {
                 int index = Array.IndexOf(src.Refs("{{item["name"]}}"), e);
                 if (dst.{{item["name"]}}[index] == null) {
-                    dst.{{item["name"]}}[index] = new {{container.get_array_type(item["type"])}}Msg();
+                    dst.{{item["name"]}}[index] = new {{container.get_msg_type(container.get_array_type(item["type"]))}}Msg();
                 }
                 ConvertToMessage(e.GetPduReadOps(), dst.{{item["name"]}}[index]);
             }

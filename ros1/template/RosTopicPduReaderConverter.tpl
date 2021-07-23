@@ -33,7 +33,7 @@ namespace Hakoniwa.PluggableAsset.Communication.Pdu.ROS.{{container.pkg_name.upp
             {
                 int index = Array.IndexOf(dst.Refs("{{item["name"]}}"), e);
                 if (src.{{item["name"]}}[index] == null) {
-                    src.{{item["name"]}}[index] = new {{container.get_array_type(item["type"])}}Msg();
+                    src.{{item["name"]}}[index] = new {{container.get_msg_type(container.get_array_type(item["type"]))}}Msg();
                 }
 				ConvertToPdu(src.{{item["name"]}}[index], e.GetPduWriteOps());
             }

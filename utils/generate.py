@@ -77,7 +77,10 @@ def get_type(name):
 		return name
 
 def get_msg_type(name):
-	return name.split('/')[1]
+	if (name.find('/') > 0):
+		return name.split('/')[1]
+	else:
+		return name
 
 
 container = RosMessageContainer()
