@@ -50,6 +50,15 @@ else
 	exit 1
 fi
 
+if [ -f ${SETTING_FOLDER}/${ROS_VERSION}_search_file_path.txt ]
+then
+	:
+else
+	echo "ERROR: Can not found folder: ${SETTING_FOLDER}/${ROS_VERSION}_search_file_path.txt"
+	exit 1
+fi
+
+
 PKG_NAME=`echo ${SETTING_FOLDER} | sed -e 's/\// /g' | awk '{print $NF}'`
 UNITY_DST_DIR=${UNITY_PRJ_DIR}/Assets/Scripts/Hakoniwa/PluggableAsset/Communication
 
