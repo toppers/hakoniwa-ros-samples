@@ -25,7 +25,7 @@ do
     COUNT=`echo $i | awk -F/ '{print NF}'`
     if [ $COUNT -eq 2 ]
     then
-        echo $i
+        echo $i | awk -F[ '{print $1}'
     else
         type=`echo ${i} | awk -F[ '{print $1}'`
         if [ -f ${ROS_INSTALL_DIR}/${PKG_NAME}/msg/${type}.msg ]

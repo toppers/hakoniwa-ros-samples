@@ -12,7 +12,7 @@ rm -f msg_types.txt
 
 function parse_one()
 {
-    local_pkg_msg=${1}
+    local_pkg_msg=`echo ${1} | awk -F[ '{print $1}'`
     rm -f entry_msg_types.txt
     for path in `cat ${SEARCH_PATH_FILE}`
     do
@@ -34,7 +34,7 @@ function parse_one()
 
 function search_recursive()
 {
-    local_pkg_msg=${1}
+    local_pkg_msg=`echo ${1} | awk -F[ '{print $1}'`
     while [ 1 ]
     do
         echo ${local_pkg_msg} >> msg_types.txt
