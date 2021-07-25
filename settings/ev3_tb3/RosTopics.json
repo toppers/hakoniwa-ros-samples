@@ -31,6 +31,12 @@
             "sub": false
         },
         {
+            "topic_message_name": "tf",
+            "topic_type_name": "tf2_msgs/TFMessage",
+            "robot_name": "TB3RoboModel",
+            "sub": false
+        },
+        {
             "topic_message_name": "cmd_vel",
             "topic_type_name": "geometry_msgs/Twist",
             "robot_name": "TB3RoboModel",
