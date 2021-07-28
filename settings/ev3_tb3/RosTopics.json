@@ -37,6 +37,12 @@
             "sub": false
         },
         {
+            "topic_message_name": "joint_states",
+            "topic_type_name": "sensor_msgs/JointState",
+            "robot_name": "TB3RoboModel",
+            "sub": false
+        },
+        {
             "topic_message_name": "cmd_vel",
             "topic_type_name": "geometry_msgs/Twist",
             "robot_name": "TB3RoboModel",
