@@ -25,3 +25,14 @@ OUT_NAME=RosTopicPduWriterConverter
 echo "###Creating ${OUT_DIR}/${OUT_NAME}.cs"
 python ./utils/generate.py ${OUT_NAME} ${IN_DIR} ${OUT_DIR} ${PKG_NAME} > ${OUT_DIR}/${OUT_NAME}.cs
 
+
+for i in `ls ${IN_DIR}/*.json`
+do
+	MSG_NAME=`echo $i | awk -F${IN_DIR}/ '{print $2}' | awk -F\. '{print $1}'`
+	OUT_NAME=${MSG_NAME}
+	cp  ${IN_DIR}/PduAccessor.tpl ${IN_DIR}/${OUT_NAME}.tpl
+	echo "###Creating ${OUT_DIR}/${OUT_NAME}Accessor.cs"
+	python ./utils/generate.py ${OUT_NAME} ${IN_DIR} ${OUT_DIR} ${PKG_NAME} > ${OUT_DIR}/${OUT_NAME}Accessor.cs
+done
+
+

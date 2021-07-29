@@ -130,6 +130,7 @@ then
 		else
 			mkdir -p $2
 		fi
+		echo "Copying $1 to $2"
 		cp -rp $1 $2
 	}
 
@@ -137,6 +138,14 @@ then
 	copy ${UNITY_SRC_FILE2} ${UNITY_DST_DIR2}
 	copy ${UNITY_SRC_FILE3} ${UNITY_DST_DIR3}
 	copy ${UNITY_SRC_FILE4} ${UNITY_DST_DIR4}
+
+
+	for i in `ls input/*.json`
+	do
+		MSG_NAME=`echo $i | awk -F${IN_DIR}/ '{print $2}' | awk -F\. '{print $1}'`
+		copy ./output/${MSG_NAME}Accessor.cs ${UNITY_DST_DIR}/Pdu/Accessor/
+	done
+
 
 	#rm -rf input
 	#rm -rf output

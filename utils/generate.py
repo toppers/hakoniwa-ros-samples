@@ -13,6 +13,7 @@ if len(sys.argv) != 5:
 	print "ERROR: generate.py <name> <in_dir> <out_dir> <package_name>"
 	sys.exit()
 
+out_name=sys.argv[1]
 tpl_name=sys.argv[1] + ".tpl"
 in_dir=sys.argv[2]
 out_dir=sys.argv[3]
@@ -54,6 +55,33 @@ def is_primitive(name):
 	else:
 		return False
 
+def tplcode_type(name):
+	if (name == 'int8'):
+		return 'SByte'
+	elif (name == 'uint8'):
+		return 'Byte'
+	elif (name == 'int16'):
+		return 'Int16'
+	elif (name == 'uint16'):
+		return 'UInt16'
+	elif (name == 'int32'):
+		return 'Int32'
+	elif (name == 'uint32'):
+		return 'UInt32'
+	elif (name == 'int64'):
+		return 'Int64'
+	elif (name == 'uint64'):
+		return 'UInt64'
+	elif (name == 'float32'):
+		return 'float'
+	elif (name == 'float64'):
+		return 'double'
+	elif (name == 'string'):
+		return 'string'
+	else:
+		return False
+
+
 def is_array(name):
 	if (name.find('[') > 0):
 		return True
@@ -78,9 +106,13 @@ def get_type(name):
 
 def get_msg_type(name):
 	if (name.find('/') > 0):
-		return name.split('/')[1]
+		tmp = name.split('/')[1]
 	else:
-		return name
+		tmp = name
+	if (tmp == 'time'):
+		return 'Time'
+	else:
+		return tmp
 
 
 container = RosMessageContainer()
@@ -92,6 +124,7 @@ container.is_primitive = is_primitive
 container.is_primitive_array = is_primitive_array
 container.pkg_name = pkg_name
 container.get_msg_type = get_msg_type
+container.tplcode_type = tplcode_type
 container.msg_pkgs = []
 
 for line in open(in_dir + "/msg_pkg.txt", 'r'):
@@ -104,6 +137,8 @@ container.ros_topics = json.load(file)
 
 container.msgs = []
 
+container.accessor_type_name = out_name
+
 files = glob.glob(in_dir + "/*.json")
 for file in files:
     ros_msg = RosMessage()
@@ -113,6 +148,8 @@ for file in files:
     container.msgs.append(ros_msg)
     tmp_file = open(in_dir + '/' + msg_name +'.json')
     ros_msg.json_data = json.load(tmp_file)
+    if (msg_name == container.accessor_type_name):
+    	container.accessor_json_data = ros_msg.json_data
 
 tpl = env.get_template(in_dir + '/' + tpl_name)
 out = tpl.render({'container':container})

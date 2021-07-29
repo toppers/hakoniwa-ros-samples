@@ -10,10 +10,14 @@ geometry_msgs/Point
 geometry_msgs/Pose
 geometry_msgs/PoseWithCovariance
 geometry_msgs/Quaternion
+geometry_msgs/Transform
+geometry_msgs/TransformStamped
 geometry_msgs/Twist
 geometry_msgs/TwistWithCovariance
 geometry_msgs/Vector3
 nav_msgs/Odometry
 sensor_msgs/Imu
+sensor_msgs/JointState
 sensor_msgs/LaserScan
 std_msgs/Header
+tf2_msgs/TFMessage
