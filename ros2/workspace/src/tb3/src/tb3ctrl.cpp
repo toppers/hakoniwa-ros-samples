@@ -66,7 +66,7 @@ static bool do_foward(void) {
     cmd_vel.linear.x = 0;
     is_stop = true;
   } else {
-    cmd_vel.linear.x = 2;
+    cmd_vel.linear.x = 0.2;
   }
 
   return is_stop;
@@ -93,7 +93,7 @@ static bool turn_right(void) {
   bool is_stop = false;
   cmd_vel.angular.z = 0;
   if (get_right_distance() < 0.05f) {
-    cmd_vel.angular.z = -5;
+    cmd_vel.angular.z = -0.01;
     is_stop = true;
   } else {
     cmd_vel.angular.z = 0;
@@ -107,7 +107,7 @@ static void do_control(void) {
   (void)turn_right();
 
   if (cmd_vel.linear.x == 0 && cmd_vel.angular.z == 0) {
-    cmd_vel.angular.z = 1;
+    cmd_vel.angular.z = -0.005;
   }
   return;
 }
