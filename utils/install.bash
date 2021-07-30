@@ -106,7 +106,7 @@ then
 		cat ${SETTING_FOLDER}/ros_msgs.txt  | awk -F/ '{print $1}' | sort | uniq | awk -F_msgs '{print $1}' > input/msg_pkg.txt
 	fi
 
-	cp ${ROS_VERSION}/template/*.tpl input/
+	cp utils/template/*.tpl input/
 
 	bash ./utils/generate.bash ./input ./output ${PKG_NAME}
 
