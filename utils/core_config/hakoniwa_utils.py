@@ -12,6 +12,13 @@ def get_robolist(ros_topics):
 		tmp_list.append(e['robot_name'])
 	return list(set(tmp_list))
 
+def get_proxylist(custom):
+	tmp_list = list()
+	for e in custom['proxies']:
+		tmp_list.append(e['robot_name'])
+	return list(set(tmp_list))
+
+
 def get_entry(ros_topics, type, name):
 	tmp_list = list()
 	for e in ros_topics['fields']:

@@ -1,6 +1,9 @@
 #!/bin/bash
 
-export CORE_IPADDR=127.0.0.1
+if [ -z CORE_IPADDR ]
+then
+	export CORE_IPADDR=127.0.0.1
+fi
 
 if [ $# -ne 3 -a $# -ne 4 ]
 then
