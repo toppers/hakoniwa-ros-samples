@@ -1,8 +1,9 @@
 #!/bin/bash
 
-if [ -z CORE_IPADDR ]
+if [ -z $CORE_IPADDR ]
 then
-	export CORE_IPADDR=127.0.0.1
+	echo "ERROR: env variable CORE_IPADDR is not set"
+	exit 1
 fi
 
 if [ $# -ne 3 -a $# -ne 4 ]

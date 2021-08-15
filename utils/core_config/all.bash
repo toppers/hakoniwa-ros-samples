@@ -64,4 +64,8 @@ then
 
 	echo "####Creating udp_methods"
 	python utils/core_config/create_udp_methods.py  		${CUSTOM_FILE_PATH} 	${CORE_IPADDR}	${OUT_DIR}
+
+	echo "####Creating proxy_param"
+	python utils/core_config/create_proxy_param.py  		${CUSTOM_FILE_PATH} 	${CORE_IPADDR}	${ROS_VERSION}/workspace
+
 fi
