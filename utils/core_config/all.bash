@@ -68,4 +68,15 @@ then
 	echo "####Creating proxy_param"
 	python utils/core_config/create_proxy_param.py  		${CUSTOM_FILE_PATH} 	${CORE_IPADDR}	${ROS_VERSION}/workspace
 
+	echo "####Downloading Hakoniwa.dll"
+	wget https://github.com/toppers/hakoniwa-core/releases/download/v1.0.0/Hakoniwa.dll
+	mv Hakoniwa.dll ${UNITY_PRJ_DIR}/Assets/Plugin/
+
+	echo "####Downloading MiconPdu.dll"
+	wget https://github.com/toppers/hakoniwa-core/releases/download/v1.0.0/MiconPdu.dll
+	mv MiconPdu.dll ${UNITY_PRJ_DIR}/
+
+	echo "####Downloading HakoniwaSimTime.json"
+	wget https://github.com/toppers/hakoniwa-core/releases/download/v1.0.0/HakoniwaSimTime.json
+	mv HakoniwaSimTime.json ${UNITY_PRJ_DIR}/
 fi

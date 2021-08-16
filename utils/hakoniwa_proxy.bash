@@ -22,6 +22,7 @@ then
 	exit 1
 fi
 
+source /opt/ros/foxy/setup.bash
 source install/setup.bash
 
 while [ 1 ]

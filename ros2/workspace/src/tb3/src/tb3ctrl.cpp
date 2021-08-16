@@ -120,6 +120,7 @@ typedef enum {
 int main(int argc, char **argv) {
   RoboModeType mode = RoboMode_INIT;
 
+  printf("START\n");
   rclcpp::init(argc, argv);
 
   auto node = rclcpp::Node::make_shared("tb3_node");
