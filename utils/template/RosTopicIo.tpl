@@ -91,9 +91,22 @@ namespace Hakoniwa.PluggableAsset.Communication.Method.ROS.{{container.pkg_name.
             RosTopicPduCommTypedData typed_data = data as RosTopicPduCommTypedData;
             ros.Send(typed_data.GetDataName(), typed_data.GetTopicData());
         }
+        
+        private void Reset()
+        {
+{% for msg in container.ros_topics["fields"]: %}
+{%-		if (msg.sub): %}
+            this.topic_data_table["{{msg.topic_message_name}}"] = null;
+{%-		endif %}
+{%- endfor %}
+        }
 
         public IPduCommTypedData Recv(string topic_name)
         {
+        	if (topic_name == null) {
+        		this.Reset();
+        		return null;
+        	}
             var cfg = AssetConfigLoader.GetRosTopic(topic_name);
             if (cfg == null)
             {
