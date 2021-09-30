@@ -26,7 +26,7 @@ class RosMessage:
     pass
 
 def to_conv(name):
-	tmp = name.replace("int", "Int").replace("uInt", "UInt").replace("float", "Float").replace("string", "String")
+	tmp = name.replace("int", "Int").replace("uInt", "UInt").replace("float", "Float").replace("string", "String").replace("bool", "Bool")
 	return re.sub(r'\[.*\]', "Array", tmp)
 
 def is_primitive(name):
@@ -51,6 +51,8 @@ def is_primitive(name):
 	elif (name == 'float64'):
 		return True
 	elif (name == 'string'):
+		return True
+	elif (name == 'bool'):
 		return True
 	else:
 		return False
@@ -78,6 +80,8 @@ def tplcode_type(name):
 		return 'double'
 	elif (name == 'string'):
 		return 'string'
+	elif (name == 'bool'):
+		return 'bool'
 	else:
 		return False
 
