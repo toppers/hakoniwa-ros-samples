@@ -19,6 +19,18 @@
             "sub": false
         },
         {
+          "topic_message_name": "image/compressed",
+          "topic_type_name": "sensor_msgs/CompressedImage",
+          "robot_name": "TB3RoboModel",
+          "sub": false
+        },
+        {
+          "topic_message_name": "camera_info",
+          "topic_type_name": "sensor_msgs/CameraInfo",
+          "robot_name": "TB3RoboModel",
+          "sub": false
+        },
+        {
             "topic_message_name": "imu",
             "topic_type_name": "sensor_msgs/Imu",
             "robot_name": "TB3RoboModel",
