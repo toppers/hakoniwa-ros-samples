@@ -11,11 +11,11 @@ from launch_ros.actions import Node
 
 def generate_launch_description():
     rviz_config_dir = os.path.join(
-        get_package_share_directory('tb3_rviz'),
+        get_package_share_directory('hakoniwa_turtlebot3_description'),
         'rviz',
         'hakoniwa_rviz_tb3b.rviz')
     robot_state_path = os.path.join(
-        get_package_share_directory('turtlebot3_bringup'),
+        get_package_share_directory('hakoniwa_turtlebot3_description'),
         'launch',
         'turtlebot3_state_publisher.launch.py')
     return LaunchDescription([

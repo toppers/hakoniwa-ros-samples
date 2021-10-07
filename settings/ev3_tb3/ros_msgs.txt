@@ -18,6 +18,7 @@ geometry_msgs/Vector3
 nav_msgs/Odometry
 sensor_msgs/CameraInfo
 sensor_msgs/CompressedImage
+sensor_msgs/Image
 sensor_msgs/Imu
 sensor_msgs/JointState
 sensor_msgs/LaserScan

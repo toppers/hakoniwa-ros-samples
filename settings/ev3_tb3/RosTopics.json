@@ -19,6 +19,12 @@
             "sub": false
         },
         {
+          "topic_message_name": "image",
+          "topic_type_name": "sensor_msgs/Image",
+          "robot_name": "TB3RoboModel",
+          "sub": false
+        },
+        {
           "topic_message_name": "image/compressed",
           "topic_type_name": "sensor_msgs/CompressedImage",
           "robot_name": "TB3RoboModel",
