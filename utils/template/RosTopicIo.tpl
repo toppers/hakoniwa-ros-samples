@@ -28,10 +28,21 @@ namespace Hakoniwa.PluggableAsset.Communication.Method.ROS.{{container.pkg_name.
         public int network_timeout;
         public float sleep_time;
     }
+    public class TopicCycle
+    {
+        public int count;
+        public int cycle;
+        public TopicCycle(int c)
+        {
+            this.count = 0;
+            this.cycle = c;
+        }
+    }
     public class RosTopicIo : IRosTopicIo
     {
         private ROSConnection ros;
         private Dictionary<string, Message> topic_data_table = new Dictionary<string, Message>();
+        private Dictionary<string, TopicCycle> topic_send_timing = new Dictionary<string, TopicCycle>();
         private UnityRosParameter parameters;
         private void LoadParameters(string filepath)
         {
@@ -65,6 +76,17 @@ namespace Hakoniwa.PluggableAsset.Communication.Method.ROS.{{container.pkg_name.
             foreach (var e in AssetConfigLoader.core_config.ros_topics)
             {
                 topic_data_table[e.topic_message_name] = null;
+                if (e.sub == false)
+                {
+                    if (e.pub_cycle_scale != 0)
+                    {
+                        topic_send_timing[e.topic_message_name] = new TopicCycle(e.pub_cycle_scale);
+                    }
+                    else
+                    {
+                        topic_send_timing[e.topic_message_name] = new TopicCycle(1);
+                    }
+                }
             }
 
 {% for msg in container.ros_topics["fields"]: %}
@@ -89,7 +111,12 @@ namespace Hakoniwa.PluggableAsset.Communication.Method.ROS.{{container.pkg_name.
         public void Publish(IPduCommTypedData data)
         {
             RosTopicPduCommTypedData typed_data = data as RosTopicPduCommTypedData;
-            ros.Send(typed_data.GetDataName(), typed_data.GetTopicData());
+            topic_send_timing[typed_data.GetDataName()].count++;
+            if (topic_send_timing[typed_data.GetDataName()].count >= topic_send_timing[typed_data.GetDataName()].cycle)
+            {
+                ros.Send(typed_data.GetDataName(), typed_data.GetTopicData());
+                topic_send_timing[typed_data.GetDataName()].count = 0;
+            }
         }
         
         private void Reset()
