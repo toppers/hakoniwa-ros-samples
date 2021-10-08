@@ -33,40 +33,40 @@ ROS_MSG_LIST=${SETTING_FOLDER}/ros_msgs.txt
 CUSTOM_FILE_PATH=${SETTING_FOLDER}/custom.json
 
 echo "####Creating core_config"
-python utils/core_config/create_core_config.py			${ROS_TOPIC_FILE_PATH} 	${CORE_IPADDR}  ${OUT_DIR}
+python2 utils/core_config/create_core_config.py			${ROS_TOPIC_FILE_PATH} 	${CORE_IPADDR}  ${OUT_DIR}
 echo "####Creating ros_topic_method"
-python utils/core_config/create_ros_topic_method.py		${PKG_NAME}			${OUT_DIR}
+python2 utils/core_config/create_ros_topic_method.py		${PKG_NAME}			${OUT_DIR}
 echo "####Creating inside_assets"
-python utils/core_config/create_inside_assets.py  		${ROS_TOPIC_FILE} 	${OUT_DIR}
+python2 utils/core_config/create_inside_assets.py  		${ROS_TOPIC_FILE} 	${OUT_DIR}
 
 echo "####Creating pdu_readers"
-python utils/core_config/create_pdu_rw.py  				${ROS_TOPIC_FILE} 	${OUT_DIR} ${PKG_NAME} r ${CUSTOM_FILE_PATH}
+python2 utils/core_config/create_pdu_rw.py  				${ROS_TOPIC_FILE} 	${OUT_DIR} ${PKG_NAME} r ${CUSTOM_FILE_PATH}
 echo "####Creating pdu_writers"
-python utils/core_config/create_pdu_rw.py  				${ROS_TOPIC_FILE} 	${OUT_DIR} ${PKG_NAME} w ${CUSTOM_FILE_PATH}
+python2 utils/core_config/create_pdu_rw.py  				${ROS_TOPIC_FILE} 	${OUT_DIR} ${PKG_NAME} w ${CUSTOM_FILE_PATH}
 
 echo "####Creating reader_channels"
-python utils/core_config/create_connector_rw.py  		${ROS_TOPIC_FILE} 	${OUT_DIR} r ${CUSTOM_FILE_PATH}
+python2 utils/core_config/create_connector_rw.py  		${ROS_TOPIC_FILE} 	${OUT_DIR} r ${CUSTOM_FILE_PATH}
 echo "####Creating writer_channels"
-python utils/core_config/create_connector_rw.py  		${ROS_TOPIC_FILE} 	${OUT_DIR} w ${CUSTOM_FILE_PATH}
+python2 utils/core_config/create_connector_rw.py  		${ROS_TOPIC_FILE} 	${OUT_DIR} w ${CUSTOM_FILE_PATH}
 echo "####Creating pdu_channel_connectors"
-python utils/core_config/create_connector_rw.py  		${ROS_TOPIC_FILE} 	${OUT_DIR} p ${CUSTOM_FILE_PATH}
+python2 utils/core_config/create_connector_rw.py  		${ROS_TOPIC_FILE} 	${OUT_DIR} p ${CUSTOM_FILE_PATH}
 
 echo "####Creating unity_ros_params"
-python utils/core_config/create_unity_ros_params.py 	${ROS_IPADDR}		${OUT_DIR}
+python2 utils/core_config/create_unity_ros_params.py 	${ROS_IPADDR}		${OUT_DIR}
 
 echo "####Creating pdu_config"
-python utils/core_config/create_pdu_config.py			${PDU_CONFIG_INDIR}	${ROS_MSG_LIST}	${OUT_DIR} ${CUSTOM_FILE_PATH}
+python2 utils/core_config/create_pdu_config.py			${PDU_CONFIG_INDIR}	${ROS_MSG_LIST}	${OUT_DIR} ${CUSTOM_FILE_PATH}
 
 if [ -f ${CUSTOM_FILE_PATH} ]
 then
 	echo "####Creating outside_assets"
-	python utils/core_config/create_outside_assets.py  		${CUSTOM_FILE_PATH} 	${OUT_DIR}
+	python2 utils/core_config/create_outside_assets.py  		${CUSTOM_FILE_PATH} 	${OUT_DIR}
 
 	echo "####Creating udp_methods"
-	python utils/core_config/create_udp_methods.py  		${CUSTOM_FILE_PATH} 	${CORE_IPADDR}	${OUT_DIR}
+	python2 utils/core_config/create_udp_methods.py  		${CUSTOM_FILE_PATH} 	${CORE_IPADDR}	${OUT_DIR}
 
 	echo "####Creating proxy_param"
-	python utils/core_config/create_proxy_param.py  		${CUSTOM_FILE_PATH} 	${CORE_IPADDR}	${ROS_VERSION}/workspace
+	python2 utils/core_config/create_proxy_param.py  		${CUSTOM_FILE_PATH} 	${CORE_IPADDR}	${ROS_VERSION}/workspace
 
 	echo "####Downloading Hakoniwa.dll"
 	wget https://github.com/toppers/hakoniwa-core/releases/download/v1.0.0/Hakoniwa.dll
