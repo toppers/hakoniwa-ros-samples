@@ -384,7 +384,7 @@ int main(int argc, char** argv) {
       n.advertise<ev3_msgs::Ev3PduActuator>("ev3_actuator", 1);
   ros::Subscriber sensor_sub = n.subscribe("ev3_sensor", 1, sensorCallback);
 
-  ros::Rate loop_rate(100);
+  ros::Rate loop_rate(10);
   int count = 0;
   while (ros::ok()) {
     ros::spinOnce();
