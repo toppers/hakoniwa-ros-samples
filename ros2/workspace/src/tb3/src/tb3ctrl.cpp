@@ -66,7 +66,7 @@ static bool do_foward(void) {
     cmd_vel.linear.x = 0;
     is_stop = true;
   } else {
-    cmd_vel.linear.x = 0.2;
+    cmd_vel.linear.x = 0.5f;
   }
 
   return is_stop;
@@ -107,7 +107,7 @@ static void do_control(void) {
   (void)turn_right();
 
   if (cmd_vel.linear.x == 0 && cmd_vel.angular.z == 0) {
-    cmd_vel.angular.z = -0.005;
+    cmd_vel.angular.z = -1.0f;
   }
   return;
 }

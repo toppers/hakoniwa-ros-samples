@@ -9,6 +9,7 @@ geometry_msgs/Twist
 geometry_msgs/TwistWithCovariance
 geometry_msgs/Vector3
 nav_msgs/Odometry
+sensor_msgs/CompressedImage
 sensor_msgs/Imu
 sensor_msgs/JointState
 sensor_msgs/LaserScan

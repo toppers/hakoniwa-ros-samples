@@ -4,7 +4,12 @@
             "topic_message_name": "ev3_sensor",
             "topic_type_name": "ev3_msgs/Ev3PduSensor",
             "robot_name": "RoboModel",
-            "sub": false
+            "sub": false,
+            "pub_option": {
+            	"cycle_scale": 10,
+            	"queue_size": 1,
+            	"latch": false
+            }
         },
         {
             "topic_message_name": "ev3_actuator",
