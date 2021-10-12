@@ -11,7 +11,7 @@ fi
 BINARY_NAME=Ros1WindowsBinary.zip
 
 
-wget https://github.com/toppers/hakoniwa-ros-samples/releases/download/v1.0.0/${BINARY_NAME}
+wget https://github.com/toppers/hakoniwa-ros-samples/releases/download/v1.1.0/${BINARY_NAME}
 
 mv ${BINARY_NAME} unity/
 cd unity
