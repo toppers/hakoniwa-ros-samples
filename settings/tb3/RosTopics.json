@@ -12,15 +12,22 @@
             }
         },
         {
-            "topic_message_name": "camera/image",
-            "topic_type_name": "sensor_msgs/CompressedImage",
-            "robot_name": "TB3RoboModel",
-            "sub": false,
-            "pub_option": {
-            	"cycle_scale": 10,
-            	"queue_size": 1,
-            	"latch": false
-            }
+          "topic_message_name": "image",
+          "topic_type_name": "sensor_msgs/Image",
+          "robot_name": "TB3RoboModel",
+          "sub": false
+        },
+        {
+          "topic_message_name": "image/compressed",
+          "topic_type_name": "sensor_msgs/CompressedImage",
+          "robot_name": "TB3RoboModel",
+          "sub": false
+        },
+        {
+          "topic_message_name": "camera_info",
+          "topic_type_name": "sensor_msgs/CameraInfo",
+          "robot_name": "TB3RoboModel",
+          "sub": false
         },
         {
             "topic_message_name": "imu",

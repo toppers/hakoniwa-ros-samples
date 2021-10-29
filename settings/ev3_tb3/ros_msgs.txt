@@ -15,10 +15,13 @@ geometry_msgs/Twist
 geometry_msgs/TwistWithCovariance
 geometry_msgs/Vector3
 nav_msgs/Odometry
+sensor_msgs/CameraInfo
 sensor_msgs/CompressedImage
+sensor_msgs/Image
 sensor_msgs/Imu
 sensor_msgs/JointState
 sensor_msgs/LaserScan
+sensor_msgs/RegionOfInterest
 std_msgs/Header
 tf2_msgs/TFMessage
 builtin_interfaces/Time

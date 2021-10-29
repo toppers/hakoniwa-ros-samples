@@ -11,19 +11,19 @@ PKG_NAME=${3}
 
 OUT_NAME=RosTopicIo
 echo "###Creating ${OUT_DIR}/${OUT_NAME}.cs"
-python ./utils/generate.py ${OUT_NAME} ${IN_DIR} ${OUT_DIR} ${PKG_NAME} > ${OUT_DIR}/${OUT_NAME}.cs
+python2 ./utils/generate.py ${OUT_NAME} ${IN_DIR} ${OUT_DIR} ${PKG_NAME} > ${OUT_DIR}/${OUT_NAME}.cs
 
 OUT_NAME=RosTopicPduCommTypedData
 echo "###Creating ${OUT_DIR}/${OUT_NAME}.cs"
-python ./utils/generate.py ${OUT_NAME} ${IN_DIR} ${OUT_DIR} ${PKG_NAME} > ${OUT_DIR}/${OUT_NAME}.cs
+python2 ./utils/generate.py ${OUT_NAME} ${IN_DIR} ${OUT_DIR} ${PKG_NAME} > ${OUT_DIR}/${OUT_NAME}.cs
 
 OUT_NAME=RosTopicPduReaderConverter
 echo "###Creating ${OUT_DIR}/${OUT_NAME}.cs"
-python ./utils/generate.py ${OUT_NAME} ${IN_DIR} ${OUT_DIR} ${PKG_NAME} > ${OUT_DIR}/${OUT_NAME}.cs
+python2 ./utils/generate.py ${OUT_NAME} ${IN_DIR} ${OUT_DIR} ${PKG_NAME} > ${OUT_DIR}/${OUT_NAME}.cs
 
 OUT_NAME=RosTopicPduWriterConverter
 echo "###Creating ${OUT_DIR}/${OUT_NAME}.cs"
-python ./utils/generate.py ${OUT_NAME} ${IN_DIR} ${OUT_DIR} ${PKG_NAME} > ${OUT_DIR}/${OUT_NAME}.cs
+python2 ./utils/generate.py ${OUT_NAME} ${IN_DIR} ${OUT_DIR} ${PKG_NAME} > ${OUT_DIR}/${OUT_NAME}.cs
 
 
 for i in `ls ${IN_DIR}/*.json`
@@ -32,7 +32,7 @@ do
 	OUT_NAME=${MSG_NAME}
 	cp  ${IN_DIR}/PduAccessor.tpl ${IN_DIR}/${OUT_NAME}.tpl
 	echo "###Creating ${OUT_DIR}/${OUT_NAME}Accessor.cs"
-	python ./utils/generate.py ${OUT_NAME} ${IN_DIR} ${OUT_DIR} ${PKG_NAME} > ${OUT_DIR}/${OUT_NAME}Accessor.cs
+	python2 ./utils/generate.py ${OUT_NAME} ${IN_DIR} ${OUT_DIR} ${PKG_NAME} > ${OUT_DIR}/${OUT_NAME}Accessor.cs
 done
 
 

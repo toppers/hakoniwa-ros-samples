@@ -13,7 +13,7 @@ for i in `ls ${IN_DIR}/*.msg`
 do
 	MSG_NAME=`echo $i | awk -F\. '{print $1}'`
 	echo $MSG_NAME
-	python utils/rosmsg2json.py ${i} ${OUT_DIR}
+	python2 utils/rosmsg2json.py ${i} ${OUT_DIR}
 done
 
 

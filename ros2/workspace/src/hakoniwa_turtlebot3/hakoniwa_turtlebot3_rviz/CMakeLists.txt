@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.5)
-project(tb3_rviz)
+project(hakoniwa_turtlebot3_rviz)
 
 # Default to C99
 if(NOT CMAKE_C_STANDARD)
