@@ -46,7 +46,7 @@ namespace Hakoniwa.PluggableAsset.Communication.Method.ROS.{{container.pkg_name.
         private UnityRosParameter parameters;
         private void LoadParameters(string filepath)
         {
-            ros = ROSConnection.instance;
+            ros = ROSConnection.GetOrCreateInstance();
             if (filepath == null)
             {
                 return;
@@ -68,7 +68,23 @@ namespace Hakoniwa.PluggableAsset.Communication.Method.ROS.{{container.pkg_name.
             SimpleLogger.Get().Log(Level.INFO, "NetworkTimeoutSeconds=" + ros.NetworkTimeoutSeconds);
             SimpleLogger.Get().Log(Level.INFO, "SleepTimeSeconds=" + ros.SleepTimeSeconds);
         }
-
+        private RostopicPublisherOption GetPubOption(string topic_name)
+        {
+            foreach (var e in AssetConfigLoader.core_config.ros_topics)
+            {
+                if (e.topic_message_name == topic_name)
+                {
+                    if (e.sub == false)
+                    {
+                        if (e.pub_option != null)
+                        {
+                            return e.pub_option;
+                        }
+                    }
+                }
+            }
+            return null;
+        }
         public RosTopicIo()
         {
             LoadParameters(AssetConfigLoader.core_config.ros_topic_method.parameters);
@@ -78,9 +94,9 @@ namespace Hakoniwa.PluggableAsset.Communication.Method.ROS.{{container.pkg_name.
                 topic_data_table[e.topic_message_name] = null;
                 if (e.sub == false)
                 {
-                    if (e.pub_cycle_scale != 0)
+                    if (e.pub_option != null)
                     {
-                        topic_send_timing[e.topic_message_name] = new TopicCycle(e.pub_cycle_scale);
+                        topic_send_timing[e.topic_message_name] = new TopicCycle(e.pub_option.cycle_scale);
                     }
                     else
                     {
@@ -88,10 +104,16 @@ namespace Hakoniwa.PluggableAsset.Communication.Method.ROS.{{container.pkg_name.
                     }
                 }
             }
-
+			RostopicPublisherOption option = null;
 {% for msg in container.ros_topics["fields"]: %}
 {%-		if (msg.sub == false): %}
-			ros.RegisterPublisher<{{container.get_msg_type(msg.topic_type_name)}}Msg>("{{msg.topic_message_name}}");
+			option = GetPubOption("{{msg.topic_message_name}}");
+			if (option != null) {
+				ros.RegisterPublisher<{{container.get_msg_type(msg.topic_type_name)}}Msg>("{{msg.topic_message_name}}", option.queue_size, option.latch);
+			}
+			else {
+				ros.RegisterPublisher<{{container.get_msg_type(msg.topic_type_name)}}Msg>("{{msg.topic_message_name}}");
+			}
 {%-		else: %}
             ros.Subscribe<{{container.get_msg_type(msg.topic_type_name)}}Msg>("{{msg.topic_message_name}}", {{container.get_msg_type(msg.topic_type_name)}}MsgChange);
 {%-		endif %}
@@ -114,7 +136,7 @@ namespace Hakoniwa.PluggableAsset.Communication.Method.ROS.{{container.pkg_name.
             topic_send_timing[typed_data.GetDataName()].count++;
             if (topic_send_timing[typed_data.GetDataName()].count >= topic_send_timing[typed_data.GetDataName()].cycle)
             {
-                ros.Send(typed_data.GetDataName(), typed_data.GetTopicData());
+                ros.Publish(typed_data.GetDataName(), typed_data.GetTopicData());
                 topic_send_timing[typed_data.GetDataName()].count = 0;
             }
         }

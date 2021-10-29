@@ -4,7 +4,12 @@
             "topic_message_name": "ev3_sensor",
             "topic_type_name": "ev3_msgs/Ev3PduSensor",
             "robot_name": "RoboModel",
-            "sub": false
+            "sub": false,
+            "pub_option": {
+              "cycle_scale": 10,
+              "queue_size": 1,
+              "latch": false
+            }
         },
         {
             "topic_message_name": "ev3_actuator",
@@ -17,52 +22,88 @@
             "topic_type_name": "sensor_msgs/LaserScan",
             "robot_name": "TB3RoboModel",
             "sub": false,
-            "pub_cycle_scale": 100
+            "pub_option": {
+              "cycle_scale": 10,
+              "queue_size": 1,
+              "latch": false
+            }
         },
         {
           "topic_message_name": "image",
           "topic_type_name": "sensor_msgs/Image",
           "robot_name": "TB3RoboModel",
           "sub": false,
-          "pub_cycle_scale": 10
+          "pub_option": {
+            "cycle_scale": 10,
+            "queue_size": 1,
+            "latch": false
+          }
         },
         {
           "topic_message_name": "image/compressed",
           "topic_type_name": "sensor_msgs/CompressedImage",
           "robot_name": "TB3RoboModel",
           "sub": false,
-          "pub_cycle_scale": 10
+          "pub_option": {
+            "cycle_scale": 10,
+            "queue_size": 1,
+            "latch": false
+          }
         },
         {
           "topic_message_name": "camera_info",
           "topic_type_name": "sensor_msgs/CameraInfo",
           "robot_name": "TB3RoboModel",
           "sub": false,
-          "pub_cycle_scale": 10
+            "pub_option": {
+              "cycle_scale": 10,
+              "queue_size": 1,
+              "latch": false
+            }
         },
         {
             "topic_message_name": "imu",
             "topic_type_name": "sensor_msgs/Imu",
             "robot_name": "TB3RoboModel",
-            "sub": false
+            "sub": false,
+            "pub_option": {
+              "cycle_scale": 10,
+              "queue_size": 1,
+              "latch": false
+            }
         },
         {
             "topic_message_name": "odom",
             "topic_type_name": "nav_msgs/Odometry",
             "robot_name": "TB3RoboModel",
-            "sub": false
+            "sub": false,
+            "pub_option": {
+              "cycle_scale": 10,
+              "queue_size": 1,
+              "latch": false
+            }
         },
         {
             "topic_message_name": "tf",
             "topic_type_name": "tf2_msgs/TFMessage",
             "robot_name": "TB3RoboModel",
-            "sub": false
+            "sub": false,
+            "pub_option": {
+              "cycle_scale": 10,
+              "queue_size": 1,
+              "latch": false
+            }
         },
         {
             "topic_message_name": "joint_states",
             "topic_type_name": "sensor_msgs/JointState",
             "robot_name": "TB3RoboModel",
-            "sub": false
+            "sub": false,
+            "pub_option": {
+              "cycle_scale": 10,
+              "queue_size": 1,
+              "latch": false
+            }
         },
         {
             "topic_message_name": "cmd_vel",
