@@ -1,5 +1,7 @@
 #!/bin/bash
 
-IP_ADDR=`ifconfig eth0 | grep netmask | awk '{print $2}'`
+NETWORK_INTERFACE=$(route | grep '^default' | grep -o '[^ ]*$' | tr -d '\n')
+IP_ADDR=$(ifconfig "${NETWORK_INTERFACE}" | grep netmask | awk '{print $2}')
+echo "IP_ADDR is ${IP_ADDR} (${NETWORK_INTERFACE})"
 source install/setup.bash
-ros2 run ros_tcp_endpoint default_server_endpoint --ros-args -p ROS_IP:=${IP_ADDR}
+ros2 run ros_tcp_endpoint default_server_endpoint --ros-args -p ROS_IP:="${IP_ADDR}"
