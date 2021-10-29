@@ -1,0 +1,18 @@
+# DIRS
+.vscode/
+
+input/
+output/
+
+ros1/workspace/build/
+ros1/workspace/devel/
+ros2/workspace/build/
+ros2/workspace/install/
+ros2/workspace/log/
+ros2/workspace/src/ros_tcp_endpoint/
+
+ros1/unity/*/
+ros2/unity/*/
+
+# FILES
+*.pyc
