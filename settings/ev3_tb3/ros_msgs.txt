@@ -1,4 +1,3 @@
-builtin_interfaces/Time
 ev3_msgs/Ev3PduActuator
 ev3_msgs/Ev3PduActuatorHeader
 ev3_msgs/Ev3PduColorSensor
@@ -16,8 +15,10 @@ geometry_msgs/Twist
 geometry_msgs/TwistWithCovariance
 geometry_msgs/Vector3
 nav_msgs/Odometry
+sensor_msgs/CompressedImage
 sensor_msgs/Imu
 sensor_msgs/JointState
 sensor_msgs/LaserScan
 std_msgs/Header
 tf2_msgs/TFMessage
+builtin_interfaces/Time

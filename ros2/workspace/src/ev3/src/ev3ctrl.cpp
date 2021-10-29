@@ -369,11 +369,11 @@ int main(int argc, char **argv) {
 
   auto node = rclcpp::Node::make_shared("ev3_pubnode");
   auto publisher =
-      node->create_publisher<ev3_msgs::msg::Ev3PduActuator>("ev3_actuator", 10);
+      node->create_publisher<ev3_msgs::msg::Ev3PduActuator>("ev3_actuator", 1);
   auto subscriber = node->create_subscription<ev3_msgs::msg::Ev3PduSensor>(
-      "ev3_sensor", 10, topic_callback);
+      "ev3_sensor", 1, topic_callback);
 
-  rclcpp::WallRate rate(10ms);
+  rclcpp::WallRate rate(100ms);
 
   auto ros_actuator_data = ev3_msgs::msg::Ev3PduActuator();
   while (rclcpp::ok()) {

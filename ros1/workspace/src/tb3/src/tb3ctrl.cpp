@@ -78,7 +78,7 @@ static bool do_foward(void) {
     cmd_vel.linear.x = 0;
     is_stop = true;
   } else {
-    cmd_vel.linear.x = 0.2;
+    cmd_vel.linear.x = 0.5f;
   }
 
   return is_stop;
@@ -88,7 +88,7 @@ static bool turn_left(void) {
   bool is_stop = false;
   cmd_vel.angular.z = 0;
   if (get_right_distance() < 0.05f) {
-    cmd_vel.angular.z = 0.01;
+    cmd_vel.angular.z = 1.0f;
     is_stop = true;
   } else {
     cmd_vel.angular.z = 0;
@@ -100,7 +100,7 @@ static bool turn_right(void) {
   bool is_stop = false;
   cmd_vel.angular.z = 0;
   if (get_right_distance() < 0.05f) {
-    cmd_vel.angular.z = -0.01;
+    cmd_vel.angular.z = -1.0f;
     is_stop = true;
   } else {
     cmd_vel.angular.z = 0;
@@ -110,17 +110,12 @@ static bool turn_right(void) {
 }
 
 static void do_control(void) {
-  bool is_foward = false;
-  bool is_left = false;
-
-  is_foward = do_foward();
-  is_left = turn_right();
+  (void)do_foward();
+  (void)turn_right();
 
   if (cmd_vel.linear.x == 0 && cmd_vel.angular.z == 0) {
-    cmd_vel.angular.z = -0.005;
+    cmd_vel.angular.z = -1.0f;
   }
- // printf("x=%f z=%f\n", cmd_vel.linear.x, cmd_vel.angular.z);
-  publisher->publish(cmd_vel);
   return;
 }
 
@@ -153,7 +148,7 @@ int main(int argc, char** argv) {
     } else {
       do_control();
       //cmd_vel.angular.z = -0.01; //turnl right
-      //publisher->publish(cmd_vel);
+      publisher->publish(cmd_vel);
     }
 
     loop_rate.sleep();

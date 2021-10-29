@@ -4,31 +4,67 @@
             "topic_message_name": "scan",
             "topic_type_name": "sensor_msgs/LaserScan",
             "robot_name": "TB3RoboModel",
-            "sub": false
+            "sub": false,
+            "pub_option": {
+            	"cycle_scale": 10,
+            	"queue_size": 1,
+            	"latch": false
+            }
+        },
+        {
+            "topic_message_name": "camera/image",
+            "topic_type_name": "sensor_msgs/CompressedImage",
+            "robot_name": "TB3RoboModel",
+            "sub": false,
+            "pub_option": {
+            	"cycle_scale": 10,
+            	"queue_size": 1,
+            	"latch": false
+            }
         },
         {
             "topic_message_name": "imu",
             "topic_type_name": "sensor_msgs/Imu",
             "robot_name": "TB3RoboModel",
-            "sub": false
+            "sub": false,
+            "pub_option": {
+            	"cycle_scale": 10,
+            	"queue_size": 1,
+            	"latch": false
+            }
         },
         {
             "topic_message_name": "odom",
             "topic_type_name": "nav_msgs/Odometry",
             "robot_name": "TB3RoboModel",
-            "sub": false
+            "sub": false,
+            "pub_option": {
+            	"cycle_scale": 10,
+            	"queue_size": 1,
+            	"latch": false
+            }
         },
         {
             "topic_message_name": "tf",
             "topic_type_name": "tf2_msgs/TFMessage",
             "robot_name": "TB3RoboModel",
-            "sub": false
+            "sub": false,
+            "pub_option": {
+            	"cycle_scale": 10,
+            	"queue_size": 1,
+            	"latch": false
+            }
         },
         {
             "topic_message_name": "joint_states",
             "topic_type_name": "sensor_msgs/JointState",
             "robot_name": "TB3RoboModel",
-            "sub": false
+            "sub": false,
+            "pub_option": {
+            	"cycle_scale": 10,
+            	"queue_size": 1,
+            	"latch": false
+            }
         },
         {
             "topic_message_name": "cmd_vel",
