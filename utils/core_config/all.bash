@@ -62,6 +62,10 @@ python2 utils/core_config/create_pdu_config.py			"${PDU_CONFIG_INDIR}"	"${ROS_MS
 echo "####Creating param_world"
 python2 utils/core_config/create_param_world.py			"${WORLD_SCALE}" "${OUT_DIR}"
 
+echo "####Creating tb3_parts"
+cp utils/template/tb3_parts.json			${OUT_DIR}/
+
+
 if [ -f "${CUSTOM_FILE_PATH}" ]
 then
 	echo "####Creating outside_assets"
