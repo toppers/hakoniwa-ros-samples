@@ -17,7 +17,7 @@
           "robot_name": "TB3RoboModel",
           "sub": false,
           "pub_option": {
-            "cycle_scale": 10,
+            "cycle_scale": 100,
             "queue_size": 1,
             "latch": false
           }
@@ -28,7 +28,7 @@
           "robot_name": "TB3RoboModel",
           "sub": false,
           "pub_option": {
-            "cycle_scale": 10,
+            "cycle_scale": 100,
             "queue_size": 1,
             "latch": false
           }
@@ -39,7 +39,7 @@
           "robot_name": "TB3RoboModel",
           "sub": false,
             "pub_option": {
-              "cycle_scale": 10,
+              "cycle_scale": 100,
               "queue_size": 1,
               "latch": false
             }
