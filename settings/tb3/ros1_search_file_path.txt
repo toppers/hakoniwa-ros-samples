@@ -1,0 +1,2 @@
+/opt/ros/melodic/share
+/mnt/c/project/hakoniwa-ros-samples/ros1/workspace/src

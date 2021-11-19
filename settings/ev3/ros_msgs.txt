@@ -5,3 +5,4 @@ ev3_msgs/Ev3PduMotor
 ev3_msgs/Ev3PduSensor
 ev3_msgs/Ev3PduSensorHeader
 ev3_msgs/Ev3PduTouchSensor
+builtin_interfaces/Time
