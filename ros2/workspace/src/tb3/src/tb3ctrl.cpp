@@ -118,7 +118,7 @@ typedef enum {
   RoboMode_RUN,
 } RoboModeType;
 int main(int argc, char **argv) {
-  RoboModeType mode = RoboMode_INIT;
+  RoboModeType mode = RoboMode_RUN;
 
   printf("START\n");
   rclcpp::init(argc, argv);
