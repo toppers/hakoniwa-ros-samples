@@ -1,0 +1,109 @@
+{
+  "fields": [
+    {
+      "topic_message_name": "scan",
+      "topic_type_name": "sensor_msgs/LaserScan",
+      "robot_name": "TB3RoboModel",
+      "sub": false,
+      "pub_option": {
+        "cycle_scale": 10,
+        "queue_size": 1,
+        "latch": false
+      }
+    },
+    {
+      "topic_message_name": "image",
+      "topic_type_name": "sensor_msgs/Image",
+      "robot_name": "TB3RoboModel",
+      "sub": false,
+      "pub_option": {
+        "cycle_scale": 10,
+        "queue_size": 1,
+        "latch": false
+      }
+    },
+    {
+      "topic_message_name": "image/compressed",
+      "topic_type_name": "sensor_msgs/CompressedImage",
+      "robot_name": "TB3RoboModel",
+      "sub": false,
+      "pub_option": {
+        "cycle_scale": 10,
+        "queue_size": 1,
+        "latch": false
+      }
+    },
+    {
+      "topic_message_name": "camera_info",
+      "topic_type_name": "sensor_msgs/CameraInfo",
+      "robot_name": "TB3RoboModel",
+      "sub": false,
+      "pub_option": {
+        "cycle_scale": 10,
+        "queue_size": 1,
+        "latch": false
+      }
+    },
+    {
+      "topic_message_name": "imu",
+      "topic_type_name": "sensor_msgs/Imu",
+      "robot_name": "TB3RoboModel",
+      "sub": false,
+      "pub_option": {
+        "cycle_scale": 10,
+        "queue_size": 1,
+        "latch": false
+      }
+    },
+    {
+      "topic_message_name": "odom",
+      "topic_type_name": "nav_msgs/Odometry",
+      "robot_name": "TB3RoboModel",
+      "sub": false,
+      "pub_option": {
+        "cycle_scale": 10,
+        "queue_size": 1,
+        "latch": false
+      }
+    },
+    {
+      "topic_message_name": "tf",
+      "topic_type_name": "tf2_msgs/TFMessage",
+      "robot_name": "TB3RoboModel",
+      "sub": false,
+      "pub_option": {
+        "cycle_scale": 10,
+        "queue_size": 1,
+        "latch": false
+      }
+    },
+    {
+      "topic_message_name": "joint_states",
+      "topic_type_name": "sensor_msgs/JointState",
+      "robot_name": "TB3RoboModel",
+      "sub": false,
+      "pub_option": {
+        "cycle_scale": 10,
+        "queue_size": 1,
+        "latch": false
+      }
+    },
+    {
+      "topic_message_name": "cmd_vel",
+      "topic_type_name": "geometry_msgs/Twist",
+      "robot_name": "TB3RoboModel",
+      "sub": true
+    },
+    {
+      "topic_message_name": "obstacles",
+      "topic_type_name": "rule_msgs/HakoRuleObstacle",
+      "robot_name": "HakoEnv",
+      "sub": false,
+      "pub_option": {
+        "cycle_scale": 10,
+        "queue_size": 1,
+        "latch": false
+      }
+    }
+  ]
+}
