@@ -13,5 +13,5 @@ then
         sleep 3
 fi
 
-sudo docker run -v ${HAKONIWA_TOP_DIR}:/root/workspace/hakoniwa-ros-sim \
+sudo docker run -v ${HAKONIWA_TOP_DIR}:/root/workspace/hakoniwa-ros-samples \
 		-it --rm --net host --name hakoniwa-ros-sim ${DOCKER_IMAGE} 
