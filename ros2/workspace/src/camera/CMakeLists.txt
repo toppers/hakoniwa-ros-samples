@@ -26,7 +26,8 @@ message(STATUS ${OpenCV_LIBS})
 
 add_executable(camera_node 
 	src/camera.cpp
-	src/tb3camera.cpp
+	src/camera_image.cpp
+	src/camera_movie.cpp
 )
 target_include_directories(camera_node
 	PRIVATE	${OpenCV_INCLUDE_DIRS}
