@@ -121,4 +121,9 @@ WORKDIR /root/workspace/opencv/opencv_build/opencv/build
 RUN make -j8
 RUN make install
 
+#install mqtt
+RUN apt-get install -y software-properties-common
+RUN add-apt-repository ppa:mosquitto-dev/mosquitto-ppa
+RUN apt-get install -y libmosquitto-dev
+
 WORKDIR /root/workspace/hakoniwa-ros-samples/ros2/workspace

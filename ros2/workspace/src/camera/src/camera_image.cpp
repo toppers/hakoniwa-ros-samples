@@ -9,6 +9,7 @@
 #include "opencv2/videoio/videoio.hpp"
 #include <opencv2/core.hpp>
 #include "camera_movie.hpp"
+#include "camera_mqtt.hpp"
 
 typedef struct {
     char image_name[4096];
@@ -50,6 +51,7 @@ void camera_init(const char* base_dirname)
         (void)mkdir(path, 0644);
     }
     camera_movie_init();
+    camera_mqtt_init();
     return;
 }
 
@@ -90,6 +92,7 @@ static void camera_data_save(const sensor_msgs::msg::CompressedImage::SharedPtr 
 
 void cameraCompressedImageCallback(const sensor_msgs::msg::CompressedImage::SharedPtr msg)
 {
+    //camera_mqtt_publish(msg);
     camera_data_save(msg);
     return;
 }

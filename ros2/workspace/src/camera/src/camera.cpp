@@ -15,7 +15,7 @@ int main(int argc, char **argv) {
   camera_init("tb3_camera");
   auto node = rclcpp::Node::make_shared("camera_node");
   auto subscriber_compressed_camera_image = node->create_subscription<sensor_msgs::msg::CompressedImage>(
-      "image/compressed", 1, cameraCompressedImageCallback);
+      "HakoEnvCamera", 1, cameraCompressedImageCallback);
 
   rclcpp::WallRate rate(10ms);
 

@@ -28,6 +28,7 @@ add_executable(camera_node
 	src/camera.cpp
 	src/camera_image.cpp
 	src/camera_movie.cpp
+	src/camera_mqtt.cpp
 )
 target_include_directories(camera_node
 	PRIVATE	${OpenCV_INCLUDE_DIRS}
@@ -42,6 +43,7 @@ ament_target_dependencies(camera_node
 )
 target_link_libraries(camera_node
 	${OpenCV_LIBRARIES}
+  mosquitto
 )
 
 install(TARGETS

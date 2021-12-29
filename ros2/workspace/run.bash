@@ -1,7 +1,7 @@
 #!/bin/bash
 
 source install/setup.bash
-export LD_LIBLARY_PATH=${LD_LIBRARY_PATH}:/usr/local/lib
+export LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:/usr/local/lib
 if [ $# -ne 1 ]
 then
 	echo "Usage: $0 <pkgname>"
