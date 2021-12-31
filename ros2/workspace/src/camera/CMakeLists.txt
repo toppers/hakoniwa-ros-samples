@@ -20,14 +20,15 @@ find_package(ament_cmake REQUIRED)
 find_package(rclcpp REQUIRED)
 find_package(geometry_msgs REQUIRED)
 find_package(sensor_msgs REQUIRED)
-find_package(OpenCV REQUIRED)
-message(STATUS ${OpenCV_INCLUDE_DIRS})
-message(STATUS ${OpenCV_LIBS})
+find_package(rule_msgs REQUIRED)
+#find_package(OpenCV REQUIRED)
+#message(STATUS ${OpenCV_INCLUDE_DIRS})
+#message(STATUS ${OpenCV_LIBS})
 
 add_executable(camera_node 
 	src/camera.cpp
 	src/camera_image.cpp
-	src/camera_movie.cpp
+	#src/camera_movie.cpp
 	src/camera_mqtt.cpp
 )
 target_include_directories(camera_node
@@ -40,9 +41,10 @@ ament_target_dependencies(camera_node
 	std_msgs 
 	geometry_msgs 
 	sensor_msgs 
+  rule_msgs
 )
 target_link_libraries(camera_node
-	${OpenCV_LIBRARIES}
+	#${OpenCV_LIBRARIES}
   mosquitto
 )
 

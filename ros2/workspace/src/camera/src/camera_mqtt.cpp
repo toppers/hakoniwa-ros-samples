@@ -6,7 +6,7 @@
 #include <thread>
 
 #define CAMERA_MQTT_ID      "mqtt/pub"
-#define CAMERA_MQTT_HOST    "172.20.240.1"
+#define CAMERA_MQTT_HOST    "192.168.11.36"
 #define CAMERA_MQTT_PORT    54011
 #define CAMERA_MQTT_TOPIC   "mqtt_test"
 #define KEPPALIBE   600
@@ -79,18 +79,24 @@ void camera_mqtt_init(void)
     return;
 }
 
-void camera_mqtt_publish(const sensor_msgs::msg::CompressedImage::SharedPtr msg)
+void camera_mqtt_publish(const char* camera_mqtt_topic_name, const sensor_msgs::msg::CompressedImage::SharedPtr msg)
 {
     int size_bytes = (std::end(msg->data) - std::begin(msg->data));
     if (size_bytes < 1024) {
         return;
     }
-    //printf("camera_mqtt_publish: pub\n");
+    //printf("camera_mqtt_publish: pub %s\n", camera_mqtt_topic_name);
 
-    mosquitto_publish(camera_mosq, NULL, CAMERA_MQTT_TOPIC, size_bytes, &msg->data[0], 0, false);
+    mosquitto_publish(camera_mosq, NULL, camera_mqtt_topic_name, size_bytes, &msg->data[0], 0, false);
     return;
 }
-
+void hakoenv_mqtt_publish(const char* camera_mqtt_topic_name, const rule_msgs::msg::HakoEnv::SharedPtr msg)
+{
+    char buf[1024];
+    int len = sprintf(buf, "%lu.%lu", msg->simtime / 1000000, msg->simtime % 1000000);
+    //printf("simtime=%s\n", buf);
+    mosquitto_publish(camera_mosq, NULL, camera_mqtt_topic_name, len, buf, 0, false);
+}
 static void endCatch(int sig)
 {
     mosquitto_destroy(camera_mosq);
