@@ -54,7 +54,7 @@ echo "####Creating pdu_channel_connectors"
 python2 utils/core_config/create_connector_rw.py  		"${ROS_TOPIC_FILE}" 	"${OUT_DIR}" p "${CUSTOM_FILE_PATH}"
 
 echo "####Creating unity_ros_params"
-python2 utils/core_config/create_unity_ros_params.py 	"${ROS_IPADDR}"		"${OUT_DIR}"
+python2 utils/core_config/create_unity_ros_params.py 	"${ROS_UNITY_IPADDR}"		"${OUT_DIR}"
 
 echo "####Creating pdu_config"
 python2 utils/core_config/create_pdu_config.py			"${PDU_CONFIG_INDIR}"	"${ROS_MSG_LIST}"	"${OUT_DIR}" "${CUSTOM_FILE_PATH}"
@@ -63,7 +63,8 @@ echo "####Creating param_world"
 python2 utils/core_config/create_param_world.py			"${WORLD_SCALE}" "${OUT_DIR}"
 
 echo "####Creating tb3_parts"
-cp utils/template/tb3_parts.json			${OUT_DIR}/
+cp utils/template/tb3_parts_urdf.json utils/template/tb3_parts.json
+cp utils/template/tb3_parts.json                       ${OUT_DIR}/
 
 
 if [ -f "${CUSTOM_FILE_PATH}" ]

@@ -35,6 +35,11 @@ else
   exit 1
 fi
 
+if [ -z "${ROS_UNITY_IPADDR}" ]
+then
+	export ROS_UNITY_IPADDR=${ROS_IPADDR}
+fi
+
 if [ -d "${ROS_JSON_DIR}" ]
 then
 	:
