@@ -119,15 +119,27 @@ typedef enum {
 } RoboModeType;
 int main(int argc, char **argv) {
   RoboModeType mode = RoboMode_RUN;
+  char buffer[3][4096];
 
-  printf("START\n");
+  if (argc > 1) {
+	sprintf(buffer[0], "%s_tb3_node", argv[1]);
+	sprintf(buffer[1], "%s_cmd_vel", argv[1]);
+	sprintf(buffer[2], "%s_scan", argv[1]);
+  	printf("START: %s\n", argv[1]);
+  }
+  else {
+	sprintf(buffer[0], "tb3_node");
+	sprintf(buffer[1], "cmd_vel");
+	sprintf(buffer[2], "scan");
+  	printf("START\n");
+  }
   rclcpp::init(argc, argv);
 
-  auto node = rclcpp::Node::make_shared("tb3_node");
+  auto node = rclcpp::Node::make_shared(buffer[0]);
   auto publisher =
-      node->create_publisher<geometry_msgs::msg::Twist>("cmd_vel", 1);
+      node->create_publisher<geometry_msgs::msg::Twist>(buffer[1], 1);
   auto subscriber = node->create_subscription<sensor_msgs::msg::LaserScan>(
-      "scan", 1, scanCallback);
+      buffer[2], 1, scanCallback);
 
   rclcpp::WallRate rate(10ms);
 

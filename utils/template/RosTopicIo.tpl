@@ -115,7 +115,7 @@ namespace Hakoniwa.PluggableAsset.Communication.Method.ROS.{{container.pkg_name.
 				ros.RegisterPublisher<{{container.get_msg_type(msg.topic_type_name)}}Msg>("{{msg.topic_message_name}}");
 			}
 {%-		else: %}
-            ros.Subscribe<{{container.get_msg_type(msg.topic_type_name)}}Msg>("{{msg.topic_message_name}}", {{container.get_msg_type(msg.topic_type_name)}}MsgChange);
+            ros.Subscribe<{{container.get_msg_type(msg.topic_type_name)}}Msg>("{{msg.topic_message_name}}", {{msg.topic_message_name}}_{{container.get_msg_type(msg.topic_type_name)}}MsgChange);
 {%-		endif %}
 {%- endfor %}
 
@@ -123,7 +123,7 @@ namespace Hakoniwa.PluggableAsset.Communication.Method.ROS.{{container.pkg_name.
 
 {% for msg in container.ros_topics["fields"]: %}
 {%-		if (msg.sub): %}
-        private void {{container.get_msg_type(msg.topic_type_name)}}MsgChange({{container.get_msg_type(msg.topic_type_name)}}Msg obj)
+        private void {{msg.topic_message_name}}_{{container.get_msg_type(msg.topic_type_name)}}MsgChange({{container.get_msg_type(msg.topic_type_name)}}Msg obj)
         {
             this.topic_data_table["{{msg.topic_message_name}}"] = obj;
         }
