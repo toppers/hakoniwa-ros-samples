@@ -12,6 +12,7 @@ then
         echo "waiting for docker service activation.. "
         sleep 3
 fi
+CORE_IPADDR=`cat /etc/resolv.conf  | grep nameserver | awk '{print $NF}'`
 
 sudo docker run -v ${HAKONIWA_TOP_DIR}:/root/workspace/hakoniwa-ros-samples \
-		-it --rm --net host --name hakoniwa-ros-sim ${DOCKER_IMAGE} 
+		-it -e CORE_IPADDR=${CORE_IPADDR} --rm --net host --name hakoniwa-ros-sim ${DOCKER_IMAGE} 
