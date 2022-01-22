@@ -54,6 +54,10 @@ int main(int argc, char **argv) {
   clear_msg(&cmd_vel_servo);
 
   while (rclcpp::ok()) {
+    printf("ServoUp   : u, ServeDown  : d\n");
+    printf("ServoLeft : l, ServeRight : r\n");
+    printf("MoveFoward: i, MoveBack   : n\n");
+    printf("MoveLeft  : j, RotateRight: k\n");
     int key = getchar();
     printf("key=%c\n", key);
     switch (key) {
