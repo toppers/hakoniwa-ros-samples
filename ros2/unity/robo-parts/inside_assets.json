@@ -1,0 +1,14 @@
+[
+  {
+    "name": "RobotController", 
+    "pdu_writer_names": [
+      "RobotController_camera_image_jpgPdu", 
+      "RobotController_scanPdu"
+    ], 
+    "pdu_reader_names": [
+      "RobotController_servo_base_anglePdu", 
+      "RobotController_servo_anglePdu", 
+      "RobotController_cmd_velPdu"
+    ]
+  }
+]

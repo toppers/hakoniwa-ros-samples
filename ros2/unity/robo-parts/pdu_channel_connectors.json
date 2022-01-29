@@ -1,0 +1,17 @@
+[
+  {
+    "reader_connector_name": "reader_connector0"
+  }, 
+  {
+    "reader_connector_name": "reader_connector1"
+  }, 
+  {
+    "writer_connector_name": "writer_connector0"
+  }, 
+  {
+    "writer_connector_name": "writer_connector1"
+  }, 
+  {
+    "reader_connector_name": "reader_connector2"
+  }
+]

@@ -1,0 +1,54 @@
+[
+  {
+    "pdu_type_name": "builtin_interfaces/Time", 
+    "pdu_data_field_path": "../../ros_json/builtin_interfaces/Time.json"
+  }, 
+  {
+    "pdu_type_name": "Time", 
+    "pdu_data_field_path": "../../ros_json/builtin_interfaces/Time.json"
+  }, 
+  {
+    "pdu_type_name": "geometry_msgs/Twist", 
+    "pdu_data_field_path": "../../ros_json/geometry_msgs/Twist.json"
+  }, 
+  {
+    "pdu_type_name": "Twist", 
+    "pdu_data_field_path": "../../ros_json/geometry_msgs/Twist.json"
+  }, 
+  {
+    "pdu_type_name": "geometry_msgs/Vector3", 
+    "pdu_data_field_path": "../../ros_json/geometry_msgs/Vector3.json"
+  }, 
+  {
+    "pdu_type_name": "Vector3", 
+    "pdu_data_field_path": "../../ros_json/geometry_msgs/Vector3.json"
+  }, 
+  {
+    "pdu_type_name": "sensor_msgs/CompressedImage", 
+    "pdu_data_field_path": "../../ros_json/sensor_msgs/CompressedImage.json"
+  }, 
+  {
+    "pdu_type_name": "CompressedImage", 
+    "pdu_data_field_path": "../../ros_json/sensor_msgs/CompressedImage.json"
+  }, 
+  {
+    "pdu_type_name": "sensor_msgs/LaserScan", 
+    "pdu_data_field_path": "../../ros_json/sensor_msgs/LaserScan.json"
+  }, 
+  {
+    "pdu_type_name": "LaserScan", 
+    "pdu_data_field_path": "../../ros_json/sensor_msgs/LaserScan.json"
+  }, 
+  {
+    "pdu_type_name": "std_msgs/Header", 
+    "pdu_data_field_path": "../../ros_json/std_msgs/Header.json"
+  }, 
+  {
+    "pdu_type_name": "Header", 
+    "pdu_data_field_path": "../../ros_json/std_msgs/Header.json"
+  }, 
+  {
+    "pdu_type_name": "time", 
+    "pdu_data_field_path": "../../ros_json/builtin_interfaces/Time.json"
+  }
+]

@@ -1,0 +1,16 @@
+{
+    "name": "Hakoniwa.Editor",
+    "rootNamespace": "",
+    "references": [
+        "GUID:031f83ff3a1d4c94781e5acd8a8b134d"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

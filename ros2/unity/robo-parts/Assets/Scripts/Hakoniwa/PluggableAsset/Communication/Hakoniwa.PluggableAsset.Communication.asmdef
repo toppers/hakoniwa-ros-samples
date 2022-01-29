@@ -1,0 +1,17 @@
+{
+    "name": "Hakoniwa.PluggableAsset.Communication",
+    "rootNamespace": "",
+    "references": [
+        "GUID:cfaaeb364a1c4dc4ba178911bdc5851f",
+        "GUID:625bfc588fb96c74696858f2c467e978"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

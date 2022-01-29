@@ -1,0 +1,16 @@
+{
+    "name": "Hakoniwa.PluggableAsset.Assets",
+    "rootNamespace": "",
+    "references": [
+        "GUID:4131e7d4acd06ec4ca8779b2c0c12f0e"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

@@ -1,0 +1,12 @@
+[
+  {
+    "name": "writer_connector0", 
+    "pdu_name": "RobotController_camera_image_jpgPdu", 
+    "method_name": "ros_topic_io"
+  }, 
+  {
+    "name": "writer_connector1", 
+    "pdu_name": "RobotController_scanPdu", 
+    "method_name": "ros_topic_io"
+  }
+]

@@ -1,0 +1,23 @@
+[
+  {
+    "name": "RobotController_servo_base_anglePdu", 
+    "class_name": "Hakoniwa.PluggableAsset.Communication.Pdu.ROS.RosTopicPduReader", 
+    "conv_class_name": "Hakoniwa.PluggableAsset.Communication.Pdu.ROS.MINI.RosTopicPduReaderConverter", 
+    "topic_message_name": "RobotController_servo_base_angle", 
+    "pdu_config_name": "geometry_msgs/Twist"
+  }, 
+  {
+    "name": "RobotController_servo_anglePdu", 
+    "class_name": "Hakoniwa.PluggableAsset.Communication.Pdu.ROS.RosTopicPduReader", 
+    "conv_class_name": "Hakoniwa.PluggableAsset.Communication.Pdu.ROS.MINI.RosTopicPduReaderConverter", 
+    "topic_message_name": "RobotController_servo_angle", 
+    "pdu_config_name": "geometry_msgs/Twist"
+  }, 
+  {
+    "name": "RobotController_cmd_velPdu", 
+    "class_name": "Hakoniwa.PluggableAsset.Communication.Pdu.ROS.RosTopicPduReader", 
+    "conv_class_name": "Hakoniwa.PluggableAsset.Communication.Pdu.ROS.MINI.RosTopicPduReaderConverter", 
+    "topic_message_name": "RobotController_cmd_vel", 
+    "pdu_config_name": "geometry_msgs/Twist"
+  }
+]

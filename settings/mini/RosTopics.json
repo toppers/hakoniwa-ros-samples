@@ -1,17 +1,6 @@
 {
   "fields": [
     {
-      "topic_message_name": "HakoEnv_HakoEnv",
-      "topic_type_name": "rule_msgs/HakoEnv",
-      "robot_name": "HakoEnv",
-      "sub": false,
-      "pub_option": {
-        "cycle_scale": 10,
-        "latch": false,
-        "queue_size": 1
-      }
-    },
-    {
       "topic_message_name": "RobotController_servo_base_angle",
       "topic_type_name": "geometry_msgs/Twist",
       "robot_name": "RobotController",
