@@ -15,7 +15,7 @@ using RosMessageTypes.Std;
 
 namespace Hakoniwa.PluggableAsset.Communication.Pdu.ROS.MINI
 {
-    class RosTopicPduCommTypedData : IPduCommTypedData
+    public class RosTopicPduCommTypedData : IPduCommTypedData
     {
         private Message topic_data = null;
         private string topic_name;

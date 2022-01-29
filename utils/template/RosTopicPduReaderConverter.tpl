@@ -13,7 +13,7 @@ using RosMessageTypes.{{pkg}};
 
 namespace Hakoniwa.PluggableAsset.Communication.Pdu.ROS.{{container.pkg_name.upper()}}
 {
-    class RosTopicPduReaderConverter : IPduReaderConverter
+    public class RosTopicPduReaderConverter : IPduReaderConverter
     {
         public IPduCommData ConvertToIoData(IPduReader src)
         {

@@ -15,7 +15,7 @@ using RosMessageTypes.Std;
 
 namespace Hakoniwa.PluggableAsset.Communication.Pdu.ROS.MINI
 {
-    class RosTopicPduWriterConverter : IPduWriterConverter
+    public class RosTopicPduWriterConverter : IPduWriterConverter
     {
         public IPduCommData ConvertToIoData(IPduWriter src)
         {
