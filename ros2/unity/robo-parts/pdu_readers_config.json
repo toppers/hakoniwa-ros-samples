@@ -14,10 +14,10 @@
     "pdu_config_name": "geometry_msgs/Twist"
   }, 
   {
-    "name": "RobotController_cmd_velPdu", 
+    "name": "RobotController_pincher_cmdPdu", 
     "class_name": "Hakoniwa.PluggableAsset.Communication.Pdu.ROS.RosTopicPduReader", 
     "conv_class_name": "Hakoniwa.PluggableAsset.Communication.Pdu.ROS.MINI.RosTopicPduReaderConverter", 
-    "topic_message_name": "RobotController_cmd_vel", 
+    "topic_message_name": "RobotController_pincher_cmd", 
     "pdu_config_name": "geometry_msgs/Twist"
   }
 ]

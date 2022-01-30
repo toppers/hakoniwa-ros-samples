@@ -8,10 +8,8 @@ using System.Threading.Tasks;
 using Unity.Robotics.ROSTCPConnector.MessageGeneration;
 using Hakoniwa.PluggableAsset.Communication.Pdu.ROS.MINI;
 
-using RosMessageTypes.BuiltinInterfaces;
 using RosMessageTypes.Geometry;
-using RosMessageTypes.Sensor;
-using RosMessageTypes.Std;
+using RosMessageTypes.Rule;
 
 namespace Hakoniwa.PluggableAsset.Communication.Pdu.ROS.MINI
 {
@@ -24,34 +22,9 @@ namespace Hakoniwa.PluggableAsset.Communication.Pdu.ROS.MINI
         }
         
 
-        private void ConvertToPdu(CompressedImageMsg src, IPduWriteOperation dst)
+        private void ConvertToPdu(HakoEnvMsg src, IPduWriteOperation dst)
         {
-			ConvertToPdu(src.header, dst.Ref("header").GetPduWriteOps());
-            dst.SetData("format", src.format);
-            dst.SetData("data", src.data);
-        }
-        private void ConvertToPdu(HeaderMsg src, IPduWriteOperation dst)
-        {
-			ConvertToPdu(src.stamp, dst.Ref("stamp").GetPduWriteOps());
-            dst.SetData("frame_id", src.frame_id);
-        }
-        private void ConvertToPdu(LaserScanMsg src, IPduWriteOperation dst)
-        {
-			ConvertToPdu(src.header, dst.Ref("header").GetPduWriteOps());
-            dst.SetData("angle_min", src.angle_min);
-            dst.SetData("angle_max", src.angle_max);
-            dst.SetData("angle_increment", src.angle_increment);
-            dst.SetData("time_increment", src.time_increment);
-            dst.SetData("scan_time", src.scan_time);
-            dst.SetData("range_min", src.range_min);
-            dst.SetData("range_max", src.range_max);
-            dst.SetData("ranges", src.ranges);
-            dst.SetData("intensities", src.intensities);
-        }
-        private void ConvertToPdu(TimeMsg src, IPduWriteOperation dst)
-        {
-            dst.SetData("sec", src.sec);
-            dst.SetData("nanosec", src.nanosec);
+            dst.SetData("simtime", src.simtime);
         }
         private void ConvertToPdu(TwistMsg src, IPduWriteOperation dst)
         {
@@ -71,9 +44,9 @@ namespace Hakoniwa.PluggableAsset.Communication.Pdu.ROS.MINI
 
             RosTopicPduReader ros_pdu_reader = dst as RosTopicPduReader;
 
-            if (ros_pdu_reader.GetTypeName().Equals("geometry_msgs/Twist"))
+            if (ros_pdu_reader.GetTypeName().Equals("rule_msgs/HakoEnv"))
             {
-                var ros_topic_data = ros_topic.GetTopicData() as TwistMsg;
+                var ros_topic_data = ros_topic.GetTopicData() as HakoEnvMsg;
                 ConvertToPdu(ros_topic_data, dst.GetWriteOps());
                 return;
             }
@@ -83,15 +56,9 @@ namespace Hakoniwa.PluggableAsset.Communication.Pdu.ROS.MINI
                 ConvertToPdu(ros_topic_data, dst.GetWriteOps());
                 return;
             }
-            if (ros_pdu_reader.GetTypeName().Equals("sensor_msgs/CompressedImage"))
+            if (ros_pdu_reader.GetTypeName().Equals("geometry_msgs/Twist"))
             {
-                var ros_topic_data = ros_topic.GetTopicData() as CompressedImageMsg;
-                ConvertToPdu(ros_topic_data, dst.GetWriteOps());
-                return;
-            }
-            if (ros_pdu_reader.GetTypeName().Equals("sensor_msgs/LaserScan"))
-            {
-                var ros_topic_data = ros_topic.GetTopicData() as LaserScanMsg;
+                var ros_topic_data = ros_topic.GetTopicData() as TwistMsg;
                 ConvertToPdu(ros_topic_data, dst.GetWriteOps());
                 return;
             }

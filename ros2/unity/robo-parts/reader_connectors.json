@@ -11,7 +11,7 @@
   }, 
   {
     "name": "reader_connector2", 
-    "pdu_name": "RobotController_cmd_velPdu", 
+    "pdu_name": "RobotController_pincher_cmdPdu", 
     "method_name": "ros_topic_io"
   }
 ]

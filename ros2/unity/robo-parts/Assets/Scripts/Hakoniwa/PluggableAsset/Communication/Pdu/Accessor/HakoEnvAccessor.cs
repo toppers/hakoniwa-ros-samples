@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Hakoniwa.PluggableAsset.Communication.Pdu.Accessor
 {
-    class HakoEnvAccessor
+    public class HakoEnvAccessor
     {
         private Pdu pdu;
         

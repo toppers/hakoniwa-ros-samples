@@ -1,14 +1,18 @@
 [
   {
-    "name": "RobotController", 
+    "name": "HakoEnv", 
     "pdu_writer_names": [
-      "RobotController_camera_image_jpgPdu", 
-      "RobotController_scanPdu"
+      "HakoEnv_HakoEnvPdu"
     ], 
+    "pdu_reader_names": []
+  }, 
+  {
+    "name": "RobotController", 
+    "pdu_writer_names": [], 
     "pdu_reader_names": [
       "RobotController_servo_base_anglePdu", 
       "RobotController_servo_anglePdu", 
-      "RobotController_cmd_velPdu"
+      "RobotController_pincher_cmdPdu"
     ]
   }
 ]

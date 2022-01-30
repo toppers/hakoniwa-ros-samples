@@ -1,16 +1,9 @@
 [
   {
-    "name": "RobotController_camera_image_jpgPdu", 
+    "name": "HakoEnv_HakoEnvPdu", 
     "class_name": "Hakoniwa.PluggableAsset.Communication.Pdu.ROS.RosTopicPduWriter", 
     "conv_class_name": "Hakoniwa.PluggableAsset.Communication.Pdu.ROS.MINI.RosTopicPduWriterConverter", 
-    "topic_message_name": "RobotController_camera_image_jpg", 
-    "pdu_config_name": "sensor_msgs/CompressedImage"
-  }, 
-  {
-    "name": "RobotController_scanPdu", 
-    "class_name": "Hakoniwa.PluggableAsset.Communication.Pdu.ROS.RosTopicPduWriter", 
-    "conv_class_name": "Hakoniwa.PluggableAsset.Communication.Pdu.ROS.MINI.RosTopicPduWriterConverter", 
-    "topic_message_name": "RobotController_scan", 
-    "pdu_config_name": "sensor_msgs/LaserScan"
+    "topic_message_name": "HakoEnv_HakoEnv", 
+    "pdu_config_name": "rule_msgs/HakoEnv"
   }
 ]

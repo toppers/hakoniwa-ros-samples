@@ -19,19 +19,21 @@ static void clear_msg(geometry_msgs::msg::Twist *cmd)
 }
 
 int main(int argc, char **argv) {
-  char buffer[4][4096];
+  char buffer[5][4096];
 
   if (argc > 1) {
     sprintf(buffer[0], "%s_robo_node", argv[1]);
     sprintf(buffer[1], "%s_cmd_vel", argv[1]);
     sprintf(buffer[2], "%s_servo_base_angle", argv[1]);
     sprintf(buffer[3], "%s_servo_angle", argv[1]);
+    sprintf(buffer[4], "%s_pincher_cmd", argv[1]);
   }
   else {
     sprintf(buffer[0], "robo_node");
     sprintf(buffer[1], "cmd_vel");
     sprintf(buffer[2], "servo_base_angle");
     sprintf(buffer[3], "servo_angle");
+    sprintf(buffer[4], "pincher_cmd");
   }
 	printf("START\n");
   rclcpp::init(argc, argv);
@@ -43,21 +45,26 @@ int main(int argc, char **argv) {
       node->create_publisher<geometry_msgs::msg::Twist>(buffer[2], 1);
   auto publisher_servo =
       node->create_publisher<geometry_msgs::msg::Twist>(buffer[3], 1);
+  auto publisher_pincher =
+      node->create_publisher<geometry_msgs::msg::Twist>(buffer[4], 1);
 
   rclcpp::WallRate rate(10ms);
 
   geometry_msgs::msg::Twist cmd_vel_motor;
   geometry_msgs::msg::Twist cmd_vel_servo_base;
   geometry_msgs::msg::Twist cmd_vel_servo;
+  geometry_msgs::msg::Twist cmd_vel_pinch;
   clear_msg(&cmd_vel_motor);
   clear_msg(&cmd_vel_servo_base);
   clear_msg(&cmd_vel_servo);
+  clear_msg(&cmd_vel_pinch);
 
   while (rclcpp::ok()) {
     printf("ServoUp   : u, ServeDown  : d\n");
     printf("ServoLeft : l, ServeRight : r\n");
     printf("MoveFoward: i, MoveBack   : n\n");
     printf("MoveLeft  : j, RotateRight: k\n");
+    printf("PinchOpen : o, PinchClose : c\n");
     int key = getchar();
     printf("key=%c\n", key);
     switch (key) {
@@ -88,10 +95,17 @@ int main(int argc, char **argv) {
       case 's':
         clear_msg(&cmd_vel_motor);
         break;
+      case 'o':
+        cmd_vel_pinch.linear.x = 0.0f;
+        break;
+      case 'c':
+        cmd_vel_pinch.linear.x = 1.0f;
+        break;
       case ' ':
         clear_msg(&cmd_vel_motor);
         clear_msg(&cmd_vel_servo_base);
         clear_msg(&cmd_vel_servo);
+        clear_msg(&cmd_vel_pinch);
         break;
       default:
         break;
@@ -100,6 +114,7 @@ int main(int argc, char **argv) {
     publisher_motor->publish(cmd_vel_motor);
     publisher_servo_base->publish(cmd_vel_servo_base);
     publisher_servo->publish(cmd_vel_servo);
+    publisher_pincher->publish(cmd_vel_pinch);
     rclcpp::spin_some(node);
     rate.sleep();
   }

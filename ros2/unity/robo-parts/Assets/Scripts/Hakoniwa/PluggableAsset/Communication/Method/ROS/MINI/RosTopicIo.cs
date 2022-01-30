@@ -12,10 +12,8 @@ using System.IO;
 using Newtonsoft.Json;
 using Hakoniwa.Core.Utils.Logger;
 
-using RosMessageTypes.BuiltinInterfaces;
 using RosMessageTypes.Geometry;
-using RosMessageTypes.Sensor;
-using RosMessageTypes.Std;
+using RosMessageTypes.Rule;
 
 namespace Hakoniwa.PluggableAsset.Communication.Method.ROS.MINI
 {
@@ -108,23 +106,16 @@ namespace Hakoniwa.PluggableAsset.Communication.Method.ROS.MINI
             }
 			RostopicPublisherOption option = null;
 
+			option = GetPubOption("HakoEnv_HakoEnv");
+			if (option != null) {
+				ros.RegisterPublisher<HakoEnvMsg>("HakoEnv_HakoEnv", option.queue_size, option.latch);
+			}
+			else {
+				ros.RegisterPublisher<HakoEnvMsg>("HakoEnv_HakoEnv");
+			}
             ros.Subscribe<TwistMsg>("RobotController_servo_base_angle", RobotController_servo_base_angle_TwistMsgChange);
             ros.Subscribe<TwistMsg>("RobotController_servo_angle", RobotController_servo_angle_TwistMsgChange);
-			option = GetPubOption("RobotController_camera_image_jpg");
-			if (option != null) {
-				ros.RegisterPublisher<CompressedImageMsg>("RobotController_camera_image_jpg", option.queue_size, option.latch);
-			}
-			else {
-				ros.RegisterPublisher<CompressedImageMsg>("RobotController_camera_image_jpg");
-			}
-			option = GetPubOption("RobotController_scan");
-			if (option != null) {
-				ros.RegisterPublisher<LaserScanMsg>("RobotController_scan", option.queue_size, option.latch);
-			}
-			else {
-				ros.RegisterPublisher<LaserScanMsg>("RobotController_scan");
-			}
-            ros.Subscribe<TwistMsg>("RobotController_cmd_vel", RobotController_cmd_vel_TwistMsgChange);
+            ros.Subscribe<TwistMsg>("RobotController_pincher_cmd", RobotController_pincher_cmd_TwistMsgChange);
 
         }
 
@@ -137,9 +128,9 @@ namespace Hakoniwa.PluggableAsset.Communication.Method.ROS.MINI
         {
             this.topic_data_table["RobotController_servo_angle"] = obj;
         }
-        private void RobotController_cmd_vel_TwistMsgChange(TwistMsg obj)
+        private void RobotController_pincher_cmd_TwistMsgChange(TwistMsg obj)
         {
-            this.topic_data_table["RobotController_cmd_vel"] = obj;
+            this.topic_data_table["RobotController_pincher_cmd"] = obj;
         }
 
         public void Publish(IPduCommTypedData data)
@@ -158,7 +149,7 @@ namespace Hakoniwa.PluggableAsset.Communication.Method.ROS.MINI
 
             this.topic_data_table["RobotController_servo_base_angle"] = null;
             this.topic_data_table["RobotController_servo_angle"] = null;
-            this.topic_data_table["RobotController_cmd_vel"] = null;
+            this.topic_data_table["RobotController_pincher_cmd"] = null;
         }
 
         public IPduCommTypedData Recv(string topic_name)
