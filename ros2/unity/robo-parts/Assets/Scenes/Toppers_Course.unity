@@ -131,6 +131,14 @@ PrefabInstance:
     m_TransformParent: {fileID: 1105189957}
     m_Modifications:
     - target: {fileID: 5136212857299818912, guid: 6952bd1bfe989da4e8e1cfe2d97fd4c7, type: 3}
+      propertyPath: m_Mass
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5136212857299818912, guid: 6952bd1bfe989da4e8e1cfe2d97fd4c7, type: 3}
+      propertyPath: m_XDrive.forceLimit
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 5136212857299818912, guid: 6952bd1bfe989da4e8e1cfe2d97fd4c7, type: 3}
       propertyPath: m_ParentAnchorPosition.x
       value: -0.4000001
       objectReference: {fileID: 0}
@@ -1003,6 +1011,7 @@ GameObject:
   - component: {fileID: 1406786763}
   - component: {fileID: 1406786762}
   - component: {fileID: 1406786761}
+  - component: {fileID: 1406786764}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -1017,14 +1026,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1406786759}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.619, y: 2.361, z: 0}
+  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: -0.788, y: 2.753, z: -0.007}
   m_LocalScale: {x: 0.05, y: 0.07, z: 0.05}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3308776265215548438}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!65 &1406786761
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1032,7 +1041,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1406786759}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: f4941ba5e9084a44eaff69bcec56f407, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -1058,7 +1067,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 7dfdbbe335502f24782281eab7892411, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1088,6 +1097,58 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1406786759}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!171741748 &1406786764
+ArticulationBody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1406786759}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Mass: 2
+  m_ParentAnchorPosition: {x: 0, y: 0, z: 0}
+  m_ParentAnchorRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
+  m_AnchorPosition: {x: 0, y: 0, z: 0}
+  m_AnchorRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
+  m_MatchAnchors: 1
+  m_ArticulationJointType: 0
+  m_LinearX: 2
+  m_LinearY: 2
+  m_LinearZ: 2
+  m_SwingY: 2
+  m_SwingZ: 2
+  m_Twist: 2
+  m_XDrive:
+    lowerLimit: 0
+    upperLimit: 0
+    stiffness: 0
+    damping: 0
+    forceLimit: 3.4028235e+38
+    target: 0
+    targetVelocity: 0
+  m_YDrive:
+    lowerLimit: 0
+    upperLimit: 0
+    stiffness: 0
+    damping: 0
+    forceLimit: 3.4028235e+38
+    target: 0
+    targetVelocity: 0
+  m_ZDrive:
+    lowerLimit: 0
+    upperLimit: 0
+    stiffness: 0
+    damping: 0
+    forceLimit: 3.4028235e+38
+    target: 0
+    targetVelocity: 0
+  m_LinearDamping: 0.05
+  m_AngularDamping: 0.05
+  m_JointFriction: 0.05
+  m_Immovable: 0
+  m_UseGravity: 1
+  m_CollisionDetectionMode: 0
 --- !u!1 &1445127675
 GameObject:
   m_ObjectHideFlags: 0
@@ -1291,12 +1352,40 @@ PrefabInstance:
     m_TransformParent: {fileID: 1233922427}
     m_Modifications:
     - target: {fileID: 1098206763442383265, guid: 42504d2ca05983f4b97eb206f1f42bbc, type: 3}
+      propertyPath: m_Mass
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1098206763442383265, guid: 42504d2ca05983f4b97eb206f1f42bbc, type: 3}
+      propertyPath: m_XDrive.damping
+      value: 900
+      objectReference: {fileID: 0}
+    - target: {fileID: 1098206763442383265, guid: 42504d2ca05983f4b97eb206f1f42bbc, type: 3}
+      propertyPath: m_XDrive.stiffness
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 1098206763442383265, guid: 42504d2ca05983f4b97eb206f1f42bbc, type: 3}
       propertyPath: m_ParentAnchorPosition.x
       value: 0.24999988
       objectReference: {fileID: 0}
     - target: {fileID: 1098206764505589552, guid: 42504d2ca05983f4b97eb206f1f42bbc, type: 3}
+      propertyPath: m_Mass
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1098206764505589552, guid: 42504d2ca05983f4b97eb206f1f42bbc, type: 3}
+      propertyPath: m_XDrive.damping
+      value: 900
+      objectReference: {fileID: 0}
+    - target: {fileID: 1098206764505589552, guid: 42504d2ca05983f4b97eb206f1f42bbc, type: 3}
+      propertyPath: m_XDrive.stiffness
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 1098206764505589552, guid: 42504d2ca05983f4b97eb206f1f42bbc, type: 3}
       propertyPath: m_ParentAnchorPosition.x
       value: 0.25000036
+      objectReference: {fileID: 0}
+    - target: {fileID: 1098206764511373716, guid: 42504d2ca05983f4b97eb206f1f42bbc, type: 3}
+      propertyPath: m_Mass
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1098206764511373716, guid: 42504d2ca05983f4b97eb206f1f42bbc, type: 3}
       propertyPath: m_ParentAnchorPosition.y
