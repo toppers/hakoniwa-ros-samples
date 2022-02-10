@@ -70,6 +70,7 @@ namespace Hakoniwa.Core
             try
             {
                 this.InitHakoniwa();
+                this.simulator.Start();
             }
             catch (Exception e)
             {
