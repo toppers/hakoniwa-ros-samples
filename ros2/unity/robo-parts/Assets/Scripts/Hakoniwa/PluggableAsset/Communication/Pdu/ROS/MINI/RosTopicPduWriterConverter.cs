@@ -10,6 +10,7 @@ using Hakoniwa.PluggableAsset.Communication.Pdu.ROS.MINI;
 
 using RosMessageTypes.Geometry;
 using RosMessageTypes.Rule;
+using RosMessageTypes.Std;
 
 namespace Hakoniwa.PluggableAsset.Communication.Pdu.ROS.MINI
 {
@@ -22,6 +23,10 @@ namespace Hakoniwa.PluggableAsset.Communication.Pdu.ROS.MINI
         }
         
 
+        static private void ConvertToMessage(IPduReadOperation src, BoolMsg dst)
+        {
+			dst.data = src.GetDataBool("data");
+        }
         static private void ConvertToMessage(IPduReadOperation src, HakoEnvMsg dst)
         {
 			dst.simtime = src.GetDataUInt64("simtime");
@@ -45,6 +50,42 @@ namespace Hakoniwa.PluggableAsset.Communication.Pdu.ROS.MINI
             if (type.Equals("rule_msgs/HakoEnv"))
             {
             	HakoEnvMsg ros_topic = new HakoEnvMsg();
+                ConvertToMessage(src, ros_topic);
+                return ros_topic;
+            }
+            if (type.Equals("std_msgs/Bool"))
+            {
+            	BoolMsg ros_topic = new BoolMsg();
+                ConvertToMessage(src, ros_topic);
+                return ros_topic;
+            }
+            if (type.Equals("std_msgs/Bool"))
+            {
+            	BoolMsg ros_topic = new BoolMsg();
+                ConvertToMessage(src, ros_topic);
+                return ros_topic;
+            }
+            if (type.Equals("std_msgs/Bool"))
+            {
+            	BoolMsg ros_topic = new BoolMsg();
+                ConvertToMessage(src, ros_topic);
+                return ros_topic;
+            }
+            if (type.Equals("std_msgs/Bool"))
+            {
+            	BoolMsg ros_topic = new BoolMsg();
+                ConvertToMessage(src, ros_topic);
+                return ros_topic;
+            }
+            if (type.Equals("std_msgs/Bool"))
+            {
+            	BoolMsg ros_topic = new BoolMsg();
+                ConvertToMessage(src, ros_topic);
+                return ros_topic;
+            }
+            if (type.Equals("std_msgs/Bool"))
+            {
+            	BoolMsg ros_topic = new BoolMsg();
                 ConvertToMessage(src, ros_topic);
                 return ros_topic;
             }

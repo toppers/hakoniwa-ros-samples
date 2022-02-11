@@ -14,6 +14,7 @@ using Hakoniwa.Core.Utils.Logger;
 
 using RosMessageTypes.Geometry;
 using RosMessageTypes.Rule;
+using RosMessageTypes.Std;
 
 namespace Hakoniwa.PluggableAsset.Communication.Method.ROS.MINI
 {
@@ -112,6 +113,48 @@ namespace Hakoniwa.PluggableAsset.Communication.Method.ROS.MINI
 			}
 			else {
 				ros.RegisterPublisher<HakoEnvMsg>("HakoEnv_HakoEnv");
+			}
+			option = GetPubOption("RobotController_servo_base_move_right");
+			if (option != null) {
+				ros.RegisterPublisher<BoolMsg>("RobotController_servo_base_move_right", option.queue_size, option.latch);
+			}
+			else {
+				ros.RegisterPublisher<BoolMsg>("RobotController_servo_base_move_right");
+			}
+			option = GetPubOption("RobotController_servo_base_move_left");
+			if (option != null) {
+				ros.RegisterPublisher<BoolMsg>("RobotController_servo_base_move_left", option.queue_size, option.latch);
+			}
+			else {
+				ros.RegisterPublisher<BoolMsg>("RobotController_servo_base_move_left");
+			}
+			option = GetPubOption("RobotController_pinch_open");
+			if (option != null) {
+				ros.RegisterPublisher<BoolMsg>("RobotController_pinch_open", option.queue_size, option.latch);
+			}
+			else {
+				ros.RegisterPublisher<BoolMsg>("RobotController_pinch_open");
+			}
+			option = GetPubOption("RobotController_pinch_close");
+			if (option != null) {
+				ros.RegisterPublisher<BoolMsg>("RobotController_pinch_close", option.queue_size, option.latch);
+			}
+			else {
+				ros.RegisterPublisher<BoolMsg>("RobotController_pinch_close");
+			}
+			option = GetPubOption("RobotController_rotate_right");
+			if (option != null) {
+				ros.RegisterPublisher<BoolMsg>("RobotController_rotate_right", option.queue_size, option.latch);
+			}
+			else {
+				ros.RegisterPublisher<BoolMsg>("RobotController_rotate_right");
+			}
+			option = GetPubOption("RobotController_rotate_left");
+			if (option != null) {
+				ros.RegisterPublisher<BoolMsg>("RobotController_rotate_left", option.queue_size, option.latch);
+			}
+			else {
+				ros.RegisterPublisher<BoolMsg>("RobotController_rotate_left");
 			}
             ros.Subscribe<TwistMsg>("RobotController_servo_base_angle", RobotController_servo_base_angle_TwistMsgChange);
             ros.Subscribe<TwistMsg>("RobotController_servo_angle", RobotController_servo_angle_TwistMsgChange);
