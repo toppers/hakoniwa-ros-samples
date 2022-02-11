@@ -1,5 +1,5 @@
 {
-  "core_ipaddr": "172.27.0.1", 
+  "core_ipaddr": "172.31.144.1", 
   "core_portno": 50051, 
   "asset_timeout": 3, 
   "inside_assets_path": "./inside_assets.json", 

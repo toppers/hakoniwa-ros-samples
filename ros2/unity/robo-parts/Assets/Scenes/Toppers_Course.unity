@@ -194,6 +194,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5136212857299818924, guid: 6952bd1bfe989da4e8e1cfe2d97fd4c7, type: 3}
+      propertyPath: topic_name
+      value: servo_base_angle
+      objectReference: {fileID: 0}
     - target: {fileID: 5136212857299818925, guid: 6952bd1bfe989da4e8e1cfe2d97fd4c7, type: 3}
       propertyPath: power_const
       value: 50

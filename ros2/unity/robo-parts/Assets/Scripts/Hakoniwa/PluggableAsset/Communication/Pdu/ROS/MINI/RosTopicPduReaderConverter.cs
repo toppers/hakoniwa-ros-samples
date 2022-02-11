@@ -10,7 +10,6 @@ using Hakoniwa.PluggableAsset.Communication.Pdu.ROS.MINI;
 
 using RosMessageTypes.Geometry;
 using RosMessageTypes.Rule;
-using RosMessageTypes.Std;
 
 namespace Hakoniwa.PluggableAsset.Communication.Pdu.ROS.MINI
 {
@@ -23,10 +22,6 @@ namespace Hakoniwa.PluggableAsset.Communication.Pdu.ROS.MINI
         }
         
 
-        private void ConvertToPdu(BoolMsg src, IPduWriteOperation dst)
-        {
-            dst.SetData("data", src.data);
-        }
         private void ConvertToPdu(HakoEnvMsg src, IPduWriteOperation dst)
         {
             dst.SetData("simtime", src.simtime);
@@ -52,42 +47,6 @@ namespace Hakoniwa.PluggableAsset.Communication.Pdu.ROS.MINI
             if (ros_pdu_reader.GetTypeName().Equals("rule_msgs/HakoEnv"))
             {
                 var ros_topic_data = ros_topic.GetTopicData() as HakoEnvMsg;
-                ConvertToPdu(ros_topic_data, dst.GetWriteOps());
-                return;
-            }
-            if (ros_pdu_reader.GetTypeName().Equals("std_msgs/Bool"))
-            {
-                var ros_topic_data = ros_topic.GetTopicData() as BoolMsg;
-                ConvertToPdu(ros_topic_data, dst.GetWriteOps());
-                return;
-            }
-            if (ros_pdu_reader.GetTypeName().Equals("std_msgs/Bool"))
-            {
-                var ros_topic_data = ros_topic.GetTopicData() as BoolMsg;
-                ConvertToPdu(ros_topic_data, dst.GetWriteOps());
-                return;
-            }
-            if (ros_pdu_reader.GetTypeName().Equals("std_msgs/Bool"))
-            {
-                var ros_topic_data = ros_topic.GetTopicData() as BoolMsg;
-                ConvertToPdu(ros_topic_data, dst.GetWriteOps());
-                return;
-            }
-            if (ros_pdu_reader.GetTypeName().Equals("std_msgs/Bool"))
-            {
-                var ros_topic_data = ros_topic.GetTopicData() as BoolMsg;
-                ConvertToPdu(ros_topic_data, dst.GetWriteOps());
-                return;
-            }
-            if (ros_pdu_reader.GetTypeName().Equals("std_msgs/Bool"))
-            {
-                var ros_topic_data = ros_topic.GetTopicData() as BoolMsg;
-                ConvertToPdu(ros_topic_data, dst.GetWriteOps());
-                return;
-            }
-            if (ros_pdu_reader.GetTypeName().Equals("std_msgs/Bool"))
-            {
-                var ros_topic_data = ros_topic.GetTopicData() as BoolMsg;
                 ConvertToPdu(ros_topic_data, dst.GetWriteOps());
                 return;
             }
