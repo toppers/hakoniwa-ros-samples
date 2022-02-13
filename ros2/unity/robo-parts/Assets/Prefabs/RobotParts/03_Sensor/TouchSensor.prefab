@@ -175,5 +175,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isTouched: 0
-  topic_type: std_msgs/msg/Bool
+  topic_type: std_msgs/Bool
   update_cycle: 100
+  topic_name: touch_sensor
