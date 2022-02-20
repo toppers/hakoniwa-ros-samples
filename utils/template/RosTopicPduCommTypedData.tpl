@@ -13,7 +13,7 @@ using RosMessageTypes.{{pkg}};
 
 namespace Hakoniwa.PluggableAsset.Communication.Pdu.ROS.{{container.pkg_name.upper()}}
 {
-    class RosTopicPduCommTypedData : IPduCommTypedData
+    public class RosTopicPduCommTypedData : IPduCommTypedData
     {
         private Message topic_data = null;
         private string topic_name;

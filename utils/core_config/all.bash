@@ -63,7 +63,7 @@ echo "####Creating param_world"
 python2 utils/core_config/create_param_world.py			"${WORLD_SCALE}" "${OUT_DIR}"
 
 echo "####Creating tb3_parts"
-cp utils/template/tb3_parts_urdf.json utils/template/tb3_parts.json
+#cp utils/template/tb3_parts_urdf.json utils/template/tb3_parts.json
 cp utils/template/tb3_parts.json                       ${OUT_DIR}/
 
 

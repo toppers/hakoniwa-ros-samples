@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Hakoniwa.PluggableAsset.Communication.Pdu.Accessor
 {
-    class {{container.accessor_type_name}}Accessor
+    public class {{container.accessor_type_name}}Accessor
     {
         private Pdu pdu;
 {%- for item in container.accessor_json_data["fields"]: -%}
