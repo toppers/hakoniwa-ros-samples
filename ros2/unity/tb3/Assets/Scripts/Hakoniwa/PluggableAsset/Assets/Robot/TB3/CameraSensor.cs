@@ -1,19 +1,14 @@
-using Assets.Scripts.Hakoniwa.PluggableAsset.Assets.Robot;
-using Assets.Scripts.Hakoniwa.PluggableAsset.Assets.Robot.TB3;
-using Hakoniwa.Core.Utils;
-using Hakoniwa.PluggableAsset.Assets.Robot;
 using Hakoniwa.PluggableAsset.Communication.Pdu;
-using System.Collections;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using System.Collections.Concurrent;
-using System.Runtime.InteropServices;
 using UnityEngine;
+using Hakoniwa.PluggableAsset.Assets.Robot.Parts;
+using Hakoniwa.PluggableAsset.Communication.Connector;
+using System;
 
 namespace Hakoniwa.PluggableAsset.Assets.Robot.TB3
 {
-    public class CameraSensor : MonoBehaviour, ICameraSensor
+    public class CameraSensor : MonoBehaviour, IRobotPartsSensor
     {
+        private GameObject root;
         private GameObject sensor;
         public RenderTexture RenderTextureRef;
         //public string saveFilePath = "./SavedScreen.jpeg";
@@ -22,12 +17,54 @@ namespace Hakoniwa.PluggableAsset.Assets.Robot.TB3
         private byte[] jpg_bytes;
         private string frame_id = "camera_link";
 
-        public void Initialize(object root)
+        private PduIoConnector pdu_io;
+        private int width = 640;
+        private int height = 480;
+        private string root_name;
+        private string sensor_name;
+        private Camera my_camera;
+        private IPduWriter [] pdu = new IPduWriter[3];
+
+
+        public void Initialize(GameObject root)
         {
-            this.sensor = (GameObject)root;
+            if (this.root == null)
+            {
+                this.root = root;
+                this.root_name = string.Copy(this.root.transform.name);
+                this.sensor_name = string.Copy(this.transform.name);
+                this.pdu_io = PduIoConnector.Get(root_name);
+                if (this.pdu_io == null)
+                {
+                    throw new ArgumentException("can not found pdu_io:" + root_name);
+                }
+                this.my_camera = this.GetComponentInChildren<Camera>();
+                var texture = new Texture2D(this.width, this.height, TextureFormat.RGB24, false);
+                this.RenderTextureRef = new RenderTexture(texture.width, texture.height, 32);
+                this.my_camera.targetTexture = this.RenderTextureRef;
+                this.sensor = this.gameObject;
+
+
+                this.pdu[0] = this.pdu_io.GetWriter(this.root_name + "_camera_infoPdu");
+                if (this.pdu[0] == null)
+                {
+                    throw new ArgumentException("can not found camera_info pdu:" + this.root_name + "_camera_infoPdu");
+                }
+                this.pdu[1] = this.pdu_io.GetWriter(this.root_name + "_imagePdu");
+                if (this.pdu[1] == null)
+                {
+                    throw new ArgumentException("can not found image pdu:" + this.root_name + "_imagePdu");
+                }
+                this.pdu[2] = this.pdu_io.GetWriter(this.root_name + "_image" + "/" + "compressedPdu");
+                if (this.pdu[2] == null)
+                {
+                    throw new ArgumentException("can not found image pdu:" + this.root_name + "_image" + "/" + "compressedPdu");
+                }
+
+            }
         }
 
-        public void UpdateSensorValues()
+        private void Scan()
         {
             tex = new Texture2D(RenderTextureRef.width, RenderTextureRef.height, TextureFormat.RGB24, false);
             RenderTexture.active = RenderTextureRef;
@@ -48,10 +85,10 @@ namespace Hakoniwa.PluggableAsset.Assets.Robot.TB3
 
             // Encode texture into JPG
             jpg_bytes = tex.EncodeToJPG();
-            Object.Destroy(tex);
+            UnityEngine.Object.Destroy(tex);
             //File.WriteAllBytes(saveFilePath, bytes);
         }
-        public void UpdateSensorData(Pdu pdu)
+        private void UpdateSensorData(Pdu pdu)
         {
             if (pdu.GetName() == "sensor_msgs/Image") {
               TimeStamp.Set(pdu);
@@ -67,9 +104,31 @@ namespace Hakoniwa.PluggableAsset.Assets.Robot.TB3
               pdu.SetData("format", "jpeg");
               pdu.SetData("data", jpg_bytes);
             } else {
-              Debug.Log("MSG Type is Not Found: " + pdu.GetName());
+                PublishCameraInfo();
             }
         }
+        private void PublishCameraInfo()
+        {
+            double[] _D = new double[5] { 0.1639958233797625, -0.271840030972792, 0.001055841660100477, -0.00166555973740089, 0 };
+            double[] _K = new double[9] { 322.0704122808738, 0, 199.2680620421962, 0, 320.8673986158544, 155.2533082600705, 0, 0, 1 };
+            double[] _R = new double[9] { 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0 };
+            double[] _P = new double[12] { 329.2483825683594, 0, 198.4101510452074, 0, 0, 329.1044006347656, 155.5057121208347, 0, 0, 0, 1, 0 };
+            //PDU
+            //header
+            TimeStamp.Set(this.pdu[0].GetWriteOps().Ref(null));
+            this.pdu[0].GetWriteOps().Ref("header").SetData("frame_id", frame_id);
+            this.pdu[0].GetWriteOps().SetData("height", (System.UInt32)480);
+            this.pdu[0].GetWriteOps().SetData("width", (System.UInt32)640);
+            this.pdu[0].GetWriteOps().SetData("distortion_model", "plumb_bob");
+            this.pdu[0].GetWriteOps().SetData("d", _D);
+            this.pdu[0].GetWriteOps().SetData("k", _K);
+            this.pdu[0].GetWriteOps().SetData("r", _R);
+            this.pdu[0].GetWriteOps().SetData("p", _P);
+            this.pdu[0].GetWriteOps().SetData("binning_x", (System.UInt32)0);
+            this.pdu[0].GetWriteOps().SetData("binning_y", (System.UInt32)0);
+        }
+
+
         public string [] topic_type = {
             "sensor_msgs/Image",
             "sensor_msgs/CompressedImage",
@@ -85,6 +144,31 @@ namespace Hakoniwa.PluggableAsset.Assets.Robot.TB3
             100,
             10
         };
+        private int [] count = {
+            0,
+            0,
+            0
+        };
+        public void UpdateSensorValues()
+        {
+            for (int i = 0; i < count.Length; i++)
+            {
+                this.count[i]++;
+                if (this.count[i] < this.update_cycle[i])
+                {
+                    continue;
+                }
+                this.count[i] = 0;
+                if (i == 0)
+                {
+                    this.Scan();
+                }
+                Debug.Log("camera update[" + i + "]:" + this.pdu[i].GetWriteOps().Ref(null).GetName());
+                this.UpdateSensorData(this.pdu[i].GetWriteOps().Ref(null));
+            }
+            return;
+        }
+
         public RosTopicMessageConfig[] getRosConfig()
         {
             RosTopicMessageConfig[] cfg = new RosTopicMessageConfig[topic_type.Length];
@@ -103,6 +187,12 @@ namespace Hakoniwa.PluggableAsset.Assets.Robot.TB3
 
             return cfg;
         }
+
+        public bool isAttachedSpecificController()
+        {
+            return false;
+        }
+
     }
 }
 

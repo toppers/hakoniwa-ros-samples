@@ -1,18 +1,12 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.IO;
 using UnityEngine;
 
-using Hakoniwa.Core;
-using Hakoniwa.PluggableAsset;
-using Hakoniwa.PluggableAsset.Assets;
 using Hakoniwa.PluggableAsset.Communication.Connector;
 using Hakoniwa.PluggableAsset.Communication.Pdu;
-using Assets.Scripts.Hakoniwa.PluggableAsset.Assets.Robot.TB3;
-using Assets.Scripts.Hakoniwa.PluggableAsset.Assets.Robot;
 using Hakoniwa.Core.Utils;
 using Hakoniwa.PluggableAsset.Communication.Pdu.Accessor;
+using Hakoniwa.PluggableAsset.Assets.Robot.Parts;
 
 namespace Hakoniwa.PluggableAsset.Assets.Robot.TB3
 {
@@ -34,9 +28,6 @@ namespace Hakoniwa.PluggableAsset.Assets.Robot.TB3
         private string my_name;
         private PduIoConnector pdu_io;
         private IPduWriter pdu_laser_scan;
-        private IPduWriter pdu_camera_info;
-        private IPduWriter pdu_raw_camera;
-        private IPduWriter pdu_compressed_camera;
         private IPduWriter pdu_imu;
         private IPduWriter pdu_odometry;
         private OdometryAccessor pdu_odometry_accessor;
@@ -44,8 +35,6 @@ namespace Hakoniwa.PluggableAsset.Assets.Robot.TB3
         private IPduWriter pdu_joint_state;
         private IPduReader pdu_motor_control;
         private ILaserScan laser_scan;
-        private ICameraSensor raw_camera;
-        private ICameraSensor compressed_camera;
         private IIMUSensor imu;
         private MotorController motor_controller;
         private int tf_num = 1;
@@ -53,8 +42,21 @@ namespace Hakoniwa.PluggableAsset.Assets.Robot.TB3
         private ParamScale scale;
         private Dictionary<string, UpdateDeviceCycle> device_update_cycle = new Dictionary<string, UpdateDeviceCycle>();
 
+        private IRobotPartsSensor[] sensors = null;
+
         public void CopySensingDataToPdu()
         {
+            foreach (var child in this.sensors)
+            {
+                if (child.isAttachedSpecificController())
+                {
+                    continue;
+                }
+                child.UpdateSensorValues();
+            }
+            //TODO
+
+
             this.current_timestamp = UtilTime.GetUnixTime();
 
             //LaserSensor
@@ -64,19 +66,6 @@ namespace Hakoniwa.PluggableAsset.Assets.Robot.TB3
                 this.laser_scan.UpdateSensorValues();
                 this.laser_scan.UpdateSensorData(pdu_laser_scan.GetWriteOps().Ref(null));
                 device_update_cycle["scan"].count = 0;
-            }
-
-            device_update_cycle["camera"].count++;
-            if (device_update_cycle["camera"].count >= device_update_cycle["camera"].cycle)
-            {
-                //CameraSensor
-                this.compressed_camera.UpdateSensorValues();
-                //this.raw_camera.UpdateSensorData(pdu_raw_camera.GetWriteOps().Ref(null));
-                this.compressed_camera.UpdateSensorData(pdu_compressed_camera.GetWriteOps().Ref(null));
-
-                //CameraInfo
-                this.PublishCameraInfo();
-                device_update_cycle["camera"].count = 0;
             }
 
             device_update_cycle["imu"].count++;
@@ -100,26 +89,6 @@ namespace Hakoniwa.PluggableAsset.Assets.Robot.TB3
             this.motor_controller.CopySensingDataToPdu();
         }
 
-        private void PublishCameraInfo()
-        {
-            double[] _D = new double[5] {0.1639958233797625, -0.271840030972792, 0.001055841660100477, -0.00166555973740089, 0};
-            double[] _K = new double[9] {322.0704122808738, 0, 199.2680620421962, 0, 320.8673986158544, 155.2533082600705, 0, 0, 1};
-            double[] _R = new double[9] {1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0};
-            double[] _P = new double[12] {329.2483825683594, 0, 198.4101510452074, 0, 0, 329.1044006347656, 155.5057121208347, 0, 0, 0, 1, 0};
-            //PDU
-            //header
-            TimeStamp.Set(this.pdu_camera_info.GetWriteOps().Ref(null));
-            this.pdu_camera_info.GetWriteOps().Ref("header").SetData("frame_id", "camera_link");
-            this.pdu_camera_info.GetWriteOps().SetData("height", (System.UInt32)480);
-            this.pdu_camera_info.GetWriteOps().SetData("width", (System.UInt32)640);
-            this.pdu_camera_info.GetWriteOps().SetData("distortion_model", "plumb_bob");
-            this.pdu_camera_info.GetWriteOps().SetData("d", _D);
-            this.pdu_camera_info.GetWriteOps().SetData("k", _K);
-            this.pdu_camera_info.GetWriteOps().SetData("r", _R);
-            this.pdu_camera_info.GetWriteOps().SetData("p", _P);
-            this.pdu_camera_info.GetWriteOps().SetData("binning_x", (System.UInt32)0);
-            this.pdu_camera_info.GetWriteOps().SetData("binning_y", (System.UInt32)0);
-        }
 
         private void PublishJointStates()
         {
@@ -297,6 +266,23 @@ namespace Hakoniwa.PluggableAsset.Assets.Robot.TB3
 
         private void InitSensor()
         {
+            /*
+             * ルートは特定のコントローラに割り当てられていないセンサを初期化する
+             * 
+             * 割り当てされているものは，当該コントローラ側の責務で初期化する
+             */
+            this.sensors = this.myObject.GetComponentsInChildren<IRobotPartsSensor>();
+            foreach (var child in this.sensors)
+            {
+                if (child.isAttachedSpecificController())
+                {
+                    continue;
+                }
+                child.Initialize(this.myObject);
+            }
+            //TODO
+
+
             int update_cycle = 1;
             GameObject obj;
             string subParts = this.parts.GetLaserScan(out update_cycle);
@@ -313,32 +299,7 @@ namespace Hakoniwa.PluggableAsset.Assets.Robot.TB3
                     throw new ArgumentException("can not found LaserScan pdu:" + this.GetName() + "_scanPdu");
                 }
             }
-            subParts = this.parts.GetCamera(out update_cycle);
-            if (subParts != null)
-            {
-                this.device_update_cycle["camera"] = new UpdateDeviceCycle(update_cycle);
-                obj = root.transform.Find(this.transform.name + "/" + subParts).gameObject;
-                Debug.Log("path=" + this.transform.name + "/" + subParts);
-                raw_camera = obj.GetComponentInChildren<ICameraSensor>();
-                raw_camera.Initialize(obj);
-                compressed_camera = obj.GetComponentInChildren<ICameraSensor>();
-                compressed_camera.Initialize(obj);
-                this.pdu_camera_info = this.pdu_io.GetWriter(this.GetName() + "_camera_infoPdu");
-                if (this.pdu_camera_info == null)
-                {
-                    throw new ArgumentException("can not found camera_info pdu:" + this.GetName() + "_camera_infoPdu");
-                }
-                this.pdu_raw_camera = this.pdu_io.GetWriter(this.GetName() + "_imagePdu");
-                if (this.pdu_raw_camera == null)
-                {
-                    throw new ArgumentException("can not found image pdu:" + this.GetName() + "_imagePdu");
-                }
-                this.pdu_compressed_camera = this.pdu_io.GetWriter(this.GetName() + "_image" + "/" + "compressedPdu");
-                if (this.pdu_compressed_camera == null)
-                {
-                    throw new ArgumentException("can not found image pdu:" + this.GetName() + "_image" + "/" + "compressedPdu");
-                }
-            }
+
             subParts = this.parts.GetIMU(out update_cycle);
             if (subParts != null)
             {
