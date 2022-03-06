@@ -1,23 +1,49 @@
-﻿using Assets.Scripts.Hakoniwa.PluggableAsset;
-using Assets.Scripts.Hakoniwa.PluggableAsset.Assets.Robot;
-using Assets.Scripts.Hakoniwa.PluggableAsset.Assets.Robot.TB3;
-using Hakoniwa.Core.Utils;
-using Hakoniwa.PluggableAsset.Assets.Robot;
+﻿using Hakoniwa.PluggableAsset.Assets.Robot.Parts;
+using Hakoniwa.PluggableAsset.Communication.Connector;
 using Hakoniwa.PluggableAsset.Communication.Pdu;
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 
 namespace Hakoniwa.PluggableAsset.Assets.Robot.TB3
 {
-    public class LaserScanner : MonoBehaviour, ILaserScan
+    public class LaserScanner : MonoBehaviour, IRobotPartsSensor
     {
+        private GameObject root;
+        private GameObject sensor;
+        private string root_name;
+        private PduIoConnector pdu_io;
+        private IPduWriter pdu_writer;
+
         public static bool is_debug = true;
         public static int view_interval = 36;
+
+        public void Initialize(GameObject root)
+        {
+            if (this.root == null)
+            {
+                this.scale = AssetConfigLoader.GetScale();
+                this.root = root;
+                this.root_name = string.Copy(this.root.transform.name);
+                this.pdu_io = PduIoConnector.Get(root_name);
+                if (this.pdu_io == null)
+                {
+                    throw new ArgumentException("can not found pdu_io:" + root_name);
+                }
+                var pdu_writer_name = root_name + "_" + this.topic_name + "Pdu";
+                this.pdu_writer = this.pdu_io.GetWriter(pdu_writer_name);
+                if (this.pdu_writer == null)
+                {
+                    throw new ArgumentException("can not found pdu_reader:" + pdu_writer_name);
+                }
+                this.sensor = this.gameObject;
+                this.init_angle = this.sensor.transform.localRotation;
+                this.distances = new float[max_count];
+
+            }
+        }
         private const int max_count = 360;
         private float contact_distance = 350f; /* cm */
         private float[] distances = new float[max_count];
-        private GameObject sensor;
         private float angle_min = 0.0f;
         private float angle_max = 6.26573181152f; //← 6.265 rad = 359°
         private float range_min = 0.119999997318f; //← 12cm
@@ -28,14 +54,7 @@ namespace Hakoniwa.PluggableAsset.Assets.Robot.TB3
         private ParamScale scale;
         private Quaternion init_angle;
         private float[] intensities = new float[0];
-
-        public void Initialize(object root)
-        {
-            this.sensor = (GameObject)root;
-            this.init_angle = this.transform.localRotation;
-            this.scale = AssetConfigLoader.GetScale();
-        }
-        public void UpdateSensorData(Pdu pdu)
+        private void UpdatePdu(Pdu pdu)
         {
             TimeStamp.Set(pdu);
             pdu.Ref("header").SetData("frame_id", "base_scan");
@@ -50,8 +69,20 @@ namespace Hakoniwa.PluggableAsset.Assets.Robot.TB3
             pdu.SetData("scan_time", scan_time);
             pdu.SetData("intensities", intensities);
         }
-
         public void UpdateSensorValues()
+        {
+            this.count++;
+            if (this.count < this.update_cycle)
+            {
+                return;
+            }
+            this.count = 0;
+            this.Scan();
+            this.UpdatePdu(this.pdu_writer.GetWriteOps().Ref(null));
+            return;
+        }
+
+        private void Scan()
         {
             this.sensor.transform.localRotation = this.init_angle;
             for (int i = 0; i < max_count; i++)
@@ -78,14 +109,18 @@ namespace Hakoniwa.PluggableAsset.Assets.Robot.TB3
             }
             else
             {
+                if (is_debug && (degree % view_interval) == 0)
+                {
+                    Debug.DrawRay(this.sensor.transform.position, fwd * contact_distance, Color.green, 0.05f, false);
+                }
                 return contact_distance;
-                //Debug.DrawRay(this.sensor.transform.position, fwd, Color.green, 10, false);
             }
         }
 
         public string topic_type = "sensor_msgs/LaserScan";
         public string topic_name = "scan";
         public int update_cycle = 10;
+        private int count = 0;
         public RosTopicMessageConfig[] getRosConfig()
         {
             RosTopicMessageConfig[] cfg = new RosTopicMessageConfig[1];
@@ -98,6 +133,10 @@ namespace Hakoniwa.PluggableAsset.Assets.Robot.TB3
             cfg[0].pub_option.latch = false;
             cfg[0].pub_option.queue_size = 1;
             return cfg;
+        }
+        public bool isAttachedSpecificController()
+        {
+            return false;
         }
     }
 }

@@ -34,7 +34,6 @@ namespace Hakoniwa.PluggableAsset.Assets.Robot.TB3
         private IPduWriter pdu_tf;
         private IPduWriter pdu_joint_state;
         private IPduReader pdu_motor_control;
-        private ILaserScan laser_scan;
         private IIMUSensor imu;
         private MotorController motor_controller;
         private int tf_num = 1;
@@ -58,15 +57,6 @@ namespace Hakoniwa.PluggableAsset.Assets.Robot.TB3
 
 
             this.current_timestamp = UtilTime.GetUnixTime();
-
-            //LaserSensor
-            device_update_cycle["scan"].count++;
-            if (device_update_cycle["scan"].count >= device_update_cycle["scan"].cycle)
-            {
-                this.laser_scan.UpdateSensorValues();
-                this.laser_scan.UpdateSensorData(pdu_laser_scan.GetWriteOps().Ref(null));
-                device_update_cycle["scan"].count = 0;
-            }
 
             device_update_cycle["imu"].count++;
             if (device_update_cycle["imu"].count >= device_update_cycle["imu"].cycle)
@@ -285,22 +275,7 @@ namespace Hakoniwa.PluggableAsset.Assets.Robot.TB3
 
             int update_cycle = 1;
             GameObject obj;
-            string subParts = this.parts.GetLaserScan(out update_cycle);
-            if (subParts != null)
-            {
-                this.device_update_cycle["scan"] = new UpdateDeviceCycle(update_cycle);
-                obj = root.transform.Find(this.transform.name + "/" + subParts).gameObject;
-                Debug.Log("path=" + this.transform.name + "/" + subParts);
-                laser_scan = obj.GetComponentInChildren<ILaserScan>();
-                laser_scan.Initialize(obj);
-                this.pdu_laser_scan = this.pdu_io.GetWriter(this.GetName() + "_scanPdu");
-                if (this.pdu_laser_scan == null)
-                {
-                    throw new ArgumentException("can not found LaserScan pdu:" + this.GetName() + "_scanPdu");
-                }
-            }
-
-            subParts = this.parts.GetIMU(out update_cycle);
+            string subParts = this.parts.GetIMU(out update_cycle);
             if (subParts != null)
             {
                 this.device_update_cycle["imu"] = new UpdateDeviceCycle(update_cycle);

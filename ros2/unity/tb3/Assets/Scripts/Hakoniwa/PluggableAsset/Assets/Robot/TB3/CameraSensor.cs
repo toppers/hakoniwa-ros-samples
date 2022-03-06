@@ -163,7 +163,7 @@ namespace Hakoniwa.PluggableAsset.Assets.Robot.TB3
                 {
                     this.Scan();
                 }
-                Debug.Log("camera update[" + i + "]:" + this.pdu[i].GetWriteOps().Ref(null).GetName());
+                //Debug.Log("camera update[" + i + "]:" + this.pdu[i].GetWriteOps().Ref(null).GetName());
                 this.UpdateSensorData(this.pdu[i].GetWriteOps().Ref(null));
             }
             return;
