@@ -1,17 +1,20 @@
-using Hakoniwa.PluggableAsset.Assets.Robot;
+using Hakoniwa.PluggableAsset.Assets.Robot.Parts;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace Hakoniwa.PluggableAsset.Assets.Robot.TB3
 {
-    public class MotorArticulationBody : MonoBehaviour, IRobotMotor, IRobotMotorSensor
+    public class MotorArticulationBody : MonoBehaviour, IRobotPartsMotorSensor, IRobotPartsMotor
     {
+        private GameObject root = null;
+        private string root_name;
+        private GameObject my_motor;
+
         private float power_const = 500;
         private float rotation_angle_rate = 0.0f;
         private float motor_radius = 3.3f; //3.3cm
 
-        private GameObject obj;
         private float targetVelocity;
         private int force;
         private bool isStop;
@@ -49,24 +52,27 @@ namespace Hakoniwa.PluggableAsset.Assets.Robot.TB3
             //drive.targetVelocity = 300;
             body.xDrive = drive;
         }
-        public void Initialize(System.Object root)
+        public void Initialize(GameObject root)
         {
-            if (this.obj != null)
+            if (this.root == null)
             {
                 Debug.Log("Motor init");
-                this.SetTargetVelicty(0.0f);
-                this.deg = 0.0f;
-                this.current_angle = obj.transform.localRotation;
-                this.prev_angle = obj.transform.localRotation;
-                this.angle_velocity = 0.0f;
+                this.root = root;
+                this.root_name = string.Copy(this.root.transform.name);
+                this.my_motor = this.gameObject;
+                this.articulation_body = this.my_motor.GetComponent<ArticulationBody>();
+                this.isStop = false;
             }
             else
             {
-                this.obj = (GameObject)root;
-                this.articulation_body = this.obj.GetComponent<ArticulationBody>();
-                this.isStop = false;
+                this.SetTargetVelicty(0.0f);
+                this.deg = 0.0f;
+                this.current_angle = my_motor.transform.localRotation;
+                this.prev_angle = my_motor.transform.localRotation;
+                this.angle_velocity = 0.0f;
             }
         }
+
         public float GetVelocity()
         {
             return (this.motor_radius * this.rotation_angle_rate);
@@ -136,7 +142,7 @@ namespace Hakoniwa.PluggableAsset.Assets.Robot.TB3
             //this.prevRotation = this.obj.transform.localRotation;
             //this.deg += diff;
 
-            this.current_angle = obj.transform.localRotation;
+            this.current_angle = my_motor.transform.localRotation;
             this.diff_angle = current_angle * Quaternion.Inverse(this.prev_angle);
 
             //this.diff_angle = (this.current_angle - this.prev_angle);
@@ -147,7 +153,7 @@ namespace Hakoniwa.PluggableAsset.Assets.Robot.TB3
         }
         public float GetCurrentAngle()
         {
-            return -obj.transform.localRotation.eulerAngles.y;
+            return -my_motor.transform.localRotation.eulerAngles.y;
         }
 
         public float GetDeltaAngle()
@@ -159,15 +165,16 @@ namespace Hakoniwa.PluggableAsset.Assets.Robot.TB3
             return diff_angle.eulerAngles;
         }
 
-        public void SetTargetVelicty(int targetVelocity)
-        {
-            throw new System.NotImplementedException();
-        }
-
         public RosTopicMessageConfig[] getRosConfig()
         {
             return null;
         }
+
+        public bool isAttachedSpecificController()
+        {
+            return true;
+        }
+
     }
 }
 
