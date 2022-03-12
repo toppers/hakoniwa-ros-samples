@@ -180,6 +180,12 @@ namespace Hakoniwa.PluggableAsset.Communication.Pdu.ROS.TB3
 
             RosTopicPduReader ros_pdu_reader = dst as RosTopicPduReader;
 
+            if (ros_pdu_reader.GetTypeName().Equals("sensor_msgs/Imu"))
+            {
+                var ros_topic_data = ros_topic.GetTopicData() as ImuMsg;
+                ConvertToPdu(ros_topic_data, dst.GetWriteOps());
+                return;
+            }
             if (ros_pdu_reader.GetTypeName().Equals("nav_msgs/Odometry"))
             {
                 var ros_topic_data = ros_topic.GetTopicData() as OdometryMsg;
@@ -204,18 +210,6 @@ namespace Hakoniwa.PluggableAsset.Communication.Pdu.ROS.TB3
                 ConvertToPdu(ros_topic_data, dst.GetWriteOps());
                 return;
             }
-            if (ros_pdu_reader.GetTypeName().Equals("sensor_msgs/LaserScan"))
-            {
-                var ros_topic_data = ros_topic.GetTopicData() as LaserScanMsg;
-                ConvertToPdu(ros_topic_data, dst.GetWriteOps());
-                return;
-            }
-            if (ros_pdu_reader.GetTypeName().Equals("sensor_msgs/Imu"))
-            {
-                var ros_topic_data = ros_topic.GetTopicData() as ImuMsg;
-                ConvertToPdu(ros_topic_data, dst.GetWriteOps());
-                return;
-            }
             if (ros_pdu_reader.GetTypeName().Equals("sensor_msgs/Image"))
             {
                 var ros_topic_data = ros_topic.GetTopicData() as ImageMsg;
@@ -231,6 +225,12 @@ namespace Hakoniwa.PluggableAsset.Communication.Pdu.ROS.TB3
             if (ros_pdu_reader.GetTypeName().Equals("sensor_msgs/CameraInfo"))
             {
                 var ros_topic_data = ros_topic.GetTopicData() as CameraInfoMsg;
+                ConvertToPdu(ros_topic_data, dst.GetWriteOps());
+                return;
+            }
+            if (ros_pdu_reader.GetTypeName().Equals("sensor_msgs/LaserScan"))
+            {
+                var ros_topic_data = ros_topic.GetTopicData() as LaserScanMsg;
                 ConvertToPdu(ros_topic_data, dst.GetWriteOps());
                 return;
             }

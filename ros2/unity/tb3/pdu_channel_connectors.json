@@ -9,10 +9,10 @@
     "writer_connector_name": "writer_connector2"
   }, 
   {
-    "reader_connector_name": "reader_connector0"
+    "writer_connector_name": "writer_connector3"
   }, 
   {
-    "writer_connector_name": "writer_connector3"
+    "reader_connector_name": "reader_connector0"
   }, 
   {
     "writer_connector_name": "writer_connector4"

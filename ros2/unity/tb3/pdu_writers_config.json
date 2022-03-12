@@ -1,5 +1,12 @@
 [
   {
+    "name": "TB3RoboModel_imuPdu", 
+    "class_name": "Hakoniwa.PluggableAsset.Communication.Pdu.ROS.RosTopicPduWriter", 
+    "conv_class_name": "Hakoniwa.PluggableAsset.Communication.Pdu.ROS.TB3.RosTopicPduWriterConverter", 
+    "topic_message_name": "TB3RoboModel_imu", 
+    "pdu_config_name": "sensor_msgs/Imu"
+  }, 
+  {
     "name": "TB3RoboModel_odomPdu", 
     "class_name": "Hakoniwa.PluggableAsset.Communication.Pdu.ROS.RosTopicPduWriter", 
     "conv_class_name": "Hakoniwa.PluggableAsset.Communication.Pdu.ROS.TB3.RosTopicPduWriterConverter", 
@@ -21,20 +28,6 @@
     "pdu_config_name": "sensor_msgs/JointState"
   }, 
   {
-    "name": "TB3RoboModel_scanPdu", 
-    "class_name": "Hakoniwa.PluggableAsset.Communication.Pdu.ROS.RosTopicPduWriter", 
-    "conv_class_name": "Hakoniwa.PluggableAsset.Communication.Pdu.ROS.TB3.RosTopicPduWriterConverter", 
-    "topic_message_name": "TB3RoboModel_scan", 
-    "pdu_config_name": "sensor_msgs/LaserScan"
-  }, 
-  {
-    "name": "TB3RoboModel_imuPdu", 
-    "class_name": "Hakoniwa.PluggableAsset.Communication.Pdu.ROS.RosTopicPduWriter", 
-    "conv_class_name": "Hakoniwa.PluggableAsset.Communication.Pdu.ROS.TB3.RosTopicPduWriterConverter", 
-    "topic_message_name": "TB3RoboModel_imu", 
-    "pdu_config_name": "sensor_msgs/Imu"
-  }, 
-  {
     "name": "TB3RoboModel_imagePdu", 
     "class_name": "Hakoniwa.PluggableAsset.Communication.Pdu.ROS.RosTopicPduWriter", 
     "conv_class_name": "Hakoniwa.PluggableAsset.Communication.Pdu.ROS.TB3.RosTopicPduWriterConverter", 
@@ -54,5 +47,12 @@
     "conv_class_name": "Hakoniwa.PluggableAsset.Communication.Pdu.ROS.TB3.RosTopicPduWriterConverter", 
     "topic_message_name": "TB3RoboModel_camera_info", 
     "pdu_config_name": "sensor_msgs/CameraInfo"
+  }, 
+  {
+    "name": "TB3RoboModel_scanPdu", 
+    "class_name": "Hakoniwa.PluggableAsset.Communication.Pdu.ROS.RosTopicPduWriter", 
+    "conv_class_name": "Hakoniwa.PluggableAsset.Communication.Pdu.ROS.TB3.RosTopicPduWriterConverter", 
+    "topic_message_name": "TB3RoboModel_scan", 
+    "pdu_config_name": "sensor_msgs/LaserScan"
   }
 ]

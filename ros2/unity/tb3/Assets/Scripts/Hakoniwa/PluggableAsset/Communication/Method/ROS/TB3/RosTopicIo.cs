@@ -110,6 +110,13 @@ namespace Hakoniwa.PluggableAsset.Communication.Method.ROS.TB3
             }
 			RostopicPublisherOption option = null;
 
+			option = GetPubOption("TB3RoboModel_imu");
+			if (option != null) {
+				ros.RegisterPublisher<ImuMsg>("TB3RoboModel_imu", option.queue_size, option.latch);
+			}
+			else {
+				ros.RegisterPublisher<ImuMsg>("TB3RoboModel_imu");
+			}
 			option = GetPubOption("TB3RoboModel_odom");
 			if (option != null) {
 				ros.RegisterPublisher<OdometryMsg>("TB3RoboModel_odom", option.queue_size, option.latch);
@@ -132,20 +139,6 @@ namespace Hakoniwa.PluggableAsset.Communication.Method.ROS.TB3
 				ros.RegisterPublisher<JointStateMsg>("TB3RoboModel_joint_states");
 			}
             ros.Subscribe<TwistMsg>("TB3RoboModel_cmd_vel", TB3RoboModel_cmd_vel_TwistMsgChange);
-			option = GetPubOption("TB3RoboModel_scan");
-			if (option != null) {
-				ros.RegisterPublisher<LaserScanMsg>("TB3RoboModel_scan", option.queue_size, option.latch);
-			}
-			else {
-				ros.RegisterPublisher<LaserScanMsg>("TB3RoboModel_scan");
-			}
-			option = GetPubOption("TB3RoboModel_imu");
-			if (option != null) {
-				ros.RegisterPublisher<ImuMsg>("TB3RoboModel_imu", option.queue_size, option.latch);
-			}
-			else {
-				ros.RegisterPublisher<ImuMsg>("TB3RoboModel_imu");
-			}
 			option = GetPubOption("TB3RoboModel_image");
 			if (option != null) {
 				ros.RegisterPublisher<ImageMsg>("TB3RoboModel_image", option.queue_size, option.latch);
@@ -166,6 +159,13 @@ namespace Hakoniwa.PluggableAsset.Communication.Method.ROS.TB3
 			}
 			else {
 				ros.RegisterPublisher<CameraInfoMsg>("TB3RoboModel_camera_info");
+			}
+			option = GetPubOption("TB3RoboModel_scan");
+			if (option != null) {
+				ros.RegisterPublisher<LaserScanMsg>("TB3RoboModel_scan", option.queue_size, option.latch);
+			}
+			else {
+				ros.RegisterPublisher<LaserScanMsg>("TB3RoboModel_scan");
 			}
 
         }

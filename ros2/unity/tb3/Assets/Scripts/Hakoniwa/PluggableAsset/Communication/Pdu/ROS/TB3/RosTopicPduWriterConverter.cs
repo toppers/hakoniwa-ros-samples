@@ -182,6 +182,12 @@ namespace Hakoniwa.PluggableAsset.Communication.Pdu.ROS.TB3
         static public Message ConvertToMessage(IPduReadOperation src, string type)
         {
 
+            if (type.Equals("sensor_msgs/Imu"))
+            {
+            	ImuMsg ros_topic = new ImuMsg();
+                ConvertToMessage(src, ros_topic);
+                return ros_topic;
+            }
             if (type.Equals("nav_msgs/Odometry"))
             {
             	OdometryMsg ros_topic = new OdometryMsg();
@@ -206,18 +212,6 @@ namespace Hakoniwa.PluggableAsset.Communication.Pdu.ROS.TB3
                 ConvertToMessage(src, ros_topic);
                 return ros_topic;
             }
-            if (type.Equals("sensor_msgs/LaserScan"))
-            {
-            	LaserScanMsg ros_topic = new LaserScanMsg();
-                ConvertToMessage(src, ros_topic);
-                return ros_topic;
-            }
-            if (type.Equals("sensor_msgs/Imu"))
-            {
-            	ImuMsg ros_topic = new ImuMsg();
-                ConvertToMessage(src, ros_topic);
-                return ros_topic;
-            }
             if (type.Equals("sensor_msgs/Image"))
             {
             	ImageMsg ros_topic = new ImageMsg();
@@ -233,6 +227,12 @@ namespace Hakoniwa.PluggableAsset.Communication.Pdu.ROS.TB3
             if (type.Equals("sensor_msgs/CameraInfo"))
             {
             	CameraInfoMsg ros_topic = new CameraInfoMsg();
+                ConvertToMessage(src, ros_topic);
+                return ros_topic;
+            }
+            if (type.Equals("sensor_msgs/LaserScan"))
+            {
+            	LaserScanMsg ros_topic = new LaserScanMsg();
                 ConvertToMessage(src, ros_topic);
                 return ros_topic;
             }

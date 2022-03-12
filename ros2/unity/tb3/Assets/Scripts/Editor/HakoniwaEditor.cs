@@ -108,7 +108,7 @@ public class HakoniwaEditor : EditorWindow
     }
 
 
-    //TODO [MenuItem("Window/Hakoniwa/Generate")]
+    [MenuItem("Window/Hakoniwa/Generate")]
     static void AssetsUpdate()
     {
         Debug.Log("assets");
@@ -122,7 +122,7 @@ public class HakoniwaEditor : EditorWindow
             GetHakoAssetConfigs(root);
         }
         Debug.Log("json:" + ConvertToJson(ros_topic_container));
-        //TODO File.WriteAllText("../../../settings/tb3/RosTopics.json", ConvertToJson(ros_topic_container));
+        File.WriteAllText("../../../settings/tb3/RosTopics.json", ConvertToJson(ros_topic_container));
     }
 
 

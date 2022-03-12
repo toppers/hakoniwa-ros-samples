@@ -175,7 +175,7 @@ namespace Hakoniwa.PluggableAsset.Assets.Robot.TB3
 
         public string[] topic_type = {
             "sensor_msgs/JointState",
-            "geometry_msgs/cmd_vel"
+            "geometry_msgs/Twist"
         };
         public string[] topic_name = {
             "joint_states",

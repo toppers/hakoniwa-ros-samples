@@ -172,7 +172,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   topic_type:
   - sensor_msgs/JointState
-  - geometry_msgs/cmd_vel
+  - geometry_msgs/Twist
   topic_name:
   - joint_states
   - cmd_vel
@@ -2533,7 +2533,7 @@ GameObject:
   - component: {fileID: 3894340002495107166}
   m_Layer: 0
   m_Name: TB3RoboModel_waffle
-  m_TagString: robot
+  m_TagString: HakoAssetRoot
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
