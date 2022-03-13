@@ -3,6 +3,9 @@
     "writer_connector_name": "writer_connector0"
   }, 
   {
+    "reader_connector_name": "reader_connector0"
+  }, 
+  {
     "writer_connector_name": "writer_connector1"
   }, 
   {
@@ -10,9 +13,6 @@
   }, 
   {
     "writer_connector_name": "writer_connector3"
-  }, 
-  {
-    "reader_connector_name": "reader_connector0"
   }, 
   {
     "writer_connector_name": "writer_connector4"
@@ -25,5 +25,59 @@
   }, 
   {
     "writer_connector_name": "writer_connector7"
+  }, 
+  {
+    "writer_connector_name": "writer_connector8"
+  }, 
+  {
+    "reader_connector_name": "reader_connector1"
+  }, 
+  {
+    "writer_connector_name": "writer_connector9"
+  }, 
+  {
+    "writer_connector_name": "writer_connector10"
+  }, 
+  {
+    "writer_connector_name": "writer_connector11"
+  }, 
+  {
+    "writer_connector_name": "writer_connector12"
+  }, 
+  {
+    "writer_connector_name": "writer_connector13"
+  }, 
+  {
+    "writer_connector_name": "writer_connector14"
+  }, 
+  {
+    "writer_connector_name": "writer_connector15"
+  }, 
+  {
+    "writer_connector_name": "writer_connector16"
+  }, 
+  {
+    "writer_connector_name": "writer_connector17"
+  }, 
+  {
+    "writer_connector_name": "writer_connector18"
+  }, 
+  {
+    "writer_connector_name": "writer_connector19"
+  }, 
+  {
+    "reader_connector_name": "reader_connector2"
+  }, 
+  {
+    "writer_connector_name": "writer_connector20"
+  }, 
+  {
+    "writer_connector_name": "writer_connector21"
+  }, 
+  {
+    "writer_connector_name": "writer_connector22"
+  }, 
+  {
+    "writer_connector_name": "writer_connector23"
   }
 ]

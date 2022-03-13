@@ -1,23 +1,12 @@
-using Hakoniwa.PluggableAsset.Communication.Pdu.ROS;
-using Hakoniwa.PluggableAsset.Communication.Method.ROS;
 using Hakoniwa.PluggableAsset.Communication.Pdu;
-using System.Collections;
 using System.Collections.Generic;
 using Unity.Robotics.ROSTCPConnector;
-using UnityEngine;
-using System;
 using Unity.Robotics.ROSTCPConnector.MessageGeneration;
 using Hakoniwa.PluggableAsset.Communication.Pdu.ROS.TB3;
 using System.IO;
 using Newtonsoft.Json;
 using Hakoniwa.Core.Utils.Logger;
 
-using RosMessageTypes.BuiltinInterfaces;
-using RosMessageTypes.Geometry;
-using RosMessageTypes.Nav;
-using RosMessageTypes.Sensor;
-using RosMessageTypes.Std;
-using RosMessageTypes.Tf2;
 
 namespace Hakoniwa.PluggableAsset.Communication.Method.ROS.TB3
 {
@@ -42,8 +31,18 @@ namespace Hakoniwa.PluggableAsset.Communication.Method.ROS.TB3
             this.cycle = c;
         }
     }
+    
     public class RosTopicIo : IRosTopicIo
     {
+        public struct RosTopicSubscription
+        {
+            public string topic_name;
+            public Dictionary<string, Message> topic_data_table;
+            public void common_callback(Message obj)
+            {
+                this.topic_data_table[topic_name] = obj;
+            }
+        }    
         private ROSConnection ros;
         private Dictionary<string, Message> topic_data_table = new Dictionary<string, Message>();
         private Dictionary<string, TopicCycle> topic_send_timing = new Dictionary<string, TopicCycle>();
@@ -89,6 +88,31 @@ namespace Hakoniwa.PluggableAsset.Communication.Method.ROS.TB3
             }
             return null;
         }
+        public void AddRosTopicPub(RosTopicMessageConfig topic_config)
+        {
+            if (topic_config.sub)
+            {
+                return;
+            }
+            if (topic_config.pub_option != null) {
+                ros.RegisterPublisher(topic_config.topic_message_name, topic_config.topic_type_name, topic_config.pub_option.queue_size, topic_config.pub_option.latch);
+            }
+            else {
+                ros.RegisterPublisher(topic_config.topic_message_name, topic_config.topic_type_name);
+            }
+
+        }
+        public void AddRosTopicSub(RosTopicMessageConfig topic_config)
+        {
+            if (!topic_config.sub)
+            {
+                return;
+            }
+            var subobj = new RosTopicSubscription();
+            subobj.topic_name = topic_config.topic_message_name;
+            subobj.topic_data_table = this.topic_data_table;
+            ros.SubscribeByMessageName(topic_config.topic_message_name, topic_config.topic_type_name, subobj.common_callback);
+        }
         public RosTopicIo()
         {
             LoadParameters(AssetConfigLoader.core_config.ros_topic_method.parameters);
@@ -108,72 +132,11 @@ namespace Hakoniwa.PluggableAsset.Communication.Method.ROS.TB3
                     }
                 }
             }
-			RostopicPublisherOption option = null;
-
-			option = GetPubOption("TB3RoboModel_imu");
-			if (option != null) {
-				ros.RegisterPublisher<ImuMsg>("TB3RoboModel_imu", option.queue_size, option.latch);
-			}
-			else {
-				ros.RegisterPublisher<ImuMsg>("TB3RoboModel_imu");
-			}
-			option = GetPubOption("TB3RoboModel_odom");
-			if (option != null) {
-				ros.RegisterPublisher<OdometryMsg>("TB3RoboModel_odom", option.queue_size, option.latch);
-			}
-			else {
-				ros.RegisterPublisher<OdometryMsg>("TB3RoboModel_odom");
-			}
-			option = GetPubOption("TB3RoboModel_tf");
-			if (option != null) {
-				ros.RegisterPublisher<TFMessageMsg>("TB3RoboModel_tf", option.queue_size, option.latch);
-			}
-			else {
-				ros.RegisterPublisher<TFMessageMsg>("TB3RoboModel_tf");
-			}
-			option = GetPubOption("TB3RoboModel_joint_states");
-			if (option != null) {
-				ros.RegisterPublisher<JointStateMsg>("TB3RoboModel_joint_states", option.queue_size, option.latch);
-			}
-			else {
-				ros.RegisterPublisher<JointStateMsg>("TB3RoboModel_joint_states");
-			}
-            ros.Subscribe<TwistMsg>("TB3RoboModel_cmd_vel", TB3RoboModel_cmd_vel_TwistMsgChange);
-			option = GetPubOption("TB3RoboModel_image");
-			if (option != null) {
-				ros.RegisterPublisher<ImageMsg>("TB3RoboModel_image", option.queue_size, option.latch);
-			}
-			else {
-				ros.RegisterPublisher<ImageMsg>("TB3RoboModel_image");
-			}
-			option = GetPubOption("TB3RoboModel_image/compressed");
-			if (option != null) {
-				ros.RegisterPublisher<CompressedImageMsg>("TB3RoboModel_image/compressed", option.queue_size, option.latch);
-			}
-			else {
-				ros.RegisterPublisher<CompressedImageMsg>("TB3RoboModel_image/compressed");
-			}
-			option = GetPubOption("TB3RoboModel_camera_info");
-			if (option != null) {
-				ros.RegisterPublisher<CameraInfoMsg>("TB3RoboModel_camera_info", option.queue_size, option.latch);
-			}
-			else {
-				ros.RegisterPublisher<CameraInfoMsg>("TB3RoboModel_camera_info");
-			}
-			option = GetPubOption("TB3RoboModel_scan");
-			if (option != null) {
-				ros.RegisterPublisher<LaserScanMsg>("TB3RoboModel_scan", option.queue_size, option.latch);
-			}
-			else {
-				ros.RegisterPublisher<LaserScanMsg>("TB3RoboModel_scan");
-			}
-
-        }
-
-
-        private void TB3RoboModel_cmd_vel_TwistMsgChange(TwistMsg obj)
-        {
-            this.topic_data_table["TB3RoboModel_cmd_vel"] = obj;
+            foreach(var e in AssetConfigLoader.core_config.ros_topics)
+            {
+                this.AddRosTopicPub(e);
+                this.AddRosTopicSub(e);
+            }
         }
 
         public void Publish(IPduCommTypedData data)
@@ -189,8 +152,15 @@ namespace Hakoniwa.PluggableAsset.Communication.Method.ROS.TB3
         
         private void Reset()
         {
-
-            this.topic_data_table["TB3RoboModel_cmd_vel"] = null;
+            List<string> lists = new List<string>();
+            foreach (var e in this.topic_data_table.Keys)
+            {
+                lists.Add(e);
+            }
+            foreach (var e in lists)
+            {
+                this.topic_data_table[e] = null;
+            }
         }
 
         public IPduCommTypedData Recv(string topic_name)

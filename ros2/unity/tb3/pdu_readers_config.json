@@ -1,9 +1,23 @@
 [
   {
-    "name": "TB3RoboModel_cmd_velPdu", 
+    "name": "waffle_cmd_velPdu", 
     "class_name": "Hakoniwa.PluggableAsset.Communication.Pdu.ROS.RosTopicPduReader", 
     "conv_class_name": "Hakoniwa.PluggableAsset.Communication.Pdu.ROS.TB3.RosTopicPduReaderConverter", 
-    "topic_message_name": "TB3RoboModel_cmd_vel", 
+    "topic_message_name": "waffle_cmd_vel", 
+    "pdu_config_name": "geometry_msgs/Twist"
+  }, 
+  {
+    "name": "tb3_urdf_cmd_velPdu", 
+    "class_name": "Hakoniwa.PluggableAsset.Communication.Pdu.ROS.RosTopicPduReader", 
+    "conv_class_name": "Hakoniwa.PluggableAsset.Communication.Pdu.ROS.TB3.RosTopicPduReaderConverter", 
+    "topic_message_name": "tb3_urdf_cmd_vel", 
+    "pdu_config_name": "geometry_msgs/Twist"
+  }, 
+  {
+    "name": "tb3_cmd_velPdu", 
+    "class_name": "Hakoniwa.PluggableAsset.Communication.Pdu.ROS.RosTopicPduReader", 
+    "conv_class_name": "Hakoniwa.PluggableAsset.Communication.Pdu.ROS.TB3.RosTopicPduReaderConverter", 
+    "topic_message_name": "tb3_cmd_vel", 
     "pdu_config_name": "geometry_msgs/Twist"
   }
 ]

@@ -48,6 +48,8 @@ namespace Hakoniwa.Core
             simulator.SaveEnvironment();
             simulator.GetLogger().SetFilePath(AssetConfigLoader.core_config.SymTimeMeasureFilePath);
 
+#if false
+            //ログインタイミングでインスタンス化する．
             foreach (Transform child in this.root.transform)
             {
                 Debug.Log("child=" + child.name);
@@ -57,13 +59,45 @@ namespace Hakoniwa.Core
                 AssetConfigLoader.AddInsideAsset(ctrl);
                 simulator.RegisterInsideAsset(child.name);
             }
-
-
+#endif
+#if false
+            LoginRobotInfoType info = new LoginRobotInfoType();
+            info.roboname = "TB3RoboModel";
+            info.robotype = "TB3RoboModel";
+            info.pos.X = 0;
+            info.pos.Y = 0;
+            info.pos.Z = 0;
+            this.Login(info);
+#else
+            var login_robots = AssetConfigLoader.LoadJsonFile<LoginRobot>("../../../settings/tb3/LoginRobot.json");
+            foreach (var e in login_robots.robos)
+            {
+                this.Login(e);
+            }
+#endif
             simulator.SetSimulationWorldTime(
                 this.maxDelayTime,
                 (long)(Time.fixedDeltaTime * 1000000f));
             simulator.SetInsideWorldSimulator(new UnitySimulator());
             Physics.autoSimulation = false;
+        }
+        public void Login(LoginRobotInfoType robo)
+        {
+            string path = "Hakoniwa/Robots/" + robo.robotype;
+            var p = Resources.Load<GameObject>(path);
+            if (p == null)
+            {
+                throw new InvalidDataException("ERROR: path is not found:" + path);
+            }
+            Vector3 pos = new Vector3(robo.pos.X, robo.pos.Y, robo.pos.Z);
+            var instance = Instantiate(p, pos, Quaternion.identity) as GameObject;
+            instance.name = robo.roboname;
+            instance.transform.parent = this.root.transform;
+
+            IInsideAssetController ctrl = instance.GetComponentInChildren<IInsideAssetController>();
+            ctrl.Initialize();
+            AssetConfigLoader.AddInsideAsset(ctrl);
+            simulator.RegisterInsideAsset(robo.roboname);
         }
         void Start()
         {

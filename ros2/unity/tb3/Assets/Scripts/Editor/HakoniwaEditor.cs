@@ -5,6 +5,7 @@ using Newtonsoft.Json;
 using Hakoniwa.PluggableAsset.Assets.Environment;
 using Hakoniwa.PluggableAsset;
 using Hakoniwa.PluggableAsset.Assets.Robot.Parts;
+using System;
 
 public class HakoniwaEditor : EditorWindow
 {
@@ -12,6 +13,7 @@ public class HakoniwaEditor : EditorWindow
     private static RosTopicMessageConfigContainer ros_topic_container;
     private static GameObject[] hako_asset_roots;
     private static GameObject[] hako_assets;
+    private static LoginRobot login_robots;
 
     static string ConvertToJson(RosTopicMessageConfigContainer cfg)
     {
@@ -89,6 +91,19 @@ public class HakoniwaEditor : EditorWindow
         {
             return;
         }
+        UnityEngine.Object prefab = PrefabUtility.GetCorrespondingObjectFromSource(root);
+        var robo = new LoginRobotInfoType();
+        robo.roboname = root.transform.name;
+        robo.robotype = prefab.name;
+        robo.pos.X = root.transform.position.x;
+        robo.pos.Y = root.transform.position.y;
+        robo.pos.Z = root.transform.position.z;
+        int index = login_robots.robos.Length;
+        Array.Resize(ref login_robots.robos, index + 1);
+        login_robots.robos[index] = robo;
+        Debug.Log("roboname=" + root.transform.name);
+        Debug.Log("robotype=" + prefab.name);
+        Debug.Log("pos=" + root.transform.position);
         foreach (var asset in robot_assets)
         {
             var configs = asset.getRosConfig();
@@ -116,12 +131,15 @@ public class HakoniwaEditor : EditorWindow
         GetHakoAssets(root_num);
         asset_num = 0;
 
+        login_robots = new LoginRobot();
+        login_robots.robos = new LoginRobotInfoType[0];
         foreach(var root in hako_asset_roots)
         {
             GetRobotAssetConfig(root);
             GetHakoAssetConfigs(root);
         }
         Debug.Log("json:" + ConvertToJson(ros_topic_container));
+        AssetConfigLoader.SaveJsonFile<LoginRobot>("../../../settings/tb3/LoginRobot.json", login_robots);
         File.WriteAllText("../../../settings/tb3/RosTopics.json", ConvertToJson(ros_topic_container));
     }
 
