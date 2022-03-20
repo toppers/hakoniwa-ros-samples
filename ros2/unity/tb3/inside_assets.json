@@ -1,50 +1,18 @@
 [
   {
-    "name": "tb3", 
+    "name": "TB3RoboModel", 
     "pdu_writer_names": [
-      "tb3_imuPdu", 
-      "tb3_odomPdu", 
-      "tb3_tfPdu", 
-      "tb3_joint_statesPdu", 
-      "tb3_imagePdu", 
-      "tb3_image/compressedPdu", 
-      "tb3_camera_infoPdu", 
-      "tb3_scanPdu"
+      "TB3RoboModel_imuPdu", 
+      "TB3RoboModel_odomPdu", 
+      "TB3RoboModel_tfPdu", 
+      "TB3RoboModel_joint_statesPdu", 
+      "TB3RoboModel_imagePdu", 
+      "TB3RoboModel_image/compressedPdu", 
+      "TB3RoboModel_camera_infoPdu", 
+      "TB3RoboModel_scanPdu"
     ], 
     "pdu_reader_names": [
-      "tb3_cmd_velPdu"
-    ]
-  }, 
-  {
-    "name": "tb3_urdf", 
-    "pdu_writer_names": [
-      "tb3_urdf_joint_statesPdu", 
-      "tb3_urdf_scanPdu", 
-      "tb3_urdf_imuPdu", 
-      "tb3_urdf_odomPdu", 
-      "tb3_urdf_tfPdu", 
-      "tb3_urdf_imagePdu", 
-      "tb3_urdf_image/compressedPdu", 
-      "tb3_urdf_camera_infoPdu"
-    ], 
-    "pdu_reader_names": [
-      "tb3_urdf_cmd_velPdu"
-    ]
-  }, 
-  {
-    "name": "waffle", 
-    "pdu_writer_names": [
-      "waffle_joint_statesPdu", 
-      "waffle_imagePdu", 
-      "waffle_image/compressedPdu", 
-      "waffle_camera_infoPdu", 
-      "waffle_scanPdu", 
-      "waffle_imuPdu", 
-      "waffle_odomPdu", 
-      "waffle_tfPdu"
-    ], 
-    "pdu_reader_names": [
-      "waffle_cmd_velPdu"
+      "TB3RoboModel_cmd_velPdu"
     ]
   }
 ]

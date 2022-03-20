@@ -1,6 +1,17 @@
 {
   "fields": [
     {
+      "topic_message_name": "TB3RoboModel_imu",
+      "topic_type_name": "sensor_msgs/Imu",
+      "robot_name": "TB3RoboModel",
+      "sub": false,
+      "pub_option": {
+        "cycle_scale": 10,
+        "latch": false,
+        "queue_size": 1
+      }
+    },
+    {
       "topic_message_name": "TB3RoboModel_odom",
       "topic_type_name": "nav_msgs/Odometry",
       "robot_name": "TB3RoboModel",
@@ -38,24 +49,6 @@
       "topic_type_name": "geometry_msgs/Twist",
       "robot_name": "TB3RoboModel",
       "sub": true,
-      "pub_option": null
-    },
-    {
-      "topic_message_name": "TB3RoboModel_scan",
-      "topic_type_name": "sensor_msgs/LaserScan",
-      "robot_name": "TB3RoboModel",
-      "sub": false,
-      "pub_option": {
-        "cycle_scale": 10,
-        "latch": false,
-        "queue_size": 1
-      }
-    },
-    {
-      "topic_message_name": "TB3RoboModel_imu",
-      "topic_type_name": "sensor_msgs/Imu",
-      "robot_name": "TB3RoboModel",
-      "sub": false,
       "pub_option": {
         "cycle_scale": 10,
         "latch": false,
@@ -87,6 +80,17 @@
     {
       "topic_message_name": "TB3RoboModel_camera_info",
       "topic_type_name": "sensor_msgs/CameraInfo",
+      "robot_name": "TB3RoboModel",
+      "sub": false,
+      "pub_option": {
+        "cycle_scale": 10,
+        "latch": false,
+        "queue_size": 1
+      }
+    },
+    {
+      "topic_message_name": "TB3RoboModel_scan",
+      "topic_type_name": "sensor_msgs/LaserScan",
       "robot_name": "TB3RoboModel",
       "sub": false,
       "pub_option": {
