@@ -4,7 +4,12 @@ CURDIR=`pwd`
 
 cd ../..
 
-bash utils/wsl2_install.bash ros2 ros2/unity/tb3 settings/tb3 config
+if [ ${OS_TYPE} = "Mac" ]
+then
+	bash utils/install.bash ros2 ros2/unity/tb3 settings/tb3 config
+else
+	bash utils/wsl2_install.bash ros2 ros2/unity/tb3 settings/tb3 config
+fi
 
 cd ros2/unity
 bash install.bash
