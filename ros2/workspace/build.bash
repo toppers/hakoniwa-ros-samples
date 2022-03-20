@@ -1,6 +1,14 @@
 #!/bin/bash
 
 source /opt/ros/foxy/setup.bash
+
+if [ -d src/ros_tcp_endpoint ]
+then
+	:
+else
+	bash clean.bash
+fi
+
 #colcon build --packages-select ev3_msgs
 #colcon build --packages-select ev3
 colcon build --packages-select tb3
