@@ -69,10 +69,18 @@ namespace Hakoniwa.Core
             info.pos.Z = 0;
             this.Login(info);
 #else
-            var login_robots = AssetConfigLoader.LoadJsonFile<LoginRobot>("../../../settings/tb3/LoginRobot.json");
-            foreach (var e in login_robots.robos)
+            try
             {
-                this.Login(e);
+                var login_robots = AssetConfigLoader.LoadJsonFile<LoginRobot>("../../../settings/tb3/PhotonLoginRobot.json");
+                Debug.Log("Photon Mode");
+
+            } catch (Exception)
+            {
+                var login_robots = AssetConfigLoader.LoadJsonFile<LoginRobot>("../../../settings/tb3/LoginRobot.json");
+                foreach (var e in login_robots.robos)
+                {
+                    this.Login(e);
+                }
             }
 #endif
             simulator.SetSimulationWorldTime(

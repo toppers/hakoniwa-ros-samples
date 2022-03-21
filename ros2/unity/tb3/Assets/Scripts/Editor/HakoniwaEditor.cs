@@ -139,7 +139,42 @@ public class HakoniwaEditor : EditorWindow
             GetHakoAssetConfigs(root);
         }
         Debug.Log("json:" + ConvertToJson(ros_topic_container));
+        try
+        {
+            File.Delete("../../../settings/tb3/PhotonLoginRobot.json");
+        }
+        catch (Exception)
+        {
+
+        }
         AssetConfigLoader.SaveJsonFile<LoginRobot>("../../../settings/tb3/LoginRobot.json", login_robots);
+        File.WriteAllText("../../../settings/tb3/RosTopics.json", ConvertToJson(ros_topic_container));
+    }
+    [MenuItem("Window/Hakoniwa/GeneratePhoton")]
+    static void PhotonAssetsUpdate()
+    {
+        Debug.Log("assets");
+        int root_num = GetHakoAssetRoots();
+        GetHakoAssets(root_num);
+        asset_num = 0;
+
+        login_robots = new LoginRobot();
+        login_robots.robos = new LoginRobotInfoType[0];
+        foreach (var root in hako_asset_roots)
+        {
+            GetRobotAssetConfig(root);
+            GetHakoAssetConfigs(root);
+        }
+        Debug.Log("json:" + ConvertToJson(ros_topic_container));
+        try
+        {
+            File.Delete("../../../settings/tb3/LoginRobot.json");
+        }
+        catch (Exception)
+        {
+
+        }
+        AssetConfigLoader.SaveJsonFile<LoginRobot>("../../../settings/tb3/PhotonLoginRobot.json", login_robots);
         File.WriteAllText("../../../settings/tb3/RosTopics.json", ConvertToJson(ros_topic_container));
     }
 
